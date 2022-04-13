@@ -1,3 +1,4 @@
+import 'package:app/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,40 +29,41 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Flutter App',
-        ),
+    return MaterialApp(
+      title: 'FlutterNotes',
+      theme: ThemeData(
+        primarySwatch: Colors.brown,
       ),
-      body: StreamBuilder<dynamic>(
-        stream: FirebaseFirestore.instance
-            .collection('chats/8G7xuGsWARWwcj3QaUBN/msg')
-            .snapshots(),
-        builder: (ctx, streamSnapshot) {
-          if (streamSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final documents = streamSnapshot.data.docs;
-          return ListView.builder(
-            itemCount: documents.length,
-            itemBuilder: (ctx, index) => Container(
-              padding: const EdgeInsets.all(8),
-              child: Text(documents[index]['text']),
-            ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          FirebaseFirestore.instance.collection('chats/8G7xuGsWARWwcj3QaUBN/msg').add({
-            'text' : 'Button has been clicked'
-          });
-        },
-      ),
+      home: const AuthScreen(),
     );
   }
 }
+
+// StreamBuilder<dynamic>(
+// stream: FirebaseFirestore.instance
+//     .collection('chats/8G7xuGsWARWwcj3QaUBN/msg')
+// .snapshots(),
+// builder: (ctx, streamSnapshot) {
+// if (streamSnapshot.connectionState == ConnectionState.waiting) {
+// return const Center(
+// child: CircularProgressIndicator(),
+// );
+// }
+// final documents = streamSnapshot.data.docs;
+// return ListView.builder(
+// itemCount: documents.length,
+// itemBuilder: (ctx, index) => Container(
+// padding: const EdgeInsets.all(8),
+// child: Text(documents[index]['text']),
+// ),
+// );
+// },
+// ),
+// floatingActionButton: FloatingActionButton(
+// child: const Icon(Icons.add),
+// onPressed: () {
+// FirebaseFirestore.instance.collection('chats/8G7xuGsWARWwcj3QaUBN/msg').add({
+// 'text' : 'Button has been clicked'
+// });
+// },
+// ),
