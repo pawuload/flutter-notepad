@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../auth/text_field.dart';
 
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key}) : super(key: key);
@@ -22,30 +23,13 @@ class _AuthFormState extends State<AuthForm> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'E-mail',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                // keyboardType: TextInputType.visiblePassword,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+             Fields(),
               const SizedBox(
                 height: 35,
               ),
               SizedBox(
-                width: 100,
-                height: 45,
+                width: 310,
+                height: 40,
                 child: ElevatedButton(
                   child: const Text(
                     'Login',
@@ -55,7 +39,7 @@ class _AuthFormState extends State<AuthForm> {
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(13),
                     side: const BorderSide(color: Colors.brown),
                   ))),
                 ),
