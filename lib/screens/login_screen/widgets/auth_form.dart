@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/app_textfield.dart';
+import '../../../common/widgets/app_textfield.dart';
 
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key}) : super(key: key);
@@ -9,9 +9,6 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
-  var userIcon = const Icon(Icons.account_circle);
-  var passwordIcon = const Icon(Icons.lock);
-
   bool value = false;
   bool isChecked = true;
 
@@ -30,20 +27,7 @@ class _AuthFormState extends State<AuthForm> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Field(
-                  hintText: 'Email',
-                  icon: userIcon,
-                  enabled: value,
-                  inputType: TextInputType.emailAddress,
-                  obscure: false,
-                ),
-                Field(
-                  hintText: 'Password',
-                  icon: passwordIcon,
-                  enabled: value,
-                  inputType: TextInputType.visiblePassword,
-                  obscure: true,
-                ),
+                _buildFields(value),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: CheckboxListTile(
@@ -68,4 +52,25 @@ class _AuthFormState extends State<AuthForm> {
       ),
     );
   }
+}
+
+Column _buildFields(bool value) {
+  return Column(
+    children: [
+      Field(
+        hintText: 'Email',
+        icon: const Icon(Icons.account_circle),
+        enabled: value,
+        inputType: TextInputType.emailAddress,
+        obscure: false,
+      ),
+      Field(
+        hintText: 'Password',
+        icon: const Icon(Icons.lock),
+        enabled: value,
+        inputType: TextInputType.visiblePassword,
+        obscure: true,
+      ),
+    ],
+  );
 }
