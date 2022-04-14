@@ -1,7 +1,8 @@
 import 'package:app/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,11 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      title: 'notepad',
+      home: AnimatedSplashScreen(
+        splash: Image.asset('assets/images/logo.png'),
+        nextScreen: const MyHomePage(),
+        backgroundColor: const Color(0xdbafa09a),
+        duration: 1000,
       ),
-      home: const MyHomePage(),
     );
   }
 }
@@ -30,7 +33,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FlutterNotes',
+      title: 'notepad',
       theme: ThemeData(
         primarySwatch: Colors.brown,
       ),

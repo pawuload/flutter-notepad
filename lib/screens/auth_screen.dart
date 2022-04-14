@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/auth/auth_form.dart';
+import '../widgets/auth/login_button.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -14,7 +15,17 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).secondaryHeaderColor,
-      body: const AuthForm(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SizedBox(
+            height: 200,
+            child: Image.asset('assets/images/logo.png'),
+          ),
+          const AuthForm(),
+          const Login(),
+        ],
+      ),
     );
   }
 }
