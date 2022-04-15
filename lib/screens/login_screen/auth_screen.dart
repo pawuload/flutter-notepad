@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/auth/auth_form.dart';
-import '../widgets/auth/login_button.dart';
+import 'widgets/auth_form.dart';
+import '../../common/widgets/app_button.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -23,7 +23,9 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Image.asset('assets/images/logo.png'),
           ),
           const AuthForm(),
-          const Login(),
+          const Btn(
+            textBtn: 'Login',
+          ),
         ],
       ),
     );

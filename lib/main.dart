@@ -1,7 +1,8 @@
-import 'package:app/screens/auth_screen.dart';
+import 'package:app/screens/login_screen/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'common/constans/theme.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
@@ -16,11 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'notepad',
       home: AnimatedSplashScreen(
         splash: Image.asset('assets/images/logo.png'),
         nextScreen: const MyHomePage(),
-        backgroundColor: const Color(0xdbafa09a),
+        backgroundColor: AppTheme.colors.lightestBrown,
         duration: 1000,
       ),
     );
