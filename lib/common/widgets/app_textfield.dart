@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 
 class Field extends StatefulWidget {
   final String hintText;
-  final dynamic icon;
-  final dynamic inputType;
+  final icon;
+  final inputType;
   final bool enabled;
   final bool obscure;
+  final validator;
 
-  const Field(
-      {Key? key,
-      required this.hintText,
-      this.icon,
-      required this.enabled,
-      required this.inputType,
-      required this.obscure})
-      : super(key: key);
+  const Field({
+    Key? key,
+    required this.hintText,
+    this.icon,
+    required this.enabled,
+    required this.inputType,
+    required this.obscure,
+    this.validator,
+  }) : super(key: key);
 
   @override
   State<Field> createState() => _FieldState();
@@ -30,6 +32,7 @@ class _FieldState extends State<Field> {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: TextFormField(
+            validator: widget.validator,
             enabled: widget.enabled,
             keyboardType: widget.inputType,
             obscureText: widget.obscure,
@@ -43,9 +46,7 @@ class _FieldState extends State<Field> {
                 borderRadius: BorderRadius.circular(13),
               ),
             ),
-            style: const TextStyle(
-              fontSize: 16,
-            ),
+            style: const TextStyle(fontSize: 16),
           ),
         ),
       ],

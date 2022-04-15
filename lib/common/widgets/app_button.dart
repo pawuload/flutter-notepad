@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Btn extends StatelessWidget {
-  final String textBtn;
+class AppButton extends StatelessWidget {
+  final String title;
 
-  const Btn({Key? key, required this.textBtn}) : super(key: key);
+  const AppButton({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class Btn extends StatelessWidget {
         elevation: 25,
         child: ElevatedButton(
           child: Text(
-            textBtn,
+            title,
             style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
           ),
           onPressed: () {},

@@ -1,3 +1,4 @@
+import 'package:app/common/constans/app_images.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/auth_form.dart';
@@ -20,11 +21,14 @@ class _AuthScreenState extends State<AuthScreen> {
         children: <Widget>[
           SizedBox(
             height: 200,
-            child: Image.asset('assets/images/logo.png'),
+            child: Hero(
+              tag: 'logo',
+              child: Image.asset(AppImages.logo),
+            ),
           ),
           const AuthForm(),
-          const Btn(
-            textBtn: 'Login',
+          const AppButton(
+            title: 'Login',
           ),
         ],
       ),

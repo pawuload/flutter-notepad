@@ -63,6 +63,12 @@ Column _buildFields(bool value) {
         enabled: value,
         inputType: TextInputType.emailAddress,
         obscure: false,
+        validator: (input){
+          if (input.isEmpty || !input.contains('@')){
+            return 'Please enter a valid email address.';
+          }
+          return null;
+        },
       ),
       Field(
         hintText: 'Password',
@@ -70,6 +76,12 @@ Column _buildFields(bool value) {
         enabled: value,
         inputType: TextInputType.visiblePassword,
         obscure: true,
+        validator: (input){
+          if(input.isEmpty || input.length < 7){
+            return 'Password must be at least 7 characters long';
+          }
+          return null;
+        },
       ),
     ],
   );

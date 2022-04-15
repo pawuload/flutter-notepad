@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-@immutable
 class AppColors {
-  final lightBrown = const Color(0xffFFBF7E);
-  final lighterBrown = const Color(0xffffe3cf);
-  final lightestBrown = const Color(0xffffd4ae);
-  final brown = const Color(0xff755335);
-  final focusBrown = const Color(0xff5d2f07);
+  const AppColors._();
 
-  const AppColors();
+  static const lightBrown = Color(0xffFFBF7E);
+  static const lighterBrown = Color(0xffffe3cf);
+  static const lightestBrown = Color(0xffffd4ae);
+  static const brown = Color(0xff755335);
+  static const focusBrown = Color(0xff5d2f07);
+
 }

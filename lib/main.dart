@@ -2,7 +2,8 @@ import 'package:app/screens/login_screen/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'common/constans/theme.dart';
+import 'common/constans/app_images.dart';
+import 'common/constans/colors.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
@@ -20,9 +21,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'notepad',
       home: AnimatedSplashScreen(
-        splash: Image.asset('assets/images/logo.png'),
+        splash: AppImages.logo,
         nextScreen: const MyHomePage(),
-        backgroundColor: AppTheme.colors.lightestBrown,
+        backgroundColor: AppColors.lightestBrown,
         duration: 1000,
       ),
     );
