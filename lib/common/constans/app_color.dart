@@ -8,5 +8,4 @@ class AppColors {
   static const lightestBrown = Color(0xffffd4ae);
   static const brown = Color(0xff755335);
   static const focusBrown = Color(0xff5d2f07);
-
 }

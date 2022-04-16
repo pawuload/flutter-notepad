@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
   final String title;
+  final onPressed;
 
-  const AppButton({Key? key, required this.title}) : super(key: key);
+  const AppButton({
+    Key? key,
+    required this.title,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class AppButton extends StatelessWidget {
             title,
             style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
           ),
-          onPressed: () {},
+          onPressed: onPressed,
           style: _buildButtonStyle(),
         ),
       ),

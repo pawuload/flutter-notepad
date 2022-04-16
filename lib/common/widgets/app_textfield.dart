@@ -7,6 +7,8 @@ class Field extends StatefulWidget {
   final bool enabled;
   final bool obscure;
   final validator;
+  final onSaved;
+  final formKey;
 
   const Field({
     Key? key,
@@ -16,6 +18,8 @@ class Field extends StatefulWidget {
     required this.inputType,
     required this.obscure,
     this.validator,
+    this.onSaved,
+    this.formKey,
   }) : super(key: key);
 
   @override
@@ -33,6 +37,8 @@ class _FieldState extends State<Field> {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: TextFormField(
             validator: widget.validator,
+            key: widget.formKey,
+            onSaved: widget.onSaved,
             enabled: widget.enabled,
             keyboardType: widget.inputType,
             obscureText: widget.obscure,

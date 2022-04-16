@@ -1,17 +1,31 @@
-import 'package:app/common/constans/app_images.dart';
 import 'package:flutter/material.dart';
-
-import 'widgets/auth_form.dart';
+import 'package:app/common/constans/app_images.dart';
+import './widgets/auth_form.dart';
+import './widgets/auth_submit.dart';
 import '../../common/widgets/app_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
+  // void onPressed() {
+  //   isButtonActive ? submit : null;
+  //   FocusScope.of(context).unfocus();
+  // }
   @override
   State<AuthScreen> createState() => _AuthScreenState();
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  final _auth = FirebaseAuth.instance;
+
+  void _submitAuthForm(
+    String email,
+    String password,
+  ) {
+    _auth.signInWithEmailAndPassword(email: email, password: password);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +40,10 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Image.asset(AppImages.logo),
             ),
           ),
-          const AuthForm(),
+          AuthForm(_submitAuthForm),
           const AppButton(
             title: 'Login',
+            onPressed: submit,
           ),
         ],
       ),
