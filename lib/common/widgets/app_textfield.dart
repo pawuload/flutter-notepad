@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class Field extends StatefulWidget {
   final String hintText;
-  final icon;
-  final inputType;
   final bool enabled;
   final bool obscure;
+  final icon;
+  final inputType;
   final validator;
   final onSaved;
   final formKey;
