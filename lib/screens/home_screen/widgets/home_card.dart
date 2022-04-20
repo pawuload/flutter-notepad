@@ -7,8 +7,6 @@ class HomeCard extends StatelessWidget {
   }) : super(key: key);
   final String text;
 
-  // final String date;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
