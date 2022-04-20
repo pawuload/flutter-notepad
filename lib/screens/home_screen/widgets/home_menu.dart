@@ -10,8 +10,8 @@ class HomeMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SpeedDial(
       activeBackgroundColor: Colors.brown[300],
-      buttonSize: const Size(50, 50),
-      childrenButtonSize: const Size(50, 50),
+      buttonSize: const Size(55, 55),
+      childrenButtonSize: const Size(55, 55),
       animatedIcon: AnimatedIcons.menu_close,
       elevation: 10,
       spacing: 3,

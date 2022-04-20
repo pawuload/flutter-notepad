@@ -44,6 +44,19 @@ dependencies:
   freezed_annotation: ^1.1.0
   flutter_speed_dial: ^5.1.0
 
+  # utopia libs
+  utopia_arch: ^0.3.0
+  utopia_firebase_crashlytics: ^0.1.0+8
+  utopia_hooks: ^0.2.4+5
+  utopia_widgets: ^0.0.3
+  utopia_utils: ^0.2.6
+  utopia_rest: ^0.0.3+14
+
+  # architecture
+  flutter_hooks: ^0.18.3
+  provider: ^6.0.1
+  injector: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
