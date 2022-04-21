@@ -1,29 +1,14 @@
 import 'package:flutter/material.dart';
+import '../state/auth_screen_state.dart';
 import 'auth_screen_form.dart';
 
-class AuthScreenCard extends StatefulWidget {
+class AuthScreenCard extends StatelessWidget {
+  final AuthScreenState state;
+
   const AuthScreenCard({
     Key? key,
-    required this.value,
-    required this.passwordKey,
-    required this.emailKey,
-    required this.setUserEmail,
-    required this.setUserPassword,
-    required this.onChanged,
+    required this.state,
   }) : super(key: key);
-  final value;
-  final emailKey;
-  final passwordKey;
-  final Function setUserEmail;
-  final Function setUserPassword;
-  final Function onChanged;
-
-  @override
-  State<AuthScreenCard> createState() => _AuthScreenCardState();
-}
-
-class _AuthScreenCardState extends State<AuthScreenCard> {
-  get onChange => widget.onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +25,12 @@ class _AuthScreenCardState extends State<AuthScreenCard> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                AuthScreenForm(
-                  passwordKey: widget.passwordKey,
-                  emailKey: widget.emailKey,
-                  value: widget.value,
-                  onSavedEmail: widget.setUserEmail,
-                  onSavedPassword: widget.setUserPassword,
-                ),
+                AuthScreenForm(state: state),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: CheckboxListTile(
-                    value: widget.value,
-                    onChanged: onChange,
+                    value: state.isCheckboxOn,
+                    onChanged: (_) => state.onCheckboxPressed(),
                     title: const Text(
                       'I consent to the processing of data for the marketing purposes',
                       style: TextStyle(fontSize: 15),

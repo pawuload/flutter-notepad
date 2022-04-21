@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class AppButton extends StatelessWidget {
   final String title;
   final Function() onPressed;
+  final bool enabled;
 
   const AppButton({
     Key? key,
     required this.title,
     required this.onPressed,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,9 @@ class AppButton extends StatelessWidget {
             title,
             style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
           ),
-          onPressed: onPressed,
+          onPressed: (){
+            if (enabled) onPressed();
+          },
           style: _buildButtonStyle(),
         ),
       ),
@@ -34,6 +38,7 @@ class AppButton extends StatelessWidget {
 
 ButtonStyle _buildButtonStyle() {
   return ButtonStyle(
+
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(13),

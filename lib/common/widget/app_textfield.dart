@@ -1,56 +1,43 @@
+import 'package:app/common/widget/app_textfield_raw.dart';
 import 'package:flutter/material.dart';
+import 'package:utopia_arch/utopia_arch.dart';
+import 'package:utopia_hooks/utopia_hooks.dart';
+import 'package:utopia_utils/utopia_utils_extensions.dart';
 
-class AppTextField extends StatelessWidget {
-  final String hintText;
-  final bool enabled;
-  final bool obscure;
-  final icon;
-  final inputType;
-  final validator;
-  final onSaved;
-  final formKey;
+class AppTextField extends HookWidget {
+  final FieldState state;
+  final TextInputType? keyboardType;
+  final String hint;
+  final IconData prefixIcon;
 
   const AppTextField({
     Key? key,
-    required this.hintText,
-    this.icon,
-    required this.enabled,
-    required this.inputType,
-    required this.obscure,
-    this.validator,
-    this.onSaved,
-    this.formKey,
+    required this.state,
+    this.keyboardType,
+    required this.hint,
+    required this.prefixIcon,
   }) : super(key: key);
-
-  get prefixIcon => null;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: TextFormField(
-            validator: validator,
-            key: formKey,
-            onSaved: onSaved,
-            enabled: enabled,
-            keyboardType: inputType,
-            obscureText: obscure,
-            decoration: InputDecoration(
-              hintText: hintText,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-              prefixIcon: prefixIcon ?? icon,
-              hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(13),
-              ),
-            ),
-            style: const TextStyle(fontSize: 16),
-          ),
-        ),
-      ],
+    return StatelessTextEditingControllerWrapper(
+      value: state.value,
+      onChanged: state.onChanged,
+      child: (controller) => AppTextFieldRaw(
+        error: state.errorMessage?.let((it) => Text(it(context))),
+        controller: controller,
+        keyboardType: keyboardType,
+        obscureText: state.isObscured == true,
+        hint: hint,
+        prefixIcon: prefixIcon,
+      ),
+    );
+  }
+
+  Widget _buildObscuredSuffix(BuildContext context, bool isObscured) {
+    return IconButton(
+      onPressed: state.onIsObscuredChanged,
+      icon: Icon(isObscured ? Icons.visibility : Icons.visibility_off),
     );
   }
 }
