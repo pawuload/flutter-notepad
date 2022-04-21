@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'screens/home_screen/home_screen.dart';
 import 'screens/login_screen/auth_screen.dart';
-import 'common/constants/app_images.dart';
-import 'common/constants/app_color.dart';
+import 'common/constans/app_images.dart';
+import 'common/constans/app_color.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

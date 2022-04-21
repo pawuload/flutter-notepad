@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:app/common/constants/app_icons.dart';
+import 'package:app/common/constans/app_icons.dart';
 
-class HomeMenu extends StatelessWidget {
-  const HomeMenu({Key? key}) : super(key: key);
+class HomeScreenButton extends StatelessWidget {
+  const HomeScreenButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

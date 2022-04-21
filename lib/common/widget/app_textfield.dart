@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Field extends StatefulWidget {
+class AppTextField extends StatelessWidget {
   final String hintText;
   final bool enabled;
   final bool obscure;
@@ -10,7 +10,7 @@ class Field extends StatefulWidget {
   final onSaved;
   final formKey;
 
-  const Field({
+  const AppTextField({
     Key? key,
     required this.hintText,
     this.icon,
@@ -22,11 +22,6 @@ class Field extends StatefulWidget {
     this.formKey,
   }) : super(key: key);
 
-  @override
-  State<Field> createState() => _FieldState();
-}
-
-class _FieldState extends State<Field> {
   get prefixIcon => null;
 
   @override
@@ -36,17 +31,17 @@ class _FieldState extends State<Field> {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: TextFormField(
-            validator: widget.validator,
-            key: widget.formKey,
-            onSaved: widget.onSaved,
-            enabled: widget.enabled,
-            keyboardType: widget.inputType,
-            obscureText: widget.obscure,
+            validator: validator,
+            key: formKey,
+            onSaved: onSaved,
+            enabled: enabled,
+            keyboardType: inputType,
+            obscureText: obscure,
             decoration: InputDecoration(
-              hintText: widget.hintText,
+              hintText: hintText,
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-              prefixIcon: prefixIcon ?? widget.icon,
+              prefixIcon: prefixIcon ?? icon,
               hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(13),

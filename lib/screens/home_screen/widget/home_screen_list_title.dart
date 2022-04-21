@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeCard extends StatelessWidget {
-  const HomeCard({
+class HomeScreenListTitle extends StatelessWidget {
+  const HomeScreenListTitle({
     Key? key,
     required this.text,
   }) : super(key: key);

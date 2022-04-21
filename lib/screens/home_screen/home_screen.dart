@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:app/screens/home_screen/widgets/home_menu.dart';
-import '../../common/constants/app_images.dart';
-import './widgets/home_card.dart';
-import './widgets/home_menu.dart';
+import 'package:app/screens/home_screen/widget/home_screen_button.dart';
+import '../../common/constans/app_images.dart';
+import './widget/home_screen_list_title.dart';
+import './widget/home_screen_button.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: const HomeMenu(),
+      floatingActionButton: const HomeScreenButton(),
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: Center(
         child: Column(
@@ -33,24 +28,20 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 margin: const EdgeInsets.only(bottom: 0),
-                child: Stack(
-                  children: [
-                    ListView(
-                      padding: const EdgeInsets.all(12),
-                      children: const <Widget>[
-                        // To tylko tak na chwilę, poglądowo
-                        HomeCard(text: 'Suspendisse potenti.'),
-                        HomeCard(text: 'Fusce et ligula ornare, vestibulum.'),
-                        HomeCard(text: 'Nullam suscipit pulvinar.'),
-                        HomeCard(text: 'Lorem'),
-                        HomeCard(text: 'Lorem Ipsum'),
-                        HomeCard(text: 'Neque porro quisquam'),
-                        HomeCard(text: 'Ut auctor sapien in est.'),
-                        HomeCard(text: 'Proin porttitor'),
-                        HomeCard(text: 'Lorem'),
-                        HomeCard(text: 'Proin porttitor'),
-                      ],
-                    ),
+                child: ListView(
+                  padding: const EdgeInsets.all(12),
+                  children: const <Widget>[
+                    // To tylko tak na chwilę, poglądowo
+                    HomeScreenListTitle(text: 'Suspendisse potenti.'),
+                    HomeScreenListTitle(text: 'Fusce et ligula ornare, vestibulum.'),
+                    HomeScreenListTitle(text: 'Nullam suscipit pulvinar.'),
+                    HomeScreenListTitle(text: 'Lorem'),
+                    HomeScreenListTitle(text: 'Lorem Ipsum'),
+                    HomeScreenListTitle(text: 'Neque porro quisquam'),
+                    HomeScreenListTitle(text: 'Ut auctor sapien in est.'),
+                    HomeScreenListTitle(text: 'Proin porttitor'),
+                    HomeScreenListTitle(text: 'Lorem'),
+                    HomeScreenListTitle(text: 'Proin porttitor'),
                   ],
                 ),
               ),

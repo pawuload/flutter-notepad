@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:app/common/constants/app_images.dart';
-import '../../common/widgets/app_button.dart';
-import '../../common/widgets/app_textfield.dart';
-
-String userEmail = '';
-String userPassword = '';
+import '../../common/widget/app_button.dart';
+import 'package:app/screens/login_screen/widget/auth_screen_logo.dart';
+import 'package:app/screens/login_screen/widget/auth_screen_card.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -60,6 +57,8 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  String userEmail = '';
+  String userPassword = '';
   bool value = false;
   bool isChecked = true;
   bool isButtonActive = true;
@@ -83,6 +82,22 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  void setUserEmail(val) {
+    userEmail = val;
+  }
+
+  void setUserPassword(val) {
+    userPassword = val;
+  }
+
+  void onChanged(value) {
+    setState(() {
+      this.value = value!;
+      isChecked = value;
+      isButtonActive = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,61 +105,16 @@ class _AuthScreenState extends State<AuthScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Container(
-              margin: const EdgeInsets.only(top: 50),
-              height: 165,
-              child: Hero(
-                tag: 'logo',
-                child: Image.asset(AppImages.logo),
-              ),
-            ),
-          ),
+          const AuthScreenLogo(),
           Expanded(
             flex: 4,
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Card(
-                  elevation: 25,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(13),
-                  ),
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        _buildForm(
-                          value,
-                          emailKey,
-                          passwordKey,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: CheckboxListTile(
-                            value: value,
-                            onChanged: (value) {
-                              setState(() {
-                                this.value = value!;
-                                isChecked = value;
-                                isButtonActive = value;
-                              });
-                            },
-                            title: const Text(
-                              'I consent to the processing of data for the marketing purposes',
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            controlAffinity: ListTileControlAffinity.leading,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+            child: AuthScreenCard(
+              value: value,
+              emailKey: emailKey,
+              passwordKey: passwordKey,
+              setUserEmail: setUserEmail,
+              setUserPassword: setUserPassword,
+              onChanged: onChanged,
             ),
           ),
           Container(
@@ -158,53 +128,4 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
     );
   }
-}
-
-Column _buildForm(
-  value,
-  emailKey,
-  passwordKey,
-) {
-  return Column(
-    children: [
-      Form(
-        key: emailKey,
-        child: Field(
-          hintText: 'Email',
-          icon: const Icon(Icons.account_circle),
-          enabled: value,
-          inputType: TextInputType.emailAddress,
-          obscure: false,
-          onSaved: (val) {
-            userEmail = val;
-          },
-          validator: (input) {
-            if (input == null || !input.contains('@') || !input.contains('.')) {
-              return 'Please enter a valid email address.';
-            }
-            return null;
-          },
-        ),
-      ),
-      Form(
-        key: passwordKey,
-        child: Field(
-          hintText: 'Password',
-          icon: const Icon(Icons.lock),
-          enabled: value,
-          inputType: TextInputType.visiblePassword,
-          obscure: true,
-          onSaved: (val) {
-            userPassword = val;
-          },
-          validator: (input) {
-            if (input == null || input.length < 7) {
-              return 'Password must be at least 7 characters long';
-            }
-            return null;
-          },
-        ),
-      ),
-    ],
-  );
 }
