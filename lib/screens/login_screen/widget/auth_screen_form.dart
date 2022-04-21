@@ -18,11 +18,13 @@ class AuthScreenForm extends StatelessWidget {
           state: state.emailState,
           hint: 'Email',
           prefixIcon: Icons.account_circle,
+          obscureText: false,
         ),
         AppTextField(
           state: state.passwordState,
           hint: 'Password',
           prefixIcon: Icons.lock,
+          obscureText: true,
         ),
       ],
     );

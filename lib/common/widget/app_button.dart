@@ -21,15 +21,18 @@ class AppButton extends StatelessWidget {
       child: Material(
         borderRadius: const BorderRadius.all(Radius.circular(50)),
         elevation: 25,
-        child: ElevatedButton(
-          child: Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+        child: Opacity(
+          opacity: enabled ? 1 : 0.6,
+          child: ElevatedButton(
+            child: Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+            ),
+            onPressed: () {
+              if (enabled) onPressed();
+            },
+            style: _buildButtonStyle(),
           ),
-          onPressed: (){
-            if (enabled) onPressed();
-          },
-          style: _buildButtonStyle(),
         ),
       ),
     );
@@ -38,7 +41,6 @@ class AppButton extends StatelessWidget {
 
 ButtonStyle _buildButtonStyle() {
   return ButtonStyle(
-
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(13),

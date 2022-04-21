@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class InputValidator {
   static String Function(BuildContext)? validateEmailInput(String email) {
-    if (!EmailValidator.validate(email)) return (_) => 'Please enter a valid email adress';
+    if (!EmailValidator.validate(email)) return (_) => 'Please enter a valid email address';
     return null;
   }
 

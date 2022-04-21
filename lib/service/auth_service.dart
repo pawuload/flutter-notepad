@@ -1,15 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future submitAuthForm({
+  Future<String?> submitAuthForm({
     required String email,
     required String password,
   }) async {
-    String _message = '';
-    bool _error = false;
     try {
       await _auth.signInWithEmailAndPassword(
         email: email.trim(),
@@ -22,30 +19,13 @@ class AuthService {
           password: password,
         );
       } else if (e.code == 'wrong-password') {
-        _message = 'The password is invalid.';
-        _error = true;
+        return 'The password is invalid.';
       } else if (e.code == 'network-request-failed') {
-        _message = 'A network error has occurred';
-        _error = true;
+        return 'A network error has occurred';
       } else {
-        _message = 'Error: logging in failed. Please, try again later';
-        _error = true;
+        return 'Error: logging in failed. Please, try again later';
       }
-      // if (_error) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(
-      //       duration: const Duration(seconds: 3),
-      //       content: Text(
-      //         _message,
-      //         style: const TextStyle(color: Colors.red),
-      //       ),
-      //       action: SnackBarAction(
-      //         label: 'OK',
-      //         onPressed: () {},
-      //       ),
-      //     ),
-      //   );
-      // }
     }
+    return null;
   }
 }

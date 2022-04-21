@@ -9,6 +9,7 @@ class AppTextField extends HookWidget {
   final TextInputType? keyboardType;
   final String hint;
   final IconData prefixIcon;
+  final bool obscureText;
 
   const AppTextField({
     Key? key,
@@ -16,6 +17,7 @@ class AppTextField extends HookWidget {
     this.keyboardType,
     required this.hint,
     required this.prefixIcon,
+    required this.obscureText,
   }) : super(key: key);
 
   @override
@@ -24,12 +26,21 @@ class AppTextField extends HookWidget {
       value: state.value,
       onChanged: state.onChanged,
       child: (controller) => AppTextFieldRaw(
-        error: state.errorMessage?.let((it) => Text(it(context))),
+        error: state.errorMessage?.let(
+          (it) => Text(
+            it(context),
+            style: const TextStyle(
+              fontSize: 13,
+              color: Colors.red,
+            ),
+          ),
+        ),
         controller: controller,
         keyboardType: keyboardType,
-        obscureText: state.isObscured == true,
+        obscureText: obscureText,
         hint: hint,
         prefixIcon: prefixIcon,
+        focusNode: state.focusNode,
       ),
     );
   }
