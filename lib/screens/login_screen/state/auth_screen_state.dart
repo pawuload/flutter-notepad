@@ -10,8 +10,7 @@ class AuthScreenState {
   final FieldState passwordState;
   final Function() onButtonPressed;
   final Function() onCheckboxPressed;
-  final Stream<void> showSnackBarEvents;
-  final String? errorMessage;
+  final Stream<String?> showSnackBarEvents;
 
   const AuthScreenState({
     required this.isCheckboxOn,
@@ -20,7 +19,6 @@ class AuthScreenState {
     required this.passwordState,
     required this.onCheckboxPressed,
     required this.showSnackBarEvents,
-    required this.errorMessage,
   });
 }
 
@@ -29,8 +27,7 @@ AuthScreenState useAuthScreenState() {
   final isCheckboxOn = useState<bool>(false);
   final emailState = useFieldStateSimple();
   final passwordState = useFieldStateSimple();
-  final showSnackBarEvents = useStreamController<void>();
-  final errorState = useState<String?>(null);
+  final showSnackBarEvents = useStreamController<String?>();
 
   shouldSubmit() {
     final emailError = emailState.validate((value) => InputValidator.validateEmailInput(value));
@@ -46,8 +43,7 @@ AuthScreenState useAuthScreenState() {
         password: passwordState.value,
       );
       if (result != null) {
-        showSnackBarEvents.add(null);
-        errorState.value = result;
+        showSnackBarEvents.add(result);
       }
     },
     shouldSubmit: (_) => shouldSubmit(),
@@ -62,6 +58,5 @@ AuthScreenState useAuthScreenState() {
     emailState: emailState,
     onCheckboxPressed: () => isCheckboxOn.value = !isCheckboxOn.value,
     showSnackBarEvents: showSnackBarEvents.stream,
-    errorMessage: errorState.value,
   );
 }

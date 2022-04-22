@@ -18,6 +18,7 @@ class AuthService {
           email: email.trim(),
           password: password,
         );
+        return 'New user registered!';
       } else if (e.code == 'wrong-password') {
         return 'The password is invalid.';
       } else if (e.code == 'network-request-failed') {

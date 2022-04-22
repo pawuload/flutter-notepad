@@ -20,9 +20,9 @@ class AuthScreen extends HookWidget {
           .secondaryHeaderColor,
       body: HookBuilder(
           builder: (context) {
-            useStreamSubscription(
+            useStreamSubscription<String?>(
               state.showSnackBarEvents,
-                  (_) => _showSnackBar(context, state),
+                  (error) => _showSnackBar(context, error!),
             );
            return Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -47,10 +47,10 @@ class AuthScreen extends HookWidget {
     );
   }
 
-  void _showSnackBar(BuildContext context, AuthScreenState state) {
+  void _showSnackBar(BuildContext context, String error) {
     AppSnackBar(
       backgroundColor: Colors.red.withOpacity(0.7),
-      content: ':<',
+      content: error,
     ).show(context);
   }
 }
