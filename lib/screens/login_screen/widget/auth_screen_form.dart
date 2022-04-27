@@ -1,6 +1,6 @@
 import 'package:app/screens/login_screen/state/auth_screen_state.dart';
 import 'package:flutter/material.dart';
-import '../../../common/widget/app_textfield.dart';
+import 'package:app/common/widget/app_textfield.dart';
 
 class AuthScreenForm extends StatelessWidget {
   final AuthScreenState state;

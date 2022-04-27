@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../common/constans/app_images.dart';
+import 'package:app/common/constans/app_images.dart';
 
 class AuthScreenLogo extends StatelessWidget {
   const AuthScreenLogo({Key? key}) : super(key: key);

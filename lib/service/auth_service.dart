@@ -1,7 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> userSetup(String email) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('Users');
+    String? uid = _auth.currentUser?.uid.toString();
+    users.add({'email': email, 'uid': uid});
+    return;
+  }
 
   Future<String?> submitAuthForm({
     required String email,
@@ -18,6 +26,7 @@ class AuthService {
           email: email.trim(),
           password: password,
         );
+        userSetup(email);
         return 'New user registered!';
       } else if (e.code == 'wrong-password') {
         return 'The password is invalid.';
