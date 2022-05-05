@@ -1,4 +1,5 @@
 import 'package:app/service/auth_service.dart';
+import 'package:app/service/item_service.dart';
 import 'package:injector/injector.dart';
 
 class AppInjector {
@@ -7,7 +8,8 @@ class AppInjector {
   static Injector setup() {
     final injector = Injector();
     injector
-      .registerSingleton(() => AuthService());
+      ..registerSingleton(() => AuthService())
+      ..registerSingleton(() => ItemService(injector.get()));
 
     return injector;
   }

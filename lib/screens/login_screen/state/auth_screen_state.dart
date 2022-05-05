@@ -1,5 +1,4 @@
 import 'package:app/service/auth_service.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_arch/utopia_arch_extensions.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
@@ -44,7 +43,7 @@ AuthScreenState useAuthScreenState() {
     submit: (_) async {
       isLoading.value = !isLoading.value;
       final result = await authService.submitAuthForm(
-        email: emailState.value,
+        email: emailState.value.trim(),
         password: passwordState.value,
       );
       if (result != null) {
@@ -67,3 +66,5 @@ AuthScreenState useAuthScreenState() {
     showSnackBarEvents: showSnackBarEvents.stream,
   );
 }
+
+

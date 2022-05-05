@@ -17,7 +17,7 @@ class AppTextFieldRaw extends HookWidget {
     required this.obscureText,
     required this.hint,
     required this.prefixIcon,
-    required this.error,
+    this.error,
     required this.focusNode,
   }) : super(key: key);
 

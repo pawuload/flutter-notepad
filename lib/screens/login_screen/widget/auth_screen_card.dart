@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/screens/login_screen/state/auth_screen_state.dart';
-import 'auth_screen_form.dart';
+import 'package:app/screens/login_screen/widget/auth_screen_form.dart';
 
 class AuthScreenCard extends StatelessWidget {
   final AuthScreenState state;

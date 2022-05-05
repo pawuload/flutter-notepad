@@ -43,14 +43,14 @@ class HomeScreenButton extends StatelessWidget {
           onTap: () {
             FirebaseAuth.instance.signOut();
           },
-        ),SpeedDialChild(
+        ),
+        SpeedDialChild(
           backgroundColor: AppColors.premium,
           child: const Icon(
             AppIcons.premium,
             color: Colors.white,
           ),
-          onTap: () {
-          },
+          onTap: () {},
         ),
       ],
     );

@@ -1,14 +1,19 @@
-import 'package:app/screens/home_screen/widget/home_screen_list_title.dart';
+import 'package:app/models/note/note.dart';
+import 'package:app/screens/home_screen/state/home_screen_state.dart';
+import 'package:app/screens/home_screen/widget/home_screen_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/home_screen/widget/home_screen_button.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:app/common/constans/app_images.dart';
+import 'package:intl/intl.dart';
+import 'package:utopia_hooks/utopia_hooks.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = useHomeScreenState();
+
     return Scaffold(
       floatingActionButton: const HomeScreenButton(),
       backgroundColor: Theme.of(context).secondaryHeaderColor,
@@ -28,22 +33,23 @@ class HomeScreen extends HookWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               margin: const EdgeInsets.only(bottom: 0),
-              child: ListView(
-                padding: const EdgeInsets.all(12),
-                children: const <Widget>[
-                  // To tylko tak na chwilę, poglądowo
-                  HomeScreenListTitle(
-                      text: 'adsdasdasd asdsa d sad fsd fsdf dsf sdf sdf sdf we fs dfdssfsfd sdfsdf dsfdsfsf sf fdg df fdgfd gdf '),
-                  HomeScreenListTitle(text: 'asjd hasjkd haskdjasjd slkdhjk'),
-                  HomeScreenListTitle(text: 'Nullam suscipit pulvinar.'),
-                  HomeScreenListTitle(text: 'Lorem'),
-                  HomeScreenListTitle(text: 'Lorem Ipsum'),
-                  HomeScreenListTitle(text: 'Neque porro quisquam'),
-                  HomeScreenListTitle(text: 'Ut auctor sapien in est.'),
-                  HomeScreenListTitle(text: 'Proin porttitor'),
-                  HomeScreenListTitle(text: 'Lorem'),
-                  HomeScreenListTitle(text: 'Proin porttitor'),
-                ],
+              child: RefreshableComputedListWrapper<Note>(
+                state: state.noteState,
+                inProgressBuilder: (context) => Container(),
+                failedBuilder: (context) => Container(),
+                emptyBuilder: (context) => Container(),
+                builder: (context, notes) {
+                  return ListView.builder(
+                    itemCount: notes.length,
+                    itemBuilder: (context, index) {
+                      return HomeScreenListItem(
+                        title: notes[index].title,
+                        date: DateFormat.yMMMd().format(notes[index].created),
+                        description: notes[index].description,
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ),

@@ -1,14 +1,15 @@
+import 'package:app/models/user/user_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  User? get user => _auth.currentUser;
+
   Future<void> userSetup(String email) async {
-    CollectionReference users = FirebaseFirestore.instance.collection('Users');
-    String? uid = _auth.currentUser?.uid.toString();
-    users.add({'email': email, 'uid': uid});
-    return;
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    users.add(UserData(email: email).toJson());
   }
 
   Future<String?> submitAuthForm({
@@ -17,13 +18,13 @@ class AuthService {
   }) async {
     try {
       await _auth.signInWithEmailAndPassword(
-        email: email.trim(),
+        email: email,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         await _auth.createUserWithEmailAndPassword(
-          email: email.trim(),
+          email: email,
           password: password,
         );
         userSetup(email);

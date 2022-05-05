@@ -17,7 +17,6 @@ final injector = Injector.appInstance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // injector.registerSingleton<AuthService>(() => AuthService());
   runApp(const MyApp());
 }
 

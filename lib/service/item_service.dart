@@ -1,35 +1,22 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:app/models/item.dart';
-// import 'auth_service.dart';
-//
-// class ItemService {
-//   Stream<List<Item>> createItemStream() {
-//     var collection = FirebaseFirestore.instance.collection('users/' + AuthService().user!.uid + '/items');
-//     return collection.orderBy('created', descending: true).snapshots().map((event) {
-//       var items = <Item>[];
-//       for (int i = 0; i < event.docs.length; i++) {
-//         var doc = event.docs[i];
-//         items.add(
-//           Item(
-//             DateTime.fromMillisecondsSinceEpoch(doc.data()['created'], isUtc: true),
-//             doc.data()['name'],
-//             doc.data()['note'],
-//             doc.data()['url'],
-//           ),
-//         );
-//       }
-//       return items;
-//     });
-//   }
-//
-//   Future saveItem(Item item) async {
-//     var collection = FirebaseFirestore.instance.collection('users/' + AuthService().user!.uid + '/items');
-//     item.created = DateTime.now();
-//     await collection.add({
-//       'created': item.created.toUtc().millisecondsSinceEpoch,
-//       'name': item.name,
-//       'note': item.note,
-//       'url': item.url,
-//     });
-//   }
-// }
+import 'package:app/models/note/note.dart';
+import 'package:app/service/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class ItemService {
+  final AuthService _authService;
+  ItemService(this._authService);
+
+  Future<List<Note>> getAllItems() async {
+    final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
+
+    final result = await collection.get();
+    final value = result.docs.map((e) => Note.fromJson(e.data()));
+    return value.toList();
+  }
+
+  Future<void> saveItem({required String title, required String description}) async {
+    final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
+
+    await collection.add(Note(title: title, description: description, created: DateTime.now()).toJson());
+  }
+}
