@@ -15,7 +15,7 @@ class HomeScreen extends HookWidget {
     final state = useHomeScreenState();
 
     return Scaffold(
-      floatingActionButton: const HomeScreenButton(),
+      floatingActionButton: HomeScreenButton(state: state),
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

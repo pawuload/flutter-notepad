@@ -30,7 +30,7 @@ class AddScreenNavBar extends StatelessWidget {
                   onPressed: () async {
                     final result = await showExitDialog(context);
                     if (result) {
-                      Navigator.pop(context);
+                      Navigator.pop(context, false);
                     }
                   },
                   icon: AppIcons.exit,
@@ -55,7 +55,7 @@ class AddScreenNavBar extends StatelessWidget {
                 AddScreenNavBarItem(
                   onPressed: () {
                     state.onSaveBtn();
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                   },
                   icon: AppIcons.save,
                   name: ' save ',

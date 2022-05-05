@@ -4,12 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemService {
   final AuthService _authService;
-  ItemService(this._authService);
+
+  const ItemService(this._authService);
+
+  static const _ordering = 'created';
 
   Future<List<Note>> getAllItems() async {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
-    final result = await collection.get();
+    final result = await collection.orderBy(_ordering, descending: false).get();
     final value = result.docs.map((e) => Note.fromJson(e.data()));
     return value.toList();
   }

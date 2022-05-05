@@ -1,4 +1,5 @@
 import 'package:app/screens/add_screen/add_screen.dart';
+import 'package:app/screens/home_screen/state/home_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -6,7 +7,12 @@ import 'package:app/common/constans/app_icons.dart';
 import 'package:app/common/constans/app_color.dart';
 
 class HomeScreenButton extends StatelessWidget {
-  const HomeScreenButton({Key? key}) : super(key: key);
+  final HomeScreenState state;
+
+  const HomeScreenButton({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +33,12 @@ class HomeScreenButton extends StatelessWidget {
             AppIcons.add,
             color: Colors.white,
           ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AddScreen()),
+          onTap: () async {
+            final result = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AddScreen()),
             );
+            if(result == true) state.noteState.refresh();
           },
         ),
         SpeedDialChild(
