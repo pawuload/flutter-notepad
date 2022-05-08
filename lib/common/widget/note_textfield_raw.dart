@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class AddScreenTextFieldRaw extends HookWidget {
+class NoteTextFieldRaw extends HookWidget {
   final TextEditingController controller;
-  final String hint;
+  final String? hint;
   final double fontSize;
   final int maxLines;
   final int limit;
+  final bool showBorder;
+  final bool isReadOnly;
 
-  const AddScreenTextFieldRaw({
+  const NoteTextFieldRaw({
     Key? key,
     required this.controller,
-    this.hint = '',
+    required this.showBorder,
     required this.fontSize,
     required this.limit,
-    this.maxLines = 1,
+    required this.maxLines,
+    required this.isReadOnly,
+    this.hint,
   }) : super(key: key);
 
   @override
@@ -32,18 +36,19 @@ class AddScreenTextFieldRaw extends HookWidget {
     useListenable(controller);
 
     return DecoratedBox(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: 0.4,
-            color: Colors.brown,
+            width: 0.7,
+            color: showBorder ? Colors.brown : Colors.transparent,
           ),
         ),
       ),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: TextField(
+            readOnly: isReadOnly,
             maxLines: maxLines,
             controller: controller,
             inputFormatters: [

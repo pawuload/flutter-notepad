@@ -1,3 +1,4 @@
+import 'package:app/provider/user/user_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,13 +30,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyAppWrapper extends HookWidget{
+class MyAppWrapper extends HookWidget {
   const MyAppWrapper({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [InjectorProvider(setupInjector: () => AppInjector.setup()),],
+      providers: [
+        InjectorProvider(setupInjector: () => AppInjector.setup()),
+        const UserStateProvider(),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'notepad',

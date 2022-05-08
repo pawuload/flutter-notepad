@@ -4,7 +4,6 @@ import 'package:app/screens/home_screen/widget/home_screen_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/home_screen/widget/home_screen_button.dart';
 import 'package:app/common/constans/app_images.dart';
-import 'package:intl/intl.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
 class HomeScreen extends HookWidget {
@@ -43,9 +42,8 @@ class HomeScreen extends HookWidget {
                     itemCount: notes.length,
                     itemBuilder: (context, index) {
                       return HomeScreenListItem(
-                        title: notes[index].title,
-                        date: DateFormat.yMMMd().format(notes[index].created),
-                        description: notes[index].description,
+                        note: notes[index],
+                        user: state.userState,
                       );
                     },
                   );

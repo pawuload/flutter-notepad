@@ -9,7 +9,7 @@ class AuthService {
 
   Future<void> userSetup(String email) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
-    users.add(UserData(email: email).toJson());
+    users.add(UserData(email: email, isPremium: false).toJson());
   }
 
   Future<String?> submitAuthForm({
@@ -40,3 +40,5 @@ class AuthService {
     return null;
   }
 }
+
+

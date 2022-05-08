@@ -12,7 +12,7 @@ class ItemService {
   Future<List<Note>> getAllItems() async {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
-    final result = await collection.orderBy(_ordering, descending: false).get();
+    final result = await collection.orderBy(_ordering, descending: true).get();
     final value = result.docs.map((e) => Note.fromJson(e.data()));
     return value.toList();
   }
@@ -21,5 +21,11 @@ class ItemService {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
     await collection.add(Note(title: title, description: description, created: DateTime.now()).toJson());
+  }
+// deleteItem jeszcze nie działa, prosze nie zwracac uwagi xD
+  Future<void> deleteItem() async {
+    DocumentReference document = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/' + '/f7VLTUTjmhYl0rnfbmqK') as DocumentReference;
+    await document.delete();
+
   }
 }

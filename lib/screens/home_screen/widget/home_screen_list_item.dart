@@ -1,18 +1,14 @@
+import 'package:app/models/note/note.dart';
+import 'package:app/provider/user/user_state.dart';
 import 'package:app/screens/details_screen/details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreenListItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String date;
+  final Note note;
+  final UserState user;
 
-
-  const HomeScreenListItem({
-    Key? key,
-    required this.title,
-    required this.date,
-    this.description = '',
-  }) : super(key: key);
+  const HomeScreenListItem({Key? key, required this.note, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +16,12 @@ class HomeScreenListItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DetailsScreen(title: title, description: description,)),
+          MaterialPageRoute(
+            builder: (context) => DetailsScreen(
+              note: note,
+              user: user,
+            ),
+          ),
         );
       },
       child: Card(
@@ -36,7 +37,7 @@ class HomeScreenListItem extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 child: Text(
-                  title,
+                  note.title,
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
@@ -45,14 +46,14 @@ class HomeScreenListItem extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      date,
+                      DateFormat.yMMMd().format(note.created),
                       style: const TextStyle(fontSize: 11),
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      description.length > 40 ? description.substring(0, 38)+'...' : description,
+                      note.description.length > 40 ? note.description.substring(0, 38) + '...' : note.description,
                       maxLines: 1,
                       style: const TextStyle(fontSize: 14),
                     ),

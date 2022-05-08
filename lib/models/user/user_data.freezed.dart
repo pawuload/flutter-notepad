@@ -22,9 +22,10 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 class _$UserDataTearOff {
   const _$UserDataTearOff();
 
-  _UserData call({required String email}) {
+  _UserData call({required String email, required bool isPremium}) {
     return _UserData(
       email: email,
+      isPremium: isPremium,
     );
   }
 
@@ -39,6 +40,7 @@ const $UserData = _$UserDataTearOff();
 /// @nodoc
 mixin _$UserData {
   String get email => throw _privateConstructorUsedError;
+  bool get isPremium => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +52,7 @@ mixin _$UserData {
 abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res>;
-  $Res call({String email});
+  $Res call({String email, bool isPremium});
 }
 
 /// @nodoc
@@ -64,12 +66,17 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
   @override
   $Res call({
     Object? email = freezed,
+    Object? isPremium = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      isPremium: isPremium == freezed
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -79,7 +86,7 @@ abstract class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
   factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) then) =
       __$UserDataCopyWithImpl<$Res>;
   @override
-  $Res call({String email});
+  $Res call({String email, bool isPremium});
 }
 
 /// @nodoc
@@ -94,12 +101,17 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? email = freezed,
+    Object? isPremium = freezed,
   }) {
     return _then(_UserData(
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      isPremium: isPremium == freezed
+          ? _value.isPremium
+          : isPremium // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -107,17 +119,19 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserData implements _UserData {
-  _$_UserData({required this.email});
+  _$_UserData({required this.email, required this.isPremium});
 
   factory _$_UserData.fromJson(Map<String, dynamic> json) =>
       _$$_UserDataFromJson(json);
 
   @override
   final String email;
+  @override
+  final bool isPremium;
 
   @override
   String toString() {
-    return 'UserData(email: $email)';
+    return 'UserData(email: $email, isPremium: $isPremium)';
   }
 
   @override
@@ -125,12 +139,15 @@ class _$_UserData implements _UserData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UserData &&
-            const DeepCollectionEquality().equals(other.email, email));
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.isPremium, isPremium));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(email));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(isPremium));
 
   @JsonKey(ignore: true)
   @override
@@ -144,12 +161,15 @@ class _$_UserData implements _UserData {
 }
 
 abstract class _UserData implements UserData {
-  factory _UserData({required String email}) = _$_UserData;
+  factory _UserData({required String email, required bool isPremium}) =
+      _$_UserData;
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
 
   @override
   String get email;
+  @override
+  bool get isPremium;
   @override
   @JsonKey(ignore: true)
   _$UserDataCopyWith<_UserData> get copyWith =>
