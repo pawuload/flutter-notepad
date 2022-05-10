@@ -9,12 +9,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class DetailsScreen extends HookWidget {
   final Note note;
-  final UserState user;
 
   const DetailsScreen({
     Key? key,
     required this.note,
-    required this.user,
   }) : super(key: key);
 
   @override
@@ -44,7 +42,7 @@ class DetailsScreen extends HookWidget {
                   child: DetailsScreenTextField(
                     isReadOnly: state.isReadOnlyState,
                     state: state.descriptionFieldState,
-                    maxLines: 50,
+                    maxLines: 1000,
                     fontSize: 16,
                     showBorder: false,
                   ),
@@ -57,7 +55,7 @@ class DetailsScreen extends HookWidget {
       ),
       floatingActionButton: Visibility(
         visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-        child: DetailsScreenButton(state: state, user: user),
+        child: DetailsScreenButton(state: state),
       ),
       floatingActionButtonLocation: state.isReadOnlyState ? FloatingActionButtonLocation.endFloat: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: state.isReadOnlyState ? null : DetailsScreenNavBar(state: state),

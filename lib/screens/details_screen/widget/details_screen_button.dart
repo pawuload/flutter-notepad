@@ -1,5 +1,4 @@
 import 'package:app/common/constans/app_color.dart';
-import 'package:app/provider/user/user_state.dart';
 import 'package:app/screens/details_screen/state/details_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -7,12 +6,10 @@ import 'package:app/common/constans/app_icons.dart';
 
 class DetailsScreenButton extends StatelessWidget {
   final DetailsScreenState state;
-  final UserState user;
 
   const DetailsScreenButton({
     Key? key,
     required this.state,
-    required this.user,
   }) : super(key: key);
 
   @override
@@ -38,6 +35,7 @@ class DetailsScreenButton extends StatelessWidget {
             final result = await showDeleteDialog(context);
             if (result) {
               state.onDeleteBtn();
+              Navigator.pop(context, true);
             }
           },
         ),

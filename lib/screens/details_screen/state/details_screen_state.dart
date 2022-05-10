@@ -1,5 +1,5 @@
 import 'package:app/models/note/note.dart';
-import 'package:app/models/user/user_data.dart';
+import 'package:app/provider/user/user_state.dart';
 import 'package:app/service/item_service.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:utopia_arch/utopia_arch.dart';
@@ -8,6 +8,7 @@ import 'package:utopia_hooks/utopia_hooks.dart';
 class DetailsScreenState {
   final FieldState titleFieldState;
   final FieldState descriptionFieldState;
+  final UserState userState;
   final bool isReadOnlyState;
   final Function() onSaveBtn;
   final Function() onDeleteBtn;
@@ -20,29 +21,31 @@ class DetailsScreenState {
     required this.descriptionFieldState,
     required this.switchPremium,
     required this.onDeleteBtn,
+    required this.userState,
   });
 }
 
 DetailsScreenState useDetailsScreenState({required Note note}) {
   final itemService = useInjected<ItemService>();
+  final userState = useProvided<UserState>();
   final isReadOnlyState = useState<bool>(true);
-  final titleFieldState = useFieldStateSimple(initialValue: note.title);
-  final descriptionFieldState = useFieldStateSimple(initialValue: note.description);
+  final titleFieldState = useFieldStateSimple(initialValue: note.details.title);
+  final descriptionFieldState = useFieldStateSimple(initialValue: note.details.description);
 
   final save = useSubmitState(
-    submit: (_) async => await itemService.saveItem(
+    submit: (_) async => await itemService.updateItem(
       title: titleFieldState.value,
       description: descriptionFieldState.value,
+      id: note.id,
     ),
   );
 
   final delete = useSubmitState(
-    submit: (_) async => await itemService.deleteItem(),
+    submit: (_) async => await itemService.deleteItem(id: note.id),
   );
 
   final switchPremium = useSubmitState(submit: (_) async {
     isReadOnlyState.value = !isReadOnlyState.value;
-
   });
 
   return DetailsScreenState(
@@ -60,5 +63,6 @@ DetailsScreenState useDetailsScreenState({required Note note}) {
     switchPremium: () {
       switchPremium.submitWithInput(null);
     },
+    userState: userState,
   );
 }

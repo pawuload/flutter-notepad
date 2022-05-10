@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 class UserService {
 
   Future<UserData> getUser() async {
-    final CollectionReference collection = FirebaseFirestore.instance.collection('users/' + FirebaseAuth.instance.currentUser!.uid);
+    final CollectionReference collection = FirebaseFirestore.instance.collection('users/' + FirebaseAuth.instance.currentUser!.uid + '/user');
 
     final result = await collection.get();
-    final value = result.docs.map((e) => UserData.fromJson(e.data()));
-    return value as Future<UserData>;
+    final value = UserData.fromJson(result.docs.first.data());
+    return value;
   }
 }

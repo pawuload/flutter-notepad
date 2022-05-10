@@ -1,3 +1,4 @@
+import 'package:app/models/note/details/note_details.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/service/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,19 +14,24 @@ class ItemService {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
     final result = await collection.orderBy(_ordering, descending: true).get();
-    final value = result.docs.map((e) => Note.fromJson(e.data()));
+    final id = result.docs.first.id;
+    final value = result.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data())));
     return value.toList();
   }
 
   Future<void> saveItem({required String title, required String description}) async {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
-    await collection.add(Note(title: title, description: description, created: DateTime.now()).toJson());
+    await collection.add(NoteDetails(title: title, description: description, created: DateTime.now()).toJson());
   }
-// deleteItem jeszcze nie działa, prosze nie zwracac uwagi xD
-  Future<void> deleteItem() async {
-    DocumentReference document = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/' + '/f7VLTUTjmhYl0rnfbmqK') as DocumentReference;
-    await document.delete();
 
+  Future<void> updateItem({required String id, required String title, required String description}) async {
+    CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
+    await collection.doc(id).update(NoteDetails(title: title, description: description, created: DateTime.now()).toJson());
+  }
+
+  Future<void> deleteItem({required String id}) async {
+    CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
+    await collection.doc(id).delete();
   }
 }

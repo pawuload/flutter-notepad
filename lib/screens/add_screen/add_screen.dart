@@ -2,6 +2,7 @@ import 'package:app/screens/add_screen/state/add_screen_state.dart';
 import 'package:app/screens/add_screen/widget/add_screen_button.dart';
 import 'package:app/screens/add_screen/widget/add_screen_nav_bar.dart';
 import 'package:app/common/widget/note_textfield.dart';
+import 'package:app/screens/add_screen/widget/add_screen_url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -44,7 +45,7 @@ class AddScreen extends HookWidget {
                 ),
               ),
             ),
-            // const AddScreenUrl(),
+            const AddScreenUrl(),
           ],
         ),
       ),

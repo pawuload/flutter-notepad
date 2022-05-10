@@ -43,7 +43,7 @@ class HomeScreen extends HookWidget {
                     itemBuilder: (context, index) {
                       return HomeScreenListItem(
                         note: notes[index],
-                        user: state.userState,
+                        state: state,
                       );
                     },
                   );
