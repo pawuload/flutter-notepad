@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 
 class AddScreenUrl extends StatelessWidget {
   const AddScreenUrl({Key? key}) : super(key: key);
@@ -19,16 +19,9 @@ class AddScreenUrl extends StatelessWidget {
         width: double.infinity,
         height: 85,
         child: SingleChildScrollView(
-          child: Link(
-            target: LinkTarget.self,
-            uri: Uri.parse('https://www.youtube.com'),
-            builder: (context, followLink) => GestureDetector(
-              onTap: followLink,
-              child: const Text(
-                'www.goggle.pl',
-                style: TextStyle(fontSize: 15),
-              ),
-            ),
+          child: Linkify(
+            onOpen: (url) => print("Clicked $url"),
+            text: 'https://www.youtube.com',
           ),
         ),
       ),

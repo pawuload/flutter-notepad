@@ -1,13 +1,14 @@
-import 'package:app/screens/add_screen/widget/add_screen_nav_bar_item.dart';
+import 'package:app/common/widget/app_nav_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:app/common/constans/app_icons.dart';
-import 'package:app/screens/add_screen/state/add_screen_state.dart';
 
-class AddScreenNavBar extends StatelessWidget {
-  final AddScreenState state;
+class AppNavBar extends StatelessWidget {
+  final state;
+  final Function() exitFunction;
 
-  const AddScreenNavBar({
+  const AppNavBar({
     required this.state,
+    required this.exitFunction,
     Key? key,
   }) : super(key: key);
 
@@ -26,17 +27,17 @@ class AddScreenNavBar extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AddScreenNavBarItem(
+                AppNavBarItem(
                   onPressed: () async {
                     final result = await showExitDialog(context);
                     if (result) {
-                      Navigator.pop(context, false);
+                      exitFunction();
                     }
                   },
                   icon: AppIcons.exit,
                   name: ' exit ',
                 ),
-                AddScreenNavBarItem(
+                AppNavBarItem(
                   onPressed: () {},
                   icon: AppIcons.addImage,
                   name: ' image ',
@@ -47,12 +48,12 @@ class AddScreenNavBar extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AddScreenNavBarItem(
+                AppNavBarItem(
                   onPressed: () {},
                   icon: AppIcons.addLink,
                   name: ' link ',
                 ),
-                AddScreenNavBarItem(
+                AppNavBarItem(
                   onPressed: () {
                     state.onSaveBtn();
                     Navigator.pop(context, true);

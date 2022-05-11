@@ -15,5 +15,6 @@ class AppIcons {
   static const yes = Icons.check;
   static const no = Icons.close;
   static const edit = Icons.edit;
+  static const read = Icons.chrome_reader_mode_outlined;
 
 }

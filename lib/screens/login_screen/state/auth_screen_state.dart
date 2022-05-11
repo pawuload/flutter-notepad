@@ -1,3 +1,4 @@
+import 'package:app/provider/user/user_state.dart';
 import 'package:app/service/auth_service.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_arch/utopia_arch_extensions.dart';
@@ -26,6 +27,7 @@ class AuthScreenState {
 
 AuthScreenState useAuthScreenState() {
   final authService = useInjected<AuthService>();
+  final userState = useProvided<UserState>();
   final isCheckboxOn = useState<bool>(false);
   final emailState = useFieldStateSimple();
   final passwordState = useFieldStateSimple();
@@ -46,6 +48,7 @@ AuthScreenState useAuthScreenState() {
         email: emailState.value.trim(),
         password: passwordState.value,
       );
+      userState.refresh();
       if (result != null) {
         showSnackBarEvents.add(result);
         isLoading.value = !isLoading.value;

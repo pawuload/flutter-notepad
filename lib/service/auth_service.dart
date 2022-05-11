@@ -1,4 +1,4 @@
-import 'package:app/models/user/user_data.dart';
+import 'package:app/models/user/details/user_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -9,7 +9,7 @@ class AuthService {
 
   Future<void> userSetup(String email) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users/' + FirebaseAuth.instance.currentUser!.uid + '/user');
-    users.add(UserData(email: email, isPremium: false).toJson());
+    users.add(UserDetails(email: email, isPremium: false).toJson());
   }
 
   Future<String?> submitAuthForm({

@@ -1,8 +1,7 @@
+import 'package:app/common/widget/app_nav_bar.dart';
 import 'package:app/models/note/note.dart';
-import 'package:app/provider/user/user_state.dart';
 import 'package:app/screens/details_screen/state/details_screen_state.dart';
 import 'package:app/screens/details_screen/widget/details_screen_button.dart';
-import 'package:app/screens/details_screen/widget/details_screen_nav_bar.dart';
 import 'package:app/screens/details_screen/widget/details_screen_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -57,8 +56,14 @@ class DetailsScreen extends HookWidget {
         visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
         child: DetailsScreenButton(state: state),
       ),
-      floatingActionButtonLocation: state.isReadOnlyState ? FloatingActionButtonLocation.endFloat: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: state.isReadOnlyState ? null : DetailsScreenNavBar(state: state),
+      floatingActionButtonLocation:
+          state.isReadOnlyState ? FloatingActionButtonLocation.endFloat : FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: state.isReadOnlyState
+          ? null
+          : AppNavBar(
+              state: state,
+              exitFunction:() => state.switchReadOnly(),
+            ),
     );
   }
 }

@@ -35,10 +35,10 @@ class HomeScreenButton extends StatelessWidget {
           ),
           onTap: () async {
             final result = await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddScreen()),
+              context,
+              MaterialPageRoute(builder: (context) => const AddScreen()),
             );
-            if(result == true) state.noteState.refresh();
+            if (result == true) state.noteState.refresh();
           },
         ),
         SpeedDialChild(
@@ -49,17 +49,83 @@ class HomeScreenButton extends StatelessWidget {
           ),
           onTap: () {
             FirebaseAuth.instance.signOut();
+            state.userState.refresh();
           },
         ),
         SpeedDialChild(
-          backgroundColor: AppColors.premium,
+          backgroundColor: state.userState.user!.details.isPremium ? Colors.brown[300] : AppColors.premium,
           child: const Icon(
             AppIcons.premium,
             color: Colors.white,
           ),
-          onTap: () {},
+          onTap: () async {
+            if (state.userState.user!.details.isPremium == false) {
+              final result = await showPremiumDialog(
+                context,
+                'Buy Premium version by only one click!',
+                'Get the Premium version to unlock a lot of useful features!',
+                'GET IT NOW',
+              );
+              if (result) {
+                state.switchPremium();
+                state.userState.refresh();
+              }
+            } else {
+              final result = await showPremiumDialog(
+                context,
+                'Are you sure you want to turn off the Premium version?',
+                'If you turn off the Premium version, you will lose a lot of useful features!',
+                'TURN IT OFF',
+              );
+              if (result) {
+                state.switchPremium();
+                state.userState.refresh();
+              }
+            }
+          },
         ),
       ],
     );
   }
+}
+
+Future<bool> showPremiumDialog(BuildContext context, text, descriptionText, buttonText) async {
+  return await showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: Text(
+        text,
+        style: const TextStyle(fontSize: 20),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            descriptionText,
+            style: const TextStyle(fontSize: 15),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        Container(
+          width: double.maxFinite,
+          padding: const EdgeInsets.all(16),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(primary: AppColors.premium, elevation: 10),
+            onPressed: () {
+              Navigator.pop(context, true);
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                buttonText,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

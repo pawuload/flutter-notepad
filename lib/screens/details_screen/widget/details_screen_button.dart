@@ -50,15 +50,21 @@ class DetailsScreenButton extends StatelessWidget {
           },
         ),
         SpeedDialChild(
-          backgroundColor: AppColors.premium,
-          child: const Icon(
-            AppIcons.edit,
+          backgroundColor: state.isPremium ? Colors.brown[300] : AppColors.premium,
+          child: Icon(
+           state.isReadOnlyState ? AppIcons.edit : AppIcons.read,
             color: Colors.white,
           ),
           onTap: () async {
-            final result = await showPremiumDialog(context);
-            if (result) {
-              state.switchPremium();
+            if (state.isPremium == false) {
+              final result = await showPremiumDialog(context);
+              if (result) {
+                state.switchPremium();
+                state.switchReadOnly();
+                state.userState.refresh();
+              }
+            } else {
+              state.switchReadOnly();
             }
           },
         ),

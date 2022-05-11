@@ -22,10 +22,10 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 class _$UserDataTearOff {
   const _$UserDataTearOff();
 
-  _UserData call({required String email, required bool isPremium}) {
+  _UserData call({required String id, required UserDetails details}) {
     return _UserData(
-      email: email,
-      isPremium: isPremium,
+      id: id,
+      details: details,
     );
   }
 
@@ -39,8 +39,8 @@ const $UserData = _$UserDataTearOff();
 
 /// @nodoc
 mixin _$UserData {
-  String get email => throw _privateConstructorUsedError;
-  bool get isPremium => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  UserDetails get details => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +52,9 @@ mixin _$UserData {
 abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res>;
-  $Res call({String email, bool isPremium});
+  $Res call({String id, UserDetails details});
+
+  $UserDetailsCopyWith<$Res> get details;
 }
 
 /// @nodoc
@@ -65,19 +67,26 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? email = freezed,
-    Object? isPremium = freezed,
+    Object? id = freezed,
+    Object? details = freezed,
   }) {
     return _then(_value.copyWith(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      isPremium: isPremium == freezed
-          ? _value.isPremium
-          : isPremium // ignore: cast_nullable_to_non_nullable
-              as bool,
+      details: details == freezed
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
+              as UserDetails,
     ));
+  }
+
+  @override
+  $UserDetailsCopyWith<$Res> get details {
+    return $UserDetailsCopyWith<$Res>(_value.details, (value) {
+      return _then(_value.copyWith(details: value));
+    });
   }
 }
 
@@ -86,7 +95,10 @@ abstract class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
   factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) then) =
       __$UserDataCopyWithImpl<$Res>;
   @override
-  $Res call({String email, bool isPremium});
+  $Res call({String id, UserDetails details});
+
+  @override
+  $UserDetailsCopyWith<$Res> get details;
 }
 
 /// @nodoc
@@ -100,18 +112,18 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? email = freezed,
-    Object? isPremium = freezed,
+    Object? id = freezed,
+    Object? details = freezed,
   }) {
     return _then(_UserData(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      isPremium: isPremium == freezed
-          ? _value.isPremium
-          : isPremium // ignore: cast_nullable_to_non_nullable
-              as bool,
+      details: details == freezed
+          ? _value.details
+          : details // ignore: cast_nullable_to_non_nullable
+              as UserDetails,
     ));
   }
 }
@@ -119,19 +131,19 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserData implements _UserData {
-  _$_UserData({required this.email, required this.isPremium});
+  _$_UserData({required this.id, required this.details});
 
   factory _$_UserData.fromJson(Map<String, dynamic> json) =>
       _$$_UserDataFromJson(json);
 
   @override
-  final String email;
+  final String id;
   @override
-  final bool isPremium;
+  final UserDetails details;
 
   @override
   String toString() {
-    return 'UserData(email: $email, isPremium: $isPremium)';
+    return 'UserData(id: $id, details: $details)';
   }
 
   @override
@@ -139,15 +151,15 @@ class _$_UserData implements _UserData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UserData &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.isPremium, isPremium));
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.details, details));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(isPremium));
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(details));
 
   @JsonKey(ignore: true)
   @override
@@ -161,15 +173,15 @@ class _$_UserData implements _UserData {
 }
 
 abstract class _UserData implements UserData {
-  factory _UserData({required String email, required bool isPremium}) =
+  factory _UserData({required String id, required UserDetails details}) =
       _$_UserData;
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
 
   @override
-  String get email;
+  String get id;
   @override
-  bool get isPremium;
+  UserDetails get details;
   @override
   @JsonKey(ignore: true)
   _$UserDataCopyWith<_UserData> get copyWith =>

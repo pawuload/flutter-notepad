@@ -1,6 +1,6 @@
+import 'package:app/common/widget/app_nav_bar.dart';
 import 'package:app/screens/add_screen/state/add_screen_state.dart';
 import 'package:app/screens/add_screen/widget/add_screen_button.dart';
-import 'package:app/screens/add_screen/widget/add_screen_nav_bar.dart';
 import 'package:app/common/widget/note_textfield.dart';
 import 'package:app/screens/add_screen/widget/add_screen_url.dart';
 import 'package:flutter/material.dart';
@@ -51,10 +51,13 @@ class AddScreen extends HookWidget {
       ),
       floatingActionButton: Visibility(
         visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-        child: const AddScreenButton(),
+        child: AddScreenButton(state: state),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AddScreenNavBar(state: state),
+      bottomNavigationBar: AppNavBar(
+        state: state,
+        exitFunction: () => Navigator.pop(context, false),
+      ),
     );
   }
 }

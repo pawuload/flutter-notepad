@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AddScreenNavBarItem extends StatelessWidget {
+class AppNavBarItem extends StatelessWidget {
   final Function() onPressed;
   final IconData icon;
   final String name;
 
-  const AddScreenNavBarItem({
+  const AppNavBarItem({
     Key? key,
     required this.onPressed,
     required this.icon,
