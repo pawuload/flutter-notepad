@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../../common/widgets/app_textfield.dart';
+import 'package:app/screens/login_screen/state/auth_screen_state.dart';
+import 'package:app/screens/login_screen/widget/auth_screen_form.dart';
 
-class AuthForm extends StatefulWidget {
-  const AuthForm({Key? key}) : super(key: key);
+class AuthScreenCard extends StatelessWidget {
+  final AuthScreenState state;
 
-  @override
-  State<AuthForm> createState() => _AuthFormState();
-}
-
-class _AuthFormState extends State<AuthForm> {
-  bool value = false;
-  bool isChecked = true;
+  const AuthScreenCard({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +25,12 @@ class _AuthFormState extends State<AuthForm> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                _buildFields(value),
+                AuthScreenForm(state: state),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: CheckboxListTile(
-                    value: value,
-                    onChanged: (value) {
-                      setState(() {
-                        this.value = value!;
-                        isChecked = value;
-                      });
-                    },
+                    value: state.isCheckboxOn,
+                    onChanged: (_) => state.onCheckboxPressed(),
                     title: const Text(
                       'I consent to the processing of data for the marketing purposes',
                       style: TextStyle(fontSize: 15),
@@ -52,25 +45,4 @@ class _AuthFormState extends State<AuthForm> {
       ),
     );
   }
-}
-
-Column _buildFields(bool value) {
-  return Column(
-    children: [
-      Field(
-        hintText: 'Email',
-        icon: const Icon(Icons.account_circle),
-        enabled: value,
-        inputType: TextInputType.emailAddress,
-        obscure: false,
-      ),
-      Field(
-        hintText: 'Password',
-        icon: const Icon(Icons.lock),
-        enabled: value,
-        inputType: TextInputType.visiblePassword,
-        obscure: true,
-      ),
-    ],
-  );
 }
