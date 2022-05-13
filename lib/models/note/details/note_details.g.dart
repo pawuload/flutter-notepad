@@ -11,6 +11,8 @@ _$_NoteDetails _$$_NoteDetailsFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String,
       created: DateTime.parse(json['created'] as String),
+      imageUrl: json['imageUrl'] as String?,
+      url: json['url'] as String?,
     );
 
 Map<String, dynamic> _$$_NoteDetailsToJson(_$_NoteDetails instance) =>
@@ -18,4 +20,6 @@ Map<String, dynamic> _$$_NoteDetailsToJson(_$_NoteDetails instance) =>
       'title': instance.title,
       'description': instance.description,
       'created': instance.created.toIso8601String(),
+      'imageUrl': instance.imageUrl,
+      'url': instance.url,
     };

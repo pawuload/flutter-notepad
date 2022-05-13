@@ -1,5 +1,6 @@
 import 'package:app/screens/login_screen/state/auth_screen_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 import 'package:app/common/widget/app_button.dart';
 import 'package:app/screens/login_screen/widget/auth_screen_logo.dart';

@@ -13,7 +13,6 @@ class AppInjector {
       ..registerSingleton(() => ItemService(injector.get()))
       ..registerSingleton(() => UserService());
 
-
     return injector;
   }
 }

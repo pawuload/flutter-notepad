@@ -10,6 +10,8 @@ class NoteDetails with _$NoteDetails {
     required String title,
     required String description,
     required DateTime created,
+    required String? imageUrl,
+    required String? url,
   }) = _NoteDetails;
 
   factory NoteDetails.fromJson(Map<String, dynamic> json) => _$NoteDetailsFromJson(json);

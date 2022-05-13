@@ -1,4 +1,5 @@
 import 'package:app/common/constans/app_color.dart';
+import 'package:app/common/constans/app_icons.dart';
 import 'package:app/screens/add_screen/state/add_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -11,7 +12,9 @@ class AddScreenButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
-      child: const Text('60'),
+      child: Container(
+        child: state.userState.user!.details.isPremium ? const Icon(AppIcons.premium) : Text(state.timeLeft.toString()),
+      ),
       backgroundColor: state.userState.user!.details.isPremium ? Colors.brown : AppColors.premium,
       elevation: 10,
     );

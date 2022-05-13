@@ -5,6 +5,7 @@ import 'note_textfield_raw.dart';
 
 class NoteTextField extends HookWidget {
   final FieldState state;
+  final Function() onTap;
   final String? hint;
   final int limit;
   final int maxLines;
@@ -16,6 +17,7 @@ class NoteTextField extends HookWidget {
     Key? key,
     required this.state,
     required this.fontSize,
+    required this.onTap,
     required this.showBorder,
     required this.maxLines,
     required this.isReadOnly,
@@ -29,6 +31,7 @@ class NoteTextField extends HookWidget {
       value: state.value,
       onChanged: state.onChanged,
       child: (controller) => NoteTextFieldRaw(
+        onTap: onTap,
         controller: controller,
         limit: limit,
         fontSize: fontSize,

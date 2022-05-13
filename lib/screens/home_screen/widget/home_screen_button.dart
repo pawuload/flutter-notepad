@@ -1,5 +1,6 @@
 import 'package:app/screens/add_screen/add_screen.dart';
 import 'package:app/screens/home_screen/state/home_screen_state.dart';
+import 'package:app/screens/login_screen/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -47,9 +48,14 @@ class HomeScreenButton extends StatelessWidget {
             AppIcons.logout,
             color: Colors.white,
           ),
-          onTap: () {
+          onTap: () async {
             FirebaseAuth.instance.signOut();
-            state.userState.refresh();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AuthScreen(),
+              ),
+            );
           },
         ),
         SpeedDialChild(
@@ -89,7 +95,7 @@ class HomeScreenButton extends StatelessWidget {
   }
 }
 
-Future<bool> showPremiumDialog(BuildContext context, text, descriptionText, buttonText) async {
+Future<bool> showPremiumDialog(BuildContext context, String text, String descriptionText, String buttonText) async {
   return await showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(

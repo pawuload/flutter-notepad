@@ -1,6 +1,13 @@
+import 'dart:io';
+
 import 'package:app/common/widget/app_nav_bar_item.dart';
+import 'package:app/service/storage_service.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:app/common/constans/app_icons.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 class AppNavBar extends StatelessWidget {
   final state;
@@ -38,7 +45,21 @@ class AppNavBar extends StatelessWidget {
                   name: ' exit ',
                 ),
                 AppNavBarItem(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final pickedImage = await ImagePicker.platform.pickImage(
+                      source: ImageSource.gallery,
+                        maxWidth: 1920,
+                        maxHeight: 1200,
+                        imageQuality: 80,
+                    );
+
+                    if (pickedImage != null) {
+                      File imagePath = File(pickedImage.path);
+                      String imageName = imagePath.path.split('/').last;
+                      print(imagePath.path);
+                      print(imageName);
+                    }
+                  },
                   icon: AppIcons.addImage,
                   name: ' image ',
                 ),

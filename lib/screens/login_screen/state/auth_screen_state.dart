@@ -1,5 +1,8 @@
 import 'package:app/provider/user/user_state.dart';
+import 'package:app/screens/home_screen/home_screen.dart';
 import 'package:app/service/auth_service.dart';
+import 'package:app/service/user_service.dart';
+import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_arch/utopia_arch_extensions.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
@@ -33,6 +36,7 @@ AuthScreenState useAuthScreenState() {
   final passwordState = useFieldStateSimple();
   final showSnackBarEvents = useStreamController<String?>();
   final isLoading = useState<bool>(false);
+  final context = useContext();
 
   shouldSubmit() {
     final emailError = emailState.validate((value) => InputValidator.validateEmailInput(value));
@@ -48,13 +52,21 @@ AuthScreenState useAuthScreenState() {
         email: emailState.value.trim(),
         password: passwordState.value,
       );
-      userState.refresh();
       if (result != null) {
         showSnackBarEvents.add(result);
         isLoading.value = !isLoading.value;
       }
     },
     shouldSubmit: (_) => shouldSubmit(),
+    afterSubmit: (_, result) async {
+      await userState.refresh();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      );
+    }
   );
 
   return AuthScreenState(

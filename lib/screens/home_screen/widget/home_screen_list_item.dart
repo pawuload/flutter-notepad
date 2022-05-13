@@ -8,7 +8,6 @@ class HomeScreenListItem extends StatelessWidget {
   final Note note;
   final HomeScreenState state;
 
-
   const HomeScreenListItem({Key? key, required this.note, required this.state}) : super(key: key);
 
   @override
@@ -23,7 +22,7 @@ class HomeScreenListItem extends StatelessWidget {
             ),
           ),
         );
-        if(result == true) state.noteState.refresh();
+        if (result == true) state.noteState.refresh();
       },
       child: Card(
         elevation: 10,

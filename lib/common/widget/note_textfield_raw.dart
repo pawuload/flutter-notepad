@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class NoteTextFieldRaw extends HookWidget {
   final TextEditingController controller;
+  final Function() onTap;
   final String? hint;
   final double fontSize;
   final int maxLines;
@@ -14,6 +15,7 @@ class NoteTextFieldRaw extends HookWidget {
   const NoteTextFieldRaw({
     Key? key,
     required this.controller,
+    required this.onTap,
     required this.showBorder,
     required this.fontSize,
     required this.limit,
@@ -48,6 +50,7 @@ class NoteTextFieldRaw extends HookWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: TextField(
+            onTap: onTap,
             readOnly: isReadOnly,
             maxLines: maxLines,
             controller: controller,

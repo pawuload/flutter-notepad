@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/models/note/details/note_details.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/service/auth_service.dart';
@@ -19,15 +21,15 @@ class ItemService {
     return value.toList();
   }
 
-  Future<void> saveItem({required String title, required String description}) async {
+  Future<void> saveItem({required String title, required String description, required String? imageUrl}) async {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
-    await collection.add(NoteDetails(title: title, description: description, created: DateTime.now()).toJson());
+    await collection.add(NoteDetails(title: title, description: description, created: DateTime.now(), url: '', imageUrl: imageUrl).toJson());
   }
 
-  Future<void> updateItem({required String id, required String title, required String description}) async {
+  Future<void> updateItem({required String id, required String title, required String description, required String? imageUrl}) async {
     CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
-    await collection.doc(id).update(NoteDetails(title: title, description: description, created: DateTime.now()).toJson());
+    await collection.doc(id).update(NoteDetails(title: title, description: description, created: DateTime.now(), url: '', imageUrl: imageUrl).toJson());
   }
 
   Future<void> deleteItem({required String id}) async {

@@ -43,6 +43,7 @@ DetailsScreenState useDetailsScreenState({required Note note}) {
       title: titleFieldState.value,
       description: descriptionFieldState.value,
       id: note.id,
+      imageUrl: '',
     ),
   );
 
@@ -66,7 +67,7 @@ DetailsScreenState useDetailsScreenState({required Note note}) {
     onDeleteBtn: () {
       delete.submitWithInput(null);
     },
-    switchReadOnly: (){
+    switchReadOnly: () {
       switchReadOnly.submitWithInput(null);
     },
     isReadOnlyState: isReadOnlyState.value,
