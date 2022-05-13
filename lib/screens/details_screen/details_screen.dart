@@ -2,10 +2,12 @@ import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/common/widget/navigation_bar/app_nav_bar.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/screens/details_screen/state/details_screen_state.dart';
+import 'package:app/screens/details_screen/widget/details_screen_bottom_sheet.dart';
 import 'package:app/screens/details_screen/widget/details_screen_button.dart';
 import 'package:app/screens/details_screen/widget/details_screen_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 
 class DetailsScreen extends HookWidget {
   final Note note;
@@ -56,14 +58,19 @@ class DetailsScreen extends HookWidget {
                     child: DetailsScreenTextField(
                       isReadOnly: state.isReadOnlyState,
                       state: state.descriptionFieldState,
-                      maxLines: 1000,
+                      maxLines: 25,
                       fontSize: 16,
                       showBorder: false,
                     ),
                   ),
                 ),
               ),
-              // const AddScreenUrl(),
+              if(note.details.url != '')
+                Linkify(
+                  onOpen: (_) => DetailsScreenBottomSheet.show(context, note.details.url!),
+                  text: note.details.url!,
+                ),
+
             ],
           ),
         ),
@@ -76,8 +83,9 @@ class DetailsScreen extends HookWidget {
         bottomNavigationBar: state.isReadOnlyState
             ? null
             : AppNavBar(
-                onSavePressed: () => state.onSaveButtonPressed(),
-                onExitPressed: () => state.switchReadOnly(),
+                onSavePressed: state.onSaveButtonPressed,
+                onExitPressed: state.switchReadOnly,
+                onImagePressed: state.onPickImagePressed,
               ),
       ),
     );

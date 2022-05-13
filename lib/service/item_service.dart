@@ -16,20 +16,55 @@ class ItemService {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
     final result = await collection.orderBy(_ordering, descending: true).get();
-    final id = result.docs.first.id;
-    final value = result.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data())));
+    final value = result.docs.map(
+      (e) => Note(
+        id: e.id,
+        details: NoteDetails.fromJson(
+          e.data(),
+        ),
+      ),
+    );
     return value.toList();
   }
 
-  Future<void> saveItem({required String title, required String description, required String? imageUrl}) async {
-    final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
+  Future<void> saveItem({
+    required String title,
+    required String description,
+    required String? url,
+    required String? imageUrl,
+  }) async {
+    final CollectionReference collection = FirebaseFirestore.instance.collection(
+      'notes/' + _authService.user!.uid + '/notes',
+    );
 
-    await collection.add(NoteDetails(title: title, description: description, created: DateTime.now(), url: '', imageUrl: imageUrl).toJson());
+    await collection.add(
+      NoteDetails(
+        title: title,
+        description: description,
+        created: DateTime.now(),
+        url: url,
+        imageUrl: imageUrl,
+      ).toJson(),
+    );
   }
 
-  Future<void> updateItem({required String id, required String title, required String description, required String? imageUrl}) async {
+  Future<void> updateItem({
+    required String id,
+    required String title,
+    required String description,
+    required String? url,
+    required String? imageUrl,
+  }) async {
     CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
-    await collection.doc(id).update(NoteDetails(title: title, description: description, created: DateTime.now(), url: '', imageUrl: imageUrl).toJson());
+    await collection.doc(id).update(
+          NoteDetails(
+            title: title,
+            description: description,
+            created: DateTime.now(),
+            url: url,
+            imageUrl: imageUrl,
+          ).toJson(),
+        );
   }
 
   Future<void> deleteItem({required String id}) async {

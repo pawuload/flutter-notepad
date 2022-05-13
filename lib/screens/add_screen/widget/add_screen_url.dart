@@ -1,3 +1,5 @@
+import 'package:app/models/note/note.dart';
+import 'package:app/screens/details_screen/widget/details_screen_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 
@@ -19,10 +21,7 @@ class AddScreenUrl extends StatelessWidget {
         width: double.infinity,
         height: 85,
         child: SingleChildScrollView(
-          child: Linkify(
-            onOpen: (url) => print("Clicked $url"),
-            text: 'https://www.youtube.com',
-          ),
+
         ),
       ),
     );

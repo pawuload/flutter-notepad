@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'auth_state_provider.dart';
 
 class AuthState {
-  final User? user;
+  final AuthStatus status;
 
-  AuthState({Key? key, required this.user});
-
-  bool get isInitialized => user != null;
-
+  AuthState({Key? key, required this.status});
 }

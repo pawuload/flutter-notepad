@@ -12,7 +12,7 @@ class AppAlertDialog extends StatelessWidget {
       {required Widget title, required Widget content}) async {
     return await show<T>(
       context,
-      (context) {
+          (context) {
         return AppAlertDialog(title: title, content: content);
       },
     );
@@ -21,7 +21,7 @@ class AppAlertDialog extends StatelessWidget {
   static Future<bool?> showExit(BuildContext context) async {
     return await show<bool>(
       context,
-      (context) {
+          (context) {
         return AppAlertDialog(
           title: const Text(
             'Are you sure you want to exit?',
@@ -65,14 +65,14 @@ class AppAlertDialog extends StatelessWidget {
   }
 
   static Future<bool?> showPremium(
-    BuildContext context, {
-    required String title,
-    required String description,
-    required String button,
-  }) async {
+      BuildContext context, {
+        required String title,
+        required String description,
+        required String button,
+      }) async {
     return await show<bool>(
       context,
-      (context) {
+          (context) {
         return AppAlertDialog(
           title: Text(
             title,

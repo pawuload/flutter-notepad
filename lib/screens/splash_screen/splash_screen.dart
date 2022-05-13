@@ -1,6 +1,7 @@
 import 'package:app/common/constans/app_color.dart';
 import 'package:app/common/constans/app_images.dart';
 import 'package:app/provider/auth/auth_state.dart';
+import 'package:app/provider/auth/auth_state_provider.dart';
 import 'package:app/provider/user/user_state.dart';
 import 'package:app/screens/home_screen/home_screen.dart';
 import 'package:app/screens/login_screen/auth_screen.dart';
@@ -17,7 +18,8 @@ class SplashScreen extends HookWidget {
     final authState = useProvided<AuthState>();
 
     useAsyncEffectAfterSetup(() async {
-      if (userState.isInitialized && authState.isInitialized) {
+      if (authState.status == AuthStatus.unknown) return;
+      if (userState.isInitialized && authState.status == AuthStatus.authorized) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -25,7 +27,7 @@ class SplashScreen extends HookWidget {
           ),
         );
       }
-      if (authState.isInitialized == false) {
+      if (authState.status == AuthStatus.none) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -35,7 +37,7 @@ class SplashScreen extends HookWidget {
       }
     }, [
       userState.isInitialized,
-      authState.isInitialized,
+      authState.status,
     ]);
 
     return Scaffold(

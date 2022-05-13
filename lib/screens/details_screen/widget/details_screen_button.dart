@@ -1,4 +1,5 @@
 import 'package:app/common/constans/app_color.dart';
+import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/screens/details_screen/state/details_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -52,13 +53,14 @@ class DetailsScreenButton extends StatelessWidget {
         SpeedDialChild(
           backgroundColor: state.isPremium ? Colors.brown[300] : AppColors.premium,
           child: Icon(
-           state.isReadOnlyState ? AppIcons.edit : AppIcons.read,
+            state.isReadOnlyState ? AppIcons.edit : AppIcons.read,
             color: Colors.white,
           ),
           onTap: () async {
             if (state.isPremium == false) {
-              final result = await showPremiumDialog(context);
-              if (result) {
+              final result = await AppAlertDialog.showPremium(context,
+                  title: 'To edit your notes you must buy a premium version!', button: 'GET IT NOW', description: '');
+              if (result == true) {
                 state.switchPremium();
                 state.switchReadOnly();
                 state.userState.refresh();
@@ -71,37 +73,6 @@ class DetailsScreenButton extends StatelessWidget {
       ],
     );
   }
-}
-
-Future<bool> showPremiumDialog(BuildContext context) async {
-  return await showDialog(
-    context: context,
-    builder: (BuildContext context) => AlertDialog(
-      title: const Text(
-        'To edit your notes you must buy a premium version!',
-        style: TextStyle(fontSize: 20),
-      ),
-      actions: <Widget>[
-        Container(
-          width: double.maxFinite,
-          padding: const EdgeInsets.all(16),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: AppColors.premium, elevation: 10),
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                'GET IT NOW',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
 }
 
 Future<bool> showDeleteDialog(BuildContext context) async {

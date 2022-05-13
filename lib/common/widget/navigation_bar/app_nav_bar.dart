@@ -10,10 +10,12 @@ import 'app_nav_bar_item.dart';
 class AppNavBar extends StatelessWidget {
   final Function() onSavePressed;
   final Function() onExitPressed;
+  final Function() onImagePressed;
 
   const AppNavBar({
     required this.onSavePressed,
     required this.onExitPressed,
+    required this.onImagePressed,
     Key? key,
   }) : super(key: key);
 
@@ -43,21 +45,7 @@ class AppNavBar extends StatelessWidget {
                   name: ' exit ',
                 ),
                 AppNavBarItem(
-                  onPressed: () async {
-                    final pickedImage = await ImagePicker.platform.pickImage(
-                      source: ImageSource.gallery,
-                        maxWidth: 1920,
-                        maxHeight: 1200,
-                        imageQuality: 80,
-                    );
-
-                    if (pickedImage != null) {
-                      File imagePath = File(pickedImage.path);
-                      String imageName = imagePath.path.split('/').last;
-                      print(imagePath.path);
-                      print(imageName);
-                    }
-                  },
+                  onPressed: () => onImagePressed(),
                   icon: AppIcons.addImage,
                   name: ' image ',
                 ),
