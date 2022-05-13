@@ -1,4 +1,4 @@
-import 'package:app/common/widget/note_textfield.dart';
+import 'package:app/common/widget/textfield/note_textfield/note_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';

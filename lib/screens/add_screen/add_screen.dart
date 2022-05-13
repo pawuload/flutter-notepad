@@ -1,9 +1,8 @@
-import 'package:app/common/constans/app_color.dart';
-import 'package:app/common/constans/app_icons.dart';
-import 'package:app/common/widget/app_nav_bar.dart';
+import 'package:app/common/widget/dialog/app_alert_dialog.dart';
+import 'package:app/common/widget/navigation_bar/app_nav_bar.dart';
 import 'package:app/screens/add_screen/state/add_screen_state.dart';
 import 'package:app/screens/add_screen/widget/add_screen_button.dart';
-import 'package:app/common/widget/note_textfield.dart';
+import 'package:app/common/widget/textfield/note_textfield/note_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -16,8 +15,8 @@ class AddScreen extends HookWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        final result = await showExitDialog(context);
-        if (result) {
+        final result = await AppAlertDialog.showExit(context);
+        if (result == true) {
           return true;
         } else {
           return false;
@@ -54,13 +53,14 @@ class AddScreen extends HookWidget {
                               const Duration(seconds: 45),
                               () async {
                                 state.switchReadOnly();
-                                final result = await showPremiumDialog(
+                                final result = await AppAlertDialog.showPremium(
                                   context,
-                                  'Buy Premium version and have unlimited time!',
-                                  'Get the Premium version to unlock an unlimited time for writing your notes!',
-                                  'GET IT NOW',
+                                  title: 'Buy Premium version and have unlimited time!',
+                                  description:
+                                      'Get the Premium version to unlock an unlimited time for writing your notes!',
+                                  button: 'GET IT NOW',
                                 );
-                                if (result) {
+                                if (result == true) {
                                   state.switchReadOnly();
                                   state.switchPremium();
                                   state.userState.refresh();
@@ -89,101 +89,10 @@ class AddScreen extends HookWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AppNavBar(
-          state: state,
-          exitFunction: () => Navigator.pop(context, false),
+          onSavePressed: state.onSaveButtonPressed,
+          onExitPressed: () => Navigator.pop(context, false),
         ),
       ),
     );
   }
-}
-
-Future<bool> showPremiumDialog(BuildContext context, String text, String descriptionText, String buttonText) async {
-  return await showDialog(
-    context: context,
-    builder: (BuildContext context) => AlertDialog(
-      title: Text(
-        text,
-        style: const TextStyle(fontSize: 20),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            descriptionText,
-            style: const TextStyle(fontSize: 15),
-          ),
-        ],
-      ),
-      actions: <Widget>[
-        Container(
-          width: double.maxFinite,
-          padding: const EdgeInsets.all(16),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: AppColors.premium, elevation: 10),
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                buttonText,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-Future<bool> showExitDialog(BuildContext context) async {
-  return await showDialog(
-    context: context,
-    builder: (BuildContext context) => AlertDialog(
-      title: const Text(
-        'Are you sure you want to exit?',
-        style: TextStyle(fontSize: 16),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
-            "If you press 'ok' your notes are not going to be saved.",
-            style: TextStyle(fontSize: 14),
-          ),
-        ],
-      ),
-      actions: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
-            icon: const Icon(
-              AppIcons.yes,
-              color: Colors.brown,
-              size: 40,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-            icon: const Icon(
-              AppIcons.no,
-              color: Colors.brown,
-              size: 40,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
 }

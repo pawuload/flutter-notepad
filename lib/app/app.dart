@@ -15,9 +15,11 @@ import 'app_reporter.dart';
 final injector = Injector.appInstance;
 
 class App extends HookWidget {
+  const App({Key? key}) : super(key: key);
+
   static void run() {
     UtopiaHooks.reporter = appReporter;
-    runAppWithReporter(appReporter, App());
+    runAppWithReporter(appReporter, const App());
   }
 
   @override

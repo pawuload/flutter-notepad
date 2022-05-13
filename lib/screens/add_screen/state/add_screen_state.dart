@@ -9,7 +9,7 @@ import 'package:utopia_hooks/utopia_hooks.dart';
 class AddScreenState {
   final FieldState titleState;
   final FieldState descriptionState;
-  final Function() onSaveBtn;
+  final Function() onSaveButtonPressed;
   final Function() timer;
   final Function() switchPremium;
   final Function() switchReadOnly;
@@ -20,7 +20,7 @@ class AddScreenState {
   const AddScreenState({
     required this.titleState,
     required this.descriptionState,
-    required this.onSaveBtn,
+    required this.onSaveButtonPressed,
     required this.timer,
     required this.isReadOnlyState,
     required this.userState,
@@ -69,7 +69,7 @@ AddScreenState useAddScreenState() {
   final switchReadOnly = useSubmitState(submit: (_) async => isReadOnlyState.value = !isReadOnlyState.value);
 
   return AddScreenState(
-    onSaveBtn: () {
+    onSaveButtonPressed: () {
       if (titleState.value != '') {
         save.submitWithInput(null);
       }

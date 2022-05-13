@@ -1,7 +1,7 @@
+import 'package:app/common/widget/textfield/note_textfield/note_textfield_raw.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
-import 'note_textfield_raw.dart';
 
 class NoteTextField extends HookWidget {
   final FieldState state;

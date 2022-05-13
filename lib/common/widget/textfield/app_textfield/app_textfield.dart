@@ -1,4 +1,4 @@
-import 'package:app/common/widget/app_textfield_raw.dart';
+import 'package:app/common/widget/textfield/app_textfield/app_textfield_raw.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
@@ -42,13 +42,6 @@ class AppTextField extends HookWidget {
         prefixIcon: prefixIcon,
         focusNode: state.focusNode,
       ),
-    );
-  }
-
-  Widget _buildObscuredSuffix(BuildContext context, bool isObscured) {
-    return IconButton(
-      onPressed: state.onIsObscuredChanged,
-      icon: Icon(isObscured ? Icons.visibility : Icons.visibility_off),
     );
   }
 }

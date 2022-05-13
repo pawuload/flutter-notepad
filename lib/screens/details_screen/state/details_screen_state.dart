@@ -11,7 +11,7 @@ class DetailsScreenState {
   final UserState userState;
   final bool isReadOnlyState;
   final bool isPremium;
-  final Function() onSaveBtn;
+  final Function() onSaveButtonPressed;
   final Function() onDeleteBtn;
   final Function() switchPremium;
   final Function() switchReadOnly;
@@ -19,7 +19,7 @@ class DetailsScreenState {
   const DetailsScreenState({
     required this.isReadOnlyState,
     required this.isPremium,
-    required this.onSaveBtn,
+    required this.onSaveButtonPressed,
     required this.titleFieldState,
     required this.descriptionFieldState,
     required this.switchPremium,
@@ -59,7 +59,7 @@ DetailsScreenState useDetailsScreenState({required Note note}) {
   final switchReadOnly = useSubmitState(submit: (_) async => isReadOnlyState.value = !isReadOnlyState.value);
 
   return DetailsScreenState(
-    onSaveBtn: () {
+    onSaveButtonPressed: () {
       if (titleFieldState.value != '') {
         save.submitWithInput(null);
       }
