@@ -119,21 +119,21 @@ Widget _buildAttachments({required state, required note, required context}) {
       if (state.isTabOpen == true && note.details.url != null && state.isReadOnlyState == true)
         Container(
           padding: const EdgeInsets.fromLTRB(4, 3, 4, 3),
-          margin: const EdgeInsets.fromLTRB(6, 3, 6, 17),
+          margin: const EdgeInsets.fromLTRB(6, 2, 6, 17),
           child: GestureDetector(
             onTap: () => DetailsScreenBottomSheet.show(context, note.details.url!),
             child: Text(
-              note.details.url!,
+              note.details.url.length > 36 ? note.details.url.substring(0, 36) + '...' : note.details.url,
+              maxLines: 1,
               style: const TextStyle(fontSize: 17),
             ),
           ),
         ),
       if (state.isTabOpen == true && note.details.imageUrl != null && state.isReadOnlyState == true)
-        SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(10, 6, 10, 16),
-            child: Image.network(note.details.imageUrl!),
-          ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 2, 0, 16),
+          constraints: const BoxConstraints(maxHeight: 625),
+          child: Image.network(note.details.imageUrl!),
         ),
     ],
   );
