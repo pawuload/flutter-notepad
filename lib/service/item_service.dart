@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:app/models/note/details/note_details.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/service/auth_service.dart';

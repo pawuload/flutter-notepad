@@ -1,21 +1,19 @@
-import 'dart:io';
-
 import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:app/common/constans/app_icons.dart';
-import 'package:image_picker/image_picker.dart';
-
 import 'app_nav_bar_item.dart';
 
 class AppNavBar extends StatelessWidget {
   final Function() onSavePressed;
   final Function() onExitPressed;
   final Function() onImagePressed;
+  final Function() onLinkPressed;
 
   const AppNavBar({
     required this.onSavePressed,
     required this.onExitPressed,
     required this.onImagePressed,
+    required this.onLinkPressed,
     Key? key,
   }) : super(key: key);
 
@@ -30,7 +28,6 @@ class AppNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-// Left Side
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,19 +48,17 @@ class AppNavBar extends StatelessWidget {
                 ),
               ],
             ),
-// Right Side
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppNavBarItem(
-                  onPressed: () {},
+                  onPressed: () => onLinkPressed(),
                   icon: AppIcons.addLink,
                   name: ' link ',
                 ),
                 AppNavBarItem(
                   onPressed: () {
                     onSavePressed();
-                    Navigator.pop(context, true);
                   },
                   icon: AppIcons.save,
                   name: ' save ',
@@ -76,5 +71,3 @@ class AppNavBar extends StatelessWidget {
     );
   }
 }
-
-

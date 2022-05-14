@@ -23,10 +23,14 @@ HomeScreenState useHomeScreenState() {
   final userState = useProvided<UserState>();
   final isPremium = useState<bool>(userState.user!.details.isPremium);
 
-  final switchPremium = useSubmitState(submit: (_) async {
+  Future<void> switchPremium() async {
     isPremium.value = !isPremium.value;
-    await userService.switchPremium(email: userState.user!.details.email, id: userState.user!.id, isPremium: isPremium.value);
-  });
+    await userService.switchPremium(
+      email: userState.user!.details.email,
+      id: userState.user!.id,
+      isPremium: isPremium.value,
+    );
+  }
 
   final noteState = useAutoComputedState(
     compute: () async => await itemService.getAllItems(),
@@ -36,8 +40,6 @@ HomeScreenState useHomeScreenState() {
   return HomeScreenState(
     userState: userState,
     noteState: noteState,
-    switchPremium: () {
-      switchPremium.submitWithInput(null);
-    },
+    switchPremium: () => switchPremium(),
   );
 }

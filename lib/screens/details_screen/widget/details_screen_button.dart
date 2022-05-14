@@ -35,7 +35,7 @@ class DetailsScreenButton extends StatelessWidget {
           onTap: () async {
             final result = await showDeleteDialog(context);
             if (result) {
-              state.onDeleteBtn();
+              state.onDeletePressed();
               Navigator.pop(context, true);
             }
           },

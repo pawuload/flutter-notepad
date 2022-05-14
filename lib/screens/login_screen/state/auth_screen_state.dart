@@ -1,7 +1,6 @@
 import 'package:app/provider/user/user_state.dart';
 import 'package:app/screens/home_screen/home_screen.dart';
 import 'package:app/service/auth_service.dart';
-import 'package:app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_arch/utopia_arch_extensions.dart';
@@ -46,28 +45,27 @@ AuthScreenState useAuthScreenState() {
   }
 
   final submitState = useSubmitState(
-    submit: (_) async {
-      isLoading.value = !isLoading.value;
-      final result = await authService.submitAuthForm(
-        email: emailState.value.trim(),
-        password: passwordState.value,
-      );
-      if (result != null) {
-        showSnackBarEvents.add(result);
+      submit: (_) async {
         isLoading.value = !isLoading.value;
-      }
-    },
-    shouldSubmit: (_) => shouldSubmit(),
-    afterSubmit: (_, result) async {
-      await userState.refresh();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ),
-      );
-    }
-  );
+        final result = await authService.submitAuthForm(
+          email: emailState.value.trim(),
+          password: passwordState.value,
+        );
+        if (result != null) {
+          showSnackBarEvents.add(result);
+          isLoading.value = !isLoading.value;
+        }
+      },
+      shouldSubmit: (_) => shouldSubmit(),
+      afterSubmit: (_, result) async {
+        await userState.refresh();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      });
 
   return AuthScreenState(
     onButtonPressed: () {
@@ -81,5 +79,3 @@ AuthScreenState useAuthScreenState() {
     showSnackBarEvents: showSnackBarEvents.stream,
   );
 }
-
-

@@ -4,7 +4,7 @@ class AppBottomSheet extends StatelessWidget {
   final Widget child;
   final bool resizeToAvoidBottomInset;
 
-  const AppBottomSheet({required this.child, this.resizeToAvoidBottomInset = false});
+  const AppBottomSheet({Key? key, required this.child, this.resizeToAvoidBottomInset = false}) : super(key: key);
 
   static Future<T?> show<T>(BuildContext context, Widget Function(BuildContext context) builder) {
     return showModalBottomSheet(
@@ -14,7 +14,6 @@ class AppBottomSheet extends StatelessWidget {
       builder: builder,
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

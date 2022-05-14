@@ -1,11 +1,11 @@
 import 'package:app/common/widget/textfield/note_textfield/note_textfield.dart';
-import 'package:app/screens/add_screen/state/add_screen_state.dart';
+import 'package:app/screens/details_screen/state/details_screen_state.dart';
 import 'package:flutter/material.dart';
 
-class AddScreenUrl extends StatelessWidget {
-  final AddScreenState state;
+class DetailsScreenUrl extends StatelessWidget {
+  final DetailsScreenState state;
 
-  const AddScreenUrl({Key? key, required this.state}) : super(key: key);
+  const DetailsScreenUrl({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class AddScreenUrl extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         width: double.infinity,
         child: NoteTextField(
-          state: state.urlState,
-          hint: 'https://...',
+          state: state.urlFieldState,
           isReadOnly: state.isReadOnlyState,
+          hint: 'https://...',
           fontSize: 16,
           maxLines: 1,
           showBorder: false,
