@@ -11,6 +11,7 @@ import 'package:utopia_utils/utopia_utils.dart';
 
 import 'app_injector.dart';
 import 'app_reporter.dart';
+import 'app_routing.dart';
 
 final injector = Injector.appInstance;
 
@@ -24,8 +25,10 @@ class App extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final navigatorKey = useMemoized(() => GlobalKey<NavigatorState>());
     return MultiProvider(
       providers: [
+        Provider<ScopedNavigatorState>.value(value: ScopedNavigatorState(navigatorKey: navigatorKey)),
         InjectorProvider(setupInjector: () => AppInjector.setup()),
         const SetupStateProvider(),
         const UserStateProvider(),
@@ -35,9 +38,13 @@ class App extends HookWidget {
         theme: ThemeData(
           primarySwatch: Colors.brown,
         ),
+        navigatorKey: navigatorKey,
+        onGenerateInitialRoutes: (name) => [RouteConfig.generateInitialRoute(AppRouting.routes, name)],
+        onGenerateRoute: (settings) => RouteConfig.generateRoute(AppRouting.routes, settings),
+        navigatorObservers: [RouteConfig.createNavigationObserver(AppRouting.routes)],
+        initialRoute: AppRouting.initialRoute,
         debugShowCheckedModeBanner: false,
         title: 'notepad',
-        home: const SplashScreen(),
       ),
     );
   }

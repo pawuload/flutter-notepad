@@ -11,6 +11,7 @@ import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
 class DetailsScreenState {
+  final Note note;
   final FieldState titleFieldState;
   final FieldState descriptionFieldState;
   final FieldState urlFieldState;
@@ -28,6 +29,7 @@ class DetailsScreenState {
   final Function() onTabOpenPressed;
 
   const DetailsScreenState({
+    required this.note,
     required this.isReadOnlyState,
     required this.isLinkTabOpen,
     required this.isPremium,
@@ -46,7 +48,10 @@ class DetailsScreenState {
   });
 }
 
-DetailsScreenState useDetailsScreenState({required Note note}) {
+DetailsScreenState useDetailsScreenState({
+  required Note note,
+  required Function(bool) navigateBack,
+}) {
   final itemService = useInjected<ItemService>();
   final userService = useInjected<UserService>();
   final storageService = useInjected<StorageService>();
@@ -108,7 +113,7 @@ DetailsScreenState useDetailsScreenState({required Note note}) {
         imageUrl: urlState.value,
         url: urlFieldState.value,
       );
-      Navigator.pop(context, true);
+      navigateBack(true);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -151,5 +156,6 @@ DetailsScreenState useDetailsScreenState({required Note note}) {
     isTabOpen: isTabOpen.value,
     isLinkTabOpen: isLinkTabOpen.value,
     urlFieldState: urlFieldState,
+    note: note,
   );
 }

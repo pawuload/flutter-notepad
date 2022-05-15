@@ -1,5 +1,6 @@
 import 'package:app/common/constans/app_color.dart';
 import 'package:app/common/constans/app_icons.dart';
+import 'package:app/models/premium_dialog/premium_dialog_item.dart';
 import 'package:flutter/material.dart';
 
 class AppAlertDialog extends StatelessWidget {
@@ -8,7 +9,8 @@ class AppAlertDialog extends StatelessWidget {
     return await Navigator.of(context).push(route);
   }
 
-  static Future<T?> showCustom<T extends Object>(BuildContext context, {required Widget title, required Widget content}) async {
+  static Future<T?> showCustom<T extends Object>(BuildContext context,
+      {required Widget title, required Widget content}) async {
     return await show<T>(
       context,
       (context) {
@@ -63,22 +65,17 @@ class AppAlertDialog extends StatelessWidget {
     );
   }
 
-  static Future<bool?> showPremium(
-    BuildContext context, {
-    required String title,
-    required String description,
-    required String button,
-  }) async {
+  static Future<bool?> showPremium(BuildContext context, {required PremiumDialogItem item}) async {
     return await show<bool>(
       context,
       (context) {
         return AppAlertDialog(
           title: Text(
-            title,
+            item.title,
             style: const TextStyle(fontSize: 20),
           ),
           content: Text(
-            description,
+            item.description,
             style: const TextStyle(fontSize: 15),
           ),
           actions: <Widget>[
@@ -93,7 +90,7 @@ class AppAlertDialog extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    button,
+                    item.button,
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),

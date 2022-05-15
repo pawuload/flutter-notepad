@@ -1,7 +1,8 @@
 import 'package:app/common/widget/dialog/app_alert_dialog.dart';
+import 'package:app/models/premium_dialog/premium_dialog_item.dart';
 import 'package:app/screens/add_screen/add_screen.dart';
+import 'package:app/screens/auth/auth_screen.dart';
 import 'package:app/screens/home_screen/state/home_screen_state.dart';
-import 'package:app/screens/login_screen/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -35,13 +36,7 @@ class HomeScreenButton extends StatelessWidget {
             AppIcons.add,
             color: Colors.white,
           ),
-          onTap: () async {
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AddScreen()),
-            );
-            if (result == true) state.noteState.refresh();
-          },
+          onTap: state.onAddButtonPressed,
         ),
         SpeedDialChild(
           backgroundColor: Colors.brown[300],
@@ -65,31 +60,7 @@ class HomeScreenButton extends StatelessWidget {
             AppIcons.premium,
             color: Colors.white,
           ),
-          onTap: () async {
-            if (state.userState.user!.details.isPremium == false) {
-              final result = await AppAlertDialog.showPremium(
-                context,
-                title: 'Buy Premium version by only one click!',
-                description: 'Get the Premium version to unlock a lot of useful features!',
-                button: 'GET IT NOW',
-              );
-              if (result == true) {
-                state.switchPremium();
-                state.userState.refresh();
-              }
-            } else {
-              final result = await AppAlertDialog.showPremium(
-                context,
-                title: 'Are you sure you want to turn off the Premium version?',
-                description: 'If you turn off the Premium version, you will lose a lot of useful features!',
-                button: 'TURN IT OFF',
-              );
-              if (result == true) {
-                state.switchPremium();
-                state.userState.refresh();
-              }
-            }
-          },
+          onTap: state.onButtonPressed,
         ),
       ],
     );

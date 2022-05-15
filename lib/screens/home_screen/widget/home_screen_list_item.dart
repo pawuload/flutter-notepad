@@ -13,17 +13,7 @@ class HomeScreenListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        final result = await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailsScreen(
-              note: note,
-            ),
-          ),
-        );
-        if (result == true) state.noteState.refresh();
-      },
+      onTap: () => state.onItemPressed(note),
       child: Card(
         elevation: 10,
         shape: RoundedRectangleBorder(
@@ -53,7 +43,9 @@ class HomeScreenListItem extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      note.details.description.length > 40 ? note.details.description.substring(0, 38) + '...' : note.details.description,
+                      note.details.description.length > 40
+                          ? note.details.description.substring(0, 38) + '...'
+                          : note.details.description,
                       maxLines: 1,
                       style: const TextStyle(fontSize: 14),
                     ),

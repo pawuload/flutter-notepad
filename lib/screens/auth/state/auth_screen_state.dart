@@ -1,7 +1,5 @@
 import 'package:app/provider/user/user_state.dart';
-import 'package:app/screens/home_screen/home_screen.dart';
 import 'package:app/service/auth_service.dart';
-import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_arch/utopia_arch_extensions.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
@@ -27,7 +25,9 @@ class AuthScreenState {
   });
 }
 
-AuthScreenState useAuthScreenState() {
+AuthScreenState useAuthScreenState({
+  required Function() navigateToHome,
+}) {
   final authService = useInjected<AuthService>();
   final userState = useProvided<UserState>();
   final isCheckboxOn = useState<bool>(false);
@@ -35,7 +35,6 @@ AuthScreenState useAuthScreenState() {
   final passwordState = useFieldStateSimple();
   final showSnackBarEvents = useStreamController<String?>();
   final isLoading = useState<bool>(false);
-  final context = useContext();
 
   shouldSubmit() {
     final emailError = emailState.validate((value) => InputValidator.validateEmailInput(value));
@@ -59,18 +58,11 @@ AuthScreenState useAuthScreenState() {
       shouldSubmit: (_) => shouldSubmit(),
       afterSubmit: (_, result) async {
         await userState.refresh();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
-          ),
-        );
+        navigateToHome();
       });
 
   return AuthScreenState(
-    onButtonPressed: () {
-      submitState.submitWithInput(null);
-    },
+    onButtonPressed: () => submitState.submitWithInput(null),
     loading: isLoading.value,
     isCheckboxOn: isCheckboxOn.value,
     passwordState: passwordState,

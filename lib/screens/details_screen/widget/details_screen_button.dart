@@ -1,5 +1,6 @@
 import 'package:app/common/constans/app_color.dart';
 import 'package:app/common/widget/dialog/app_alert_dialog.dart';
+import 'package:app/models/premium_dialog/premium_dialog_item.dart';
 import 'package:app/screens/details_screen/state/details_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -58,8 +59,7 @@ class DetailsScreenButton extends StatelessWidget {
           ),
           onTap: () async {
             if (state.isPremium == false) {
-              final result = await AppAlertDialog.showPremium(context,
-                  title: 'To edit your notes you must buy a premium version!', button: 'GET IT NOW', description: '');
+              final result = await AppAlertDialog.showPremium(context, item: PremiumDialogItem.details);
               if (result == true) {
                 state.switchPremium();
                 state.switchReadOnly();
