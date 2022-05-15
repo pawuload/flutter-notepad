@@ -24,7 +24,6 @@ class DetailsScreenTextField extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return NoteTextField(
-      onTap: (){},
       state: state,
       fontSize: fontSize,
       maxLines: maxLines,

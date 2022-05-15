@@ -8,11 +8,10 @@ class AppAlertDialog extends StatelessWidget {
     return await Navigator.of(context).push(route);
   }
 
-  static Future<T?> showCustom<T extends Object>(BuildContext context,
-      {required Widget title, required Widget content}) async {
+  static Future<T?> showCustom<T extends Object>(BuildContext context, {required Widget title, required Widget content}) async {
     return await show<T>(
       context,
-          (context) {
+      (context) {
         return AppAlertDialog(title: title, content: content);
       },
     );
@@ -21,7 +20,7 @@ class AppAlertDialog extends StatelessWidget {
   static Future<bool?> showExit(BuildContext context) async {
     return await show<bool>(
       context,
-          (context) {
+      (context) {
         return AppAlertDialog(
           title: const Text(
             'Are you sure you want to exit?',
@@ -65,14 +64,14 @@ class AppAlertDialog extends StatelessWidget {
   }
 
   static Future<bool?> showPremium(
-      BuildContext context, {
-        required String title,
-        required String description,
-        required String button,
-      }) async {
+    BuildContext context, {
+    required String title,
+    required String description,
+    required String button,
+  }) async {
     return await show<bool>(
       context,
-          (context) {
+      (context) {
         return AppAlertDialog(
           title: Text(
             title,
@@ -110,7 +109,7 @@ class AppAlertDialog extends StatelessWidget {
   final Widget? content;
   final List<Widget>? actions;
 
-  const AppAlertDialog({required this.title, required this.content, this.actions});
+  const AppAlertDialog({Key? key, required this.title, required this.content, this.actions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

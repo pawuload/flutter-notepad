@@ -36,35 +36,19 @@ class AddScreen extends HookWidget {
             margin: const EdgeInsets.only(top: 60),
             child: Column(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: NoteTextField(
-                    isReadOnly: state.isReadOnlyState,
-                    state: state.titleState,
-                    fontSize: 20,
-                    limit: 47,
-                    hint: 'Title',
-                    showBorder: true,
-                    maxLines: 1,
-                    onTap: () {},
-                  ),
+                _buildNoteTextFieldTitle(
+                  isReadOnly: state.isReadOnlyState,
+                  titleState: state.titleState,
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: NoteTextField(
-                        onTap: () async {},
-                        isReadOnly: state.isReadOnlyState,
-                        state: state.descriptionState,
-                        maxLines: 25,
-                        fontSize: 16,
-                        hint: 'Start your note here...',
-                        showBorder: false,
-                      ),
+                    child: _buildNoteTextFieldDescription(
+                      isReadOnly: state.isReadOnlyState,
+                      descriptionState: state.descriptionState,
                     ),
                   ),
                 ),
+                if (state.isLinkTabOpen == true) AddScreenUrl(state: state),
               ],
             ),
           ),
@@ -75,6 +59,7 @@ class AddScreen extends HookWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AppNavBar(
+          onLinkPressed: state.onLinkPressed,
           onSavePressed: state.onSaveButtonPressed,
           onExitPressed: () => Navigator.pop(context, false),
           onImagePressed: state.onPickImagePressed,
@@ -82,4 +67,33 @@ class AddScreen extends HookWidget {
       ),
     );
   }
+}
+
+Widget _buildNoteTextFieldTitle({required isReadOnly, required titleState}) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 5),
+    child: NoteTextField(
+      isReadOnly: isReadOnly,
+      state: titleState,
+      fontSize: 20,
+      limit: 47,
+      hint: 'Title',
+      showBorder: true,
+      maxLines: 1,
+    ),
+  );
+}
+
+Widget _buildNoteTextFieldDescription({required isReadOnly, required descriptionState}) {
+  return Padding(
+    padding: const EdgeInsets.all(12),
+    child: NoteTextField(
+      isReadOnly: isReadOnly,
+      state: descriptionState,
+      maxLines: 25,
+      fontSize: 16,
+      hint: 'Start your note here...',
+      showBorder: false,
+    ),
+  );
 }

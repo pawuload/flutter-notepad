@@ -16,5 +16,7 @@ class AppIcons {
   static const no = Icons.close;
   static const edit = Icons.edit;
   static const read = Icons.chrome_reader_mode_outlined;
+  static const up = Icons.keyboard_arrow_up_rounded;
+  static const down = Icons.keyboard_arrow_down_rounded;
 
 }
