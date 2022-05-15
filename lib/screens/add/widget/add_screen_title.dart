@@ -1,6 +1,6 @@
+import 'package:app/screens/add/state/add_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:app/screens/add_screen/state/add_screen_state.dart';
 
 class AddScreenTitle extends StatelessWidget {
   final AddScreenState state;

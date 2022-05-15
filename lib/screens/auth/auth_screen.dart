@@ -1,6 +1,6 @@
 import 'package:app/screens/auth/state/auth_screen_state.dart';
 import 'package:app/screens/auth/view/auth_screen_view.dart';
-import 'package:app/screens/home_screen/home_screen.dart';
+import 'package:app/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';

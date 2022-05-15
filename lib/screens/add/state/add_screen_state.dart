@@ -17,10 +17,10 @@ class AddScreenState {
   final Function() onSaveButtonPressed;
   final Function() onPickImagePressed;
   final Function() onLinkPressed;
+  final Function() onExitPressed;
   final Function() switchReadOnly;
-  final bool isReadOnlyState;
+  final bool isReadOnly;
   final bool isLinkTabOpen;
-  final UserState userState;
   final int timeLeft;
   final bool isPremium;
 
@@ -31,16 +31,19 @@ class AddScreenState {
     required this.descriptionState,
     required this.onSaveButtonPressed,
     required this.onLinkPressed,
-    required this.isReadOnlyState,
+    required this.onExitPressed,
+    required this.isReadOnly,
     required this.isLinkTabOpen,
-    required this.userState,
     required this.timeLeft,
     required this.switchReadOnly,
     required this.onPickImagePressed,
   });
 }
 
-AddScreenState useAddScreenState({required Future<bool?> Function() showPremiumDialog}) {
+AddScreenState useAddScreenState({
+  required Future<bool?> Function() showPremiumDialog,
+  required Function(bool?) navigateBack,
+}) {
   final itemService = useInjected<ItemService>();
   final userService = useInjected<UserService>();
   final storageService = useInjected<StorageService>();
@@ -100,7 +103,7 @@ AddScreenState useAddScreenState({required Future<bool?> Function() showPremiumD
         imageUrl: urlState.value,
         url: urlFieldState.value,
       );
-      Navigator.pop(context, true);
+      navigateBack(true);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -147,15 +150,15 @@ AddScreenState useAddScreenState({required Future<bool?> Function() showPremiumD
   }, [timeLeft.value]);
 
   return AddScreenState(
+    onExitPressed: () => navigateBack(false),
     onSaveButtonPressed: () => onSavePressed(),
     onLinkPressed: () => onLinkPressed(),
     switchReadOnly: () => isReadOnlyState.value = !isReadOnlyState.value,
     titleState: titleState,
     descriptionState: descriptionState,
     urlState: urlFieldState,
-    userState: userState,
     timeLeft: timeLeft.value,
-    isReadOnlyState: isReadOnlyState.value,
+    isReadOnly: isReadOnlyState.value,
     onPickImagePressed: () => openGallery(),
     isPremium: isPremium.value,
     isLinkTabOpen: isLinkTabOpen.value,

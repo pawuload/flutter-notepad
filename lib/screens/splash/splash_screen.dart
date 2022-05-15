@@ -4,7 +4,7 @@ import 'package:app/provider/auth/auth_state.dart';
 import 'package:app/provider/auth/auth_state_provider.dart';
 import 'package:app/provider/user/user_state.dart';
 import 'package:app/screens/auth/auth_screen.dart';
-import 'package:app/screens/home_screen/home_screen.dart';
+import 'package:app/screens/home/home_screen.dart';
 import 'package:app/util/hooks/setup_state_hooks.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';

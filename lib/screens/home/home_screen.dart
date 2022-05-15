@@ -1,13 +1,14 @@
 import 'package:app/common/widget/dialog/app_alert_dialog.dart';
-import 'package:app/screens/details_screen/details_screen.dart';
-import 'package:app/screens/details_screen/details_screen_args.dart';
-import 'package:app/screens/home_screen/state/home_screen_state.dart';
-import 'package:app/screens/home_screen/view/home_screen_view.dart';
+import 'package:app/screens/add/add_screen.dart';
+import 'package:app/screens/auth/auth_screen.dart';
+import 'package:app/screens/details/details_screen.dart';
+import 'package:app/screens/details/details_screen_args.dart';
+import 'package:app/screens/home/state/home_screen_state.dart';
+import 'package:app/screens/home/view/home_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
-import '../auth/auth_screen.dart';
 
 class HomeScreen extends HookWidget {
   static const route = '/home';
@@ -24,7 +25,8 @@ class HomeScreen extends HookWidget {
         arguments: DetailsScreenArgs(note: note),
       ),
       showPremiumDialog: (item) async => await AppAlertDialog.showPremium(context, item: item),
-      navigateToAdd: () => navigator.pushNamed(AuthScreen.route), //TODO
+      navigateToAdd: () => navigator.pushNamed(AddScreen.route),
+      navigateToAuth: () => navigator.pushReplacementNamed(AuthScreen.route),
     );
 
     return HomeScreenView(state: state);

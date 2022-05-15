@@ -9,8 +9,7 @@ class AppAlertDialog extends StatelessWidget {
     return await Navigator.of(context).push(route);
   }
 
-  static Future<T?> showCustom<T extends Object>(BuildContext context,
-      {required Widget title, required Widget content}) async {
+  static Future<T?> showCustom<T extends Object>(BuildContext context, {required Widget title, required Widget content}) async {
     return await show<T>(
       context,
       (context) {
@@ -62,6 +61,56 @@ class AppAlertDialog extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  static Future<bool?> showDelete(BuildContext context) async {
+    return await show<bool>(
+      context,
+      (context) => AlertDialog(
+        title: const Text(
+          'Are you sure you want to delete this note?',
+          style: TextStyle(fontSize: 16),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              "If you delete it, it will be gone forever...",
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              icon: const Icon(
+                AppIcons.yes,
+                color: Colors.brown,
+                size: 40,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              icon: const Icon(
+                AppIcons.no,
+                color: Colors.brown,
+                size: 40,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

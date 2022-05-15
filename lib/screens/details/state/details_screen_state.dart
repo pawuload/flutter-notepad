@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/models/note/note.dart';
+import 'package:app/models/premium_dialog/premium_dialog_item.dart';
 import 'package:app/provider/user/user_state.dart';
 import 'package:app/service/item_service.dart';
 import 'package:app/service/storage_service.dart';
@@ -15,22 +17,23 @@ class DetailsScreenState {
   final FieldState titleFieldState;
   final FieldState descriptionFieldState;
   final FieldState urlFieldState;
-  final UserState userState;
-  final bool isReadOnlyState;
+  final bool isReadOnly;
   final bool isLinkTabOpen;
   final bool isPremium;
   final bool isTabOpen;
   final Function() onSaveButtonPressed;
   final Function() onDeletePressed;
   final Function() onLinkPressed;
-  final Function() switchPremium;
   final Function() switchReadOnly;
   final Function() onPickImagePressed;
   final Function() onTabOpenPressed;
+  final Function() onEditPressed;
+  final Function() onExitPressed;
+  final Function() onWillPop;
 
   const DetailsScreenState({
     required this.note,
-    required this.isReadOnlyState,
+    required this.isReadOnly,
     required this.isLinkTabOpen,
     required this.isPremium,
     required this.isTabOpen,
@@ -39,18 +42,21 @@ class DetailsScreenState {
     required this.titleFieldState,
     required this.descriptionFieldState,
     required this.urlFieldState,
-    required this.switchPremium,
     required this.switchReadOnly,
     required this.onDeletePressed,
-    required this.userState,
     required this.onPickImagePressed,
     required this.onTabOpenPressed,
+    required this.onEditPressed,
+    required this.onExitPressed,
+    required this.onWillPop,
   });
 }
 
 DetailsScreenState useDetailsScreenState({
   required Note note,
   required Function(bool) navigateBack,
+  required Future<bool?> Function(PremiumDialogItem) showPremiumDialog,
+  required Future<bool?> Function() showDeleteDialog,
 }) {
   final itemService = useInjected<ItemService>();
   final userService = useInjected<UserService>();
@@ -127,7 +133,13 @@ DetailsScreenState useDetailsScreenState({
     }
   }
 
-  Future<void> delete() async => await itemService.deleteItem(id: note.id);
+  Future<void> delete() async {
+    final result = await showDeleteDialog();
+    if (result == true) {
+      await itemService.deleteItem(id: note.id);
+      navigateBack(true);
+    }
+  }
 
   Future<void> switchPremium() async {
     isPremium.value = !isPremium.value;
@@ -140,22 +152,50 @@ DetailsScreenState useDetailsScreenState({
 
   Future<void> switchReadOnly() async => isReadOnlyState.value = !isReadOnlyState.value;
 
+  Future<void> edit() async {
+    if (isPremium.value == false) {
+      final result = await showPremiumDialog(PremiumDialogItem.details);
+      if (result == true) {
+        switchPremium();
+        switchReadOnly();
+        userState.refresh();
+      }
+    } else {
+      switchReadOnly();
+    }
+  }
+
+  Future<bool> onWillPop() async {
+    if (isReadOnlyState.value == false) {
+      final result = await AppAlertDialog.showExit(context);
+      if (result == true) {
+        switchReadOnly();
+        return false;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+
   return DetailsScreenState(
     onSaveButtonPressed: () => onSavePressed(),
     onTabOpenPressed: () => onTabOpenPressed(),
     onLinkPressed: () => onLinkPressed(),
     onDeletePressed: () => delete(),
     switchReadOnly: () => switchReadOnly(),
-    isReadOnlyState: isReadOnlyState.value,
+    isReadOnly: isReadOnlyState.value,
     descriptionFieldState: descriptionFieldState,
     titleFieldState: titleFieldState,
-    switchPremium: () => switchPremium(),
     onPickImagePressed: () => openGallery(),
-    userState: userState,
     isPremium: isPremium.value,
     isTabOpen: isTabOpen.value,
     isLinkTabOpen: isLinkTabOpen.value,
     urlFieldState: urlFieldState,
     note: note,
+    onEditPressed: () => edit(),
+    onExitPressed: () => navigateBack(false),
+    onWillPop: () => onWillPop(),
   );
 }

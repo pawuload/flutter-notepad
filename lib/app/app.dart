@@ -1,7 +1,9 @@
+import 'package:app/app/app_injector.dart';
+import 'package:app/app/app_reporter.dart';
+import 'package:app/app/app_routing.dart';
 import 'package:app/provider/auth/auth_state_provider.dart';
 import 'package:app/provider/setup/setup_state_provider.dart';
 import 'package:app/provider/user/user_state_provider.dart';
-import 'package:app/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
@@ -9,9 +11,6 @@ import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 import 'package:utopia_utils/utopia_utils.dart';
 
-import 'app_injector.dart';
-import 'app_reporter.dart';
-import 'app_routing.dart';
 
 final injector = Injector.appInstance;
 

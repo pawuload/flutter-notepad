@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class PremiumDialogItem {
   final String title;
   final String description;
