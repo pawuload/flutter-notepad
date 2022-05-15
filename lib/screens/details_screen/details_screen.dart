@@ -1,9 +1,8 @@
-import 'package:app/common/constans/app_icons.dart';
 import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/common/widget/navigation_bar/app_nav_bar.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/screens/details_screen/state/details_screen_state.dart';
-import 'package:app/screens/details_screen/widget/details_screen_bottom_sheet.dart';
+import 'package:app/screens/details_screen/widget/details_screen_attachments.dart';
 import 'package:app/screens/details_screen/widget/details_screen_button.dart';
 import 'package:app/screens/details_screen/widget/details_screen_textfield.dart';
 import 'package:app/screens/details_screen/widget/details_screen_url.dart';
@@ -53,7 +52,7 @@ class DetailsScreen extends HookWidget {
                   ),
                 ),
               ),
-              _buildAttachments(state: state, note: note, context: context),
+              DetailsScreenAttachments(state: state, note: note),
               if (state.isLinkTabOpen == true)
                 if (state.isReadOnlyState == false) DetailsScreenUrl(state: state),
             ],
@@ -102,39 +101,5 @@ Widget _buildDetailsScreenTextFieldDescription({required isReadOnly, required de
       fontSize: 16,
       showBorder: false,
     ),
-  );
-}
-
-Widget _buildAttachments({required state, required note, required context}) {
-  return Column(
-    children: [
-      if ((note.details.url != '' || note.details.imageUrl != null) && state.isReadOnlyState == true)
-        IconButton(
-          icon: Icon(
-            state.isTabOpen == true ? AppIcons.down : AppIcons.up,
-            size: 30,
-          ),
-          onPressed: state.onTabOpenPressed,
-        ),
-      if (state.isTabOpen == true && note.details.url != null && state.isReadOnlyState == true)
-        Container(
-          padding: const EdgeInsets.fromLTRB(4, 3, 4, 3),
-          margin: const EdgeInsets.fromLTRB(6, 2, 6, 17),
-          child: GestureDetector(
-            onTap: () => DetailsScreenBottomSheet.show(context, note.details.url!),
-            child: Text(
-              note.details.url.length > 36 ? note.details.url.substring(0, 36) + '...' : note.details.url,
-              maxLines: 1,
-              style: const TextStyle(fontSize: 17),
-            ),
-          ),
-        ),
-      if (state.isTabOpen == true && note.details.imageUrl != null && state.isReadOnlyState == true)
-        Container(
-          margin: const EdgeInsets.fromLTRB(0, 2, 0, 16),
-          constraints: const BoxConstraints(maxHeight: 625),
-          child: Image.network(note.details.imageUrl!),
-        ),
-    ],
   );
 }

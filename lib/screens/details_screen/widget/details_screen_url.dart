@@ -11,12 +11,13 @@ class DetailsScreenUrl extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: const BoxDecoration(
-          border: Border(
-        top: BorderSide(
-          width: 0.4,
-          color: Colors.brown,
+        border: Border(
+          top: BorderSide(
+            width: 0.4,
+            color: Colors.brown,
+          ),
         ),
-      )),
+      ),
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
