@@ -2,6 +2,8 @@
 <h6> Flutter android app </h6>
 
 Notepad is a simple and fast notetaking app for making notes, memos, or just any plain text content.
+<br>
+To watch full demo go to [assets/notepad_demo](#https://github.com/pawuload/flutter-notepad/blob/main/assets/notepad_demo.mp4)
 
 <center>
 <img src="demo/github_demo.gif" height="500px"/>
