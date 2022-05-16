@@ -34,6 +34,8 @@ Open links in reading mode using built-in webdrawer.
 
 ### Get Premium
 Get useful Premium version with which you can edit your notes and turn off [time limit](#time-limit) for writing them.
+<br>
+You can get Premium in a few different ways. Each of them is presented below.
 
 <center>
 <img src="demo/get_premium.gif" height="500px"/>
@@ -46,9 +48,8 @@ If you have Premium version, you can easily edit text, image and link in your ex
 <img src="demo/editing.gif" height="500px"/>
 </center>
 
-
 ### Switch modes
-With one click switch between editing and reading mode
+With one click switch between editing and reading mode.
 
 <center>
 <img src="demo/switch_mode.gif" height="500px"/>
