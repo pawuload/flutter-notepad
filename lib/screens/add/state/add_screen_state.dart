@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/provider/user/user_state.dart';
 import 'package:app/service/item_service.dart';
 import 'package:app/service/storage_service.dart';
@@ -19,6 +20,7 @@ class AddScreenState {
   final Function() onLinkPressed;
   final Function() onExitPressed;
   final Function() switchReadOnly;
+  final Function() onWillPop;
   final bool isReadOnly;
   final bool isLinkTabOpen;
   final int timeLeft;
@@ -37,6 +39,7 @@ class AddScreenState {
     required this.timeLeft,
     required this.switchReadOnly,
     required this.onPickImagePressed,
+    required this.onWillPop,
   });
 }
 
@@ -149,11 +152,21 @@ AddScreenState useAddScreenState({
     }
   }, [timeLeft.value]);
 
+  Future<bool> onWillPop() async {
+    final result = await AppAlertDialog.showExit(context);
+    if (result == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return AddScreenState(
     onExitPressed: () => navigateBack(false),
     onSaveButtonPressed: () => onSavePressed(),
     onLinkPressed: () => onLinkPressed(),
     switchReadOnly: () => isReadOnlyState.value = !isReadOnlyState.value,
+    onWillPop: () => onWillPop(),
     titleState: titleState,
     descriptionState: descriptionState,
     urlState: urlFieldState,

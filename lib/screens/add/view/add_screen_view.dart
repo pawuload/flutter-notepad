@@ -1,4 +1,3 @@
-import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/common/widget/navigation_bar/app_nav_bar.dart';
 import 'package:app/common/widget/textfield/note_textfield/note_textfield.dart';
 import 'package:app/screens/add/state/add_screen_state.dart';
@@ -14,14 +13,7 @@ class AddScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        final result = await AppAlertDialog.showExit(context);
-        if (result == true) {
-          return true;
-        } else {
-          return false;
-        }
-      },
+      onWillPop: () => state.onWillPop(),
       child: Scaffold(
         body: GestureDetector(
           child: Container(
