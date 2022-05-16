@@ -37,7 +37,7 @@ class DetailsScreenAttachments extends StatelessWidget {
           ),
         if (state.isTabOpen == true && note.details.imageUrl != null && state.isReadOnly == true)
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 2, 0, 16),
+            margin: const EdgeInsets.fromLTRB(3, 2, 3, 16),
             constraints: const BoxConstraints(maxHeight: 550),
             child: Image.network(note.details.imageUrl!),
           ),

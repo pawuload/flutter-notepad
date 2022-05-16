@@ -8,7 +8,7 @@ class InputValidator {
   }
 
   static String Function(BuildContext)? validatePasswordConstraints(String password) {
-    if (password.length < 6) return (_) => 'Password must be at least 7 characters long';
+    if (password.length < 7) return (_) => 'Password must be at least 7 characters long';
     return null;
   }
 }

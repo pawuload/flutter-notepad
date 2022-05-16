@@ -70,7 +70,7 @@ class DetailsScreenView extends StatelessWidget {
       child: DetailsScreenTextField(
         isReadOnly: state.isReadOnly,
         state: state.descriptionFieldState,
-        maxLines: 25,
+        maxLines: 32,
         fontSize: 16,
         showBorder: false,
       ),

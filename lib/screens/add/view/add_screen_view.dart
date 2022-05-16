@@ -75,7 +75,7 @@ class AddScreenView extends StatelessWidget {
       child: NoteTextField(
         isReadOnly: state.isReadOnly,
         state: state.descriptionState,
-        maxLines: 25,
+        maxLines: 32,
         fontSize: 16,
         hint: 'Start your note here...',
         showBorder: false,

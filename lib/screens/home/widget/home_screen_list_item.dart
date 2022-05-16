@@ -42,8 +42,8 @@ class HomeScreenListItem extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
-                      note.details.description.length > 40
-                          ? note.details.description.substring(0, 38) + '...'
+                      note.details.description.length > 36
+                          ? note.details.description.substring(0, 36) + '...'
                           : note.details.description,
                       maxLines: 1,
                       style: const TextStyle(fontSize: 14),
