@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/models/premium_dialog/premium_dialog_item.dart';
 import 'package:app/provider/user/user_state.dart';
@@ -57,6 +55,7 @@ DetailsScreenState useDetailsScreenState({
   required Function(bool) navigateBack,
   required Future<bool?> Function(PremiumDialogItem) showPremiumDialog,
   required Future<bool?> Function() showDeleteDialog,
+  required Future<bool?> Function() showExitDialog,
 }) {
   final itemService = useInjected<ItemService>();
   final userService = useInjected<UserService>();
@@ -167,7 +166,7 @@ DetailsScreenState useDetailsScreenState({
 
   Future<bool> onWillPop() async {
     if (isReadOnlyState.value == false) {
-      final result = await AppAlertDialog.showExit(context);
+      final result = await showExitDialog();
       if (result == true) {
         switchReadOnly();
         return false;

@@ -23,6 +23,7 @@ class DetailsScreen extends HookWidget {
       navigateBack: (value) => navigator.pop(value),
       showPremiumDialog: (item) async => await AppAlertDialog.showPremium(context, item: item),
       showDeleteDialog: () async => await AppAlertDialog.showDelete(context),
+      showExitDialog: () async => await AppAlertDialog.showExit(context),
     );
 
     return DetailsScreenView(state: state);

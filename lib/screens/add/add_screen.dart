@@ -22,6 +22,7 @@ class AddScreen extends HookWidget {
           item: PremiumDialogItem.time,
         );
       },
+      showExitDialog: () async => await AppAlertDialog.showExit(context),
       navigateBack: (value) => navigator.pop(value),
     );
 

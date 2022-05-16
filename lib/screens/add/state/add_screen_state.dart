@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/provider/user/user_state.dart';
 import 'package:app/service/item_service.dart';
 import 'package:app/service/storage_service.dart';
@@ -45,6 +44,7 @@ class AddScreenState {
 
 AddScreenState useAddScreenState({
   required Future<bool?> Function() showPremiumDialog,
+  required Future<bool?> Function() showExitDialog,
   required Function(bool?) navigateBack,
 }) {
   final itemService = useInjected<ItemService>();
@@ -153,7 +153,7 @@ AddScreenState useAddScreenState({
   }, [timeLeft.value]);
 
   Future<bool> onWillPop() async {
-    final result = await AppAlertDialog.showExit(context);
+    final result = await showExitDialog();
     if (result == true) {
       return true;
     } else {
