@@ -85,6 +85,7 @@ HomeScreenState useHomeScreenState({
       if (result == true) noteState.refresh();
     },
     onButtonPressed: () async {
+      onHomePressed();
       if (userState.user!.details.isPremium == false) {
         final result = await showPremiumDialog(PremiumDialogItem.off);
         if (result == true) {
@@ -98,6 +99,7 @@ HomeScreenState useHomeScreenState({
       }
     },
     onAddButtonPressed: () async {
+      onHomePressed();
       final result = await navigateToAdd();
       if (result == true) {
         noteState.refresh();
