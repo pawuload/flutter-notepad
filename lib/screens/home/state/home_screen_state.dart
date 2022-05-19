@@ -4,25 +4,32 @@ import 'package:app/provider/user/user_state.dart';
 import 'package:app/service/auth_service.dart';
 import 'package:app/service/item_service.dart';
 import 'package:app/service/user_service.dart';
+import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
 class HomeScreenState {
   final RefreshableComputedState<List<Note>> noteState;
   final UserState userState;
+  final bool isButtonOpen;
+  final AnimationController buttonAnimationController;
   final Function(Note) onItemPressed;
   final Function() switchPremium;
   final Function() onButtonPressed;
   final Function() onAddButtonPressed;
   final Function() onSignOutPressed;
+  final Function() onHomePressed;
 
   const HomeScreenState({
     required this.noteState,
     required this.userState,
+    required this.buttonAnimationController,
+    required this.isButtonOpen,
     required this.switchPremium,
     required this.onItemPressed,
     required this.onButtonPressed,
     required this.onAddButtonPressed,
+    required this.onHomePressed,
     required this.onSignOutPressed,
   });
 }
@@ -38,6 +45,7 @@ HomeScreenState useHomeScreenState({
   final authService = useInjected<AuthService>();
   final userState = useProvided<UserState>();
   final isPremium = useState<bool>(userState.user!.details.isPremium);
+  final isButtonOpen = useState<bool>(false);
 
   Future<void> switchPremium() async {
     isPremium.value = !isPremium.value;
@@ -57,6 +65,15 @@ HomeScreenState useHomeScreenState({
   Future<void> logout() async {
     authService.signOut();
     navigateToAuth();
+  }
+
+  final buttonAnimationController = useAnimationController(
+    duration: const Duration(milliseconds: 200),
+  );
+
+  Future<void> onHomePressed() async {
+    isButtonOpen.value = !isButtonOpen.value;
+    isButtonOpen.value == true ? buttonAnimationController.forward() : buttonAnimationController.reverse();
   }
 
   return HomeScreenState(
@@ -87,5 +104,9 @@ HomeScreenState useHomeScreenState({
       }
     },
     onSignOutPressed: () => logout(),
+    isButtonOpen: isButtonOpen.value,
+    onHomePressed: () => onHomePressed(),
+    buttonAnimationController: buttonAnimationController,
+    // showButtons: showButtons,
   );
 }
