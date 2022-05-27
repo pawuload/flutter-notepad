@@ -13,7 +13,7 @@ To watch full demo go to [assets/notepad_demo](https://github.com/pawuload/flutt
 - [Create an account](#create-an-account) with data storage connected to Firebase
 - Make your own notes which include text, images and clickable links
 - No limits on note's length or number of notes
-- [Open saved links](#Webdrawer)with a built-in webdrawer
+- [Open saved links](#Webdrawer) with a built-in webdrawer
 - [Get Premium](#get-premium) version to unlock useful features
 - [Edit](#edit-notes) already existing notes
 - [Switch](#switch-modes) between reading and editing mode
