@@ -4,6 +4,7 @@ import 'package:app/screens/home/widget/home_screen_button.dart';
 import 'package:app/screens/home/widget/home_screen_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:app/common/constans/app_images.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
 class HomeScreenView extends StatelessWidget {
@@ -71,9 +72,18 @@ class HomeScreenView extends StatelessWidget {
                   return ListView.builder(
                     itemCount: notes.length,
                     itemBuilder: (context, index) {
-                      return HomeScreenListItem(
-                        note: notes[index],
-                        state: state,
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: const Duration(milliseconds: 375),
+                        child: SlideAnimation(
+                          verticalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: HomeScreenListItem(
+                              note: notes[index],
+                              state: state,
+                            ),
+                          ),
+                        ),
                       );
                     },
                   );
