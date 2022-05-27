@@ -12,7 +12,7 @@ class HomeScreenState {
   final UserState userState;
   final Function(Note) onItemPressed;
   final Function() switchPremium;
-  final Function() onButtonPressed;
+  final Function() onPremiumPressed;
   final Function() onAddButtonPressed;
   final Function() onSignOutPressed;
 
@@ -21,7 +21,7 @@ class HomeScreenState {
     required this.userState,
     required this.switchPremium,
     required this.onItemPressed,
-    required this.onButtonPressed,
+    required this.onPremiumPressed,
     required this.onAddButtonPressed,
     required this.onSignOutPressed,
   });
@@ -40,7 +40,7 @@ HomeScreenState useHomeScreenState({
   final isPremium = useState<bool>(userState.user!.details.isPremium);
 
   Future<void> switchPremium() async {
-    isPremium.value = !isPremium.value;
+    isPremium.value = !userState.user!.details.isPremium;
     await userService.switchPremium(
       email: userState.user!.details.email,
       id: userState.user!.id,
@@ -67,7 +67,7 @@ HomeScreenState useHomeScreenState({
       final result = await navigateToDetails(note);
       if (result == true) noteState.refresh();
     },
-    onButtonPressed: () async {
+    onPremiumPressed: () async {
       if (userState.user!.details.isPremium == false) {
         final result = await showPremiumDialog(PremiumDialogItem.off);
         if (result == true) {

@@ -44,7 +44,7 @@ class HomeScreenButton extends StatelessWidget {
             AppIcons.premium,
             color: Colors.white,
           ),
-          onTap: state.onButtonPressed,
+          onTap: state.onPremiumPressed,
         ),
       ],
     );

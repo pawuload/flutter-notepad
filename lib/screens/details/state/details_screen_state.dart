@@ -147,6 +147,7 @@ DetailsScreenState useDetailsScreenState({
       id: userState.user!.id,
       isPremium: isPremium.value,
     );
+    userState.refresh();
   }
 
   Future<void> switchReadOnly() async => isReadOnlyState.value = !isReadOnlyState.value;
@@ -157,7 +158,7 @@ DetailsScreenState useDetailsScreenState({
       if (result == true) {
         switchPremium();
         switchReadOnly();
-        userState.refresh();
+
       }
     } else {
       switchReadOnly();

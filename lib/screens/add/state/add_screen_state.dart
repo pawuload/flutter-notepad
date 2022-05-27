@@ -69,6 +69,10 @@ AddScreenState useAddScreenState({
   final ImagePicker imagePicker = ImagePicker();
 
   Future openGallery() async {
+
+    if(isPremium.value == false){
+      stopwatch.onExecute.add(StopWatchExecute.stop);
+    }
     final pickedFile = await imagePicker.getImage(
       source: ImageSource.gallery,
     );
@@ -76,6 +80,9 @@ AddScreenState useAddScreenState({
     if (pickedFile != null) {
       fileState.value = File(pickedFile.path);
       urlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+      if(isPremium.value == false){
+        stopwatch.onExecute.add(StopWatchExecute.start);
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(
@@ -86,6 +93,9 @@ AddScreenState useAddScreenState({
         ),
       );
     } else {
+      if(isPremium.value == false){
+        stopwatch.onExecute.add(StopWatchExecute.start);
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(
