@@ -27,6 +27,7 @@ class DetailsScreenState {
   final Function() onTabOpenPressed;
   final Function() onEditPressed;
   final Function() onExitPressed;
+  final Function() onVideoPressed;
   final Function() onWillPop;
 
   const DetailsScreenState({
@@ -46,6 +47,7 @@ class DetailsScreenState {
     required this.onTabOpenPressed,
     required this.onEditPressed,
     required this.onExitPressed,
+    required this.onVideoPressed,
     required this.onWillPop,
   });
 }
@@ -158,7 +160,6 @@ DetailsScreenState useDetailsScreenState({
       if (result == true) {
         switchPremium();
         switchReadOnly();
-
       }
     } else {
       switchReadOnly();
@@ -196,6 +197,7 @@ DetailsScreenState useDetailsScreenState({
     note: note,
     onEditPressed: () => edit(),
     onExitPressed: () => navigateBack(false),
+    onVideoPressed: () {},
     onWillPop: () => onWillPop(),
   );
 }

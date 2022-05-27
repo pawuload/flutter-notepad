@@ -17,8 +17,9 @@ class DetailsScreenView extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => state.onWillPop(),
       child: Scaffold(
+        appBar: AppBar(),
         body: Container(
-          margin: const EdgeInsets.only(top: 60),
+          margin: const EdgeInsets.only(top: 25),
           child: Column(
             children: [
               _buildDetailsScreenTextFieldTitle(),
@@ -28,8 +29,16 @@ class DetailsScreenView extends StatelessWidget {
                 ),
               ),
               DetailsScreenAttachments(state: state, note: state.note),
-              if (state.isLinkTabOpen == true)
-                if (state.isReadOnly == false) DetailsScreenUrl(state: state),
+              if (state.isReadOnly == false)
+                AnimatedOpacity(
+                  opacity: state.isLinkTabOpen ? 1 : 0,
+                  duration: const Duration(milliseconds: 500),
+                  child: state.isLinkTabOpen == true
+                      ? DetailsScreenUrl(
+                          state: state,
+                        )
+                      : null,
+                ),
             ],
           ),
         ),
@@ -43,7 +52,7 @@ class DetailsScreenView extends StatelessWidget {
             : AppNavBar(
                 onLinkPressed: state.onLinkPressed,
                 onSavePressed: state.onSaveButtonPressed,
-                onExitPressed: state.switchReadOnly,
+                onVideoPressed: state.onVideoPressed,
                 onImagePressed: state.onPickImagePressed,
               ),
       ),

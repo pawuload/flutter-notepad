@@ -14,7 +14,7 @@ class ItemService {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
     final result = await collection.orderBy(_ordering, descending: true).get();
-    final value = result.docs.map(
+    final value = result.docs.map(  // TODO
       (e) => Note(
         id: e.id,
         details: NoteDetails.fromJson(

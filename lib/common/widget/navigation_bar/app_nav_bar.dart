@@ -5,13 +5,13 @@ import 'app_nav_bar_item.dart';
 
 class AppNavBar extends StatelessWidget {
   final Function() onSavePressed;
-  final Function() onExitPressed;
+  final Function() onVideoPressed;
   final Function() onImagePressed;
   final Function() onLinkPressed;
 
   const AppNavBar({
     required this.onSavePressed,
-    required this.onExitPressed,
+    required this.onVideoPressed,
     required this.onImagePressed,
     required this.onLinkPressed,
     Key? key,
@@ -32,19 +32,14 @@ class AppNavBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppNavBarItem(
-                  onPressed: () async {
-                    final result = await AppAlertDialog.showExit(context);
-                    if (result == true) {
-                      onExitPressed();
-                    }
-                  },
-                  icon: AppIcons.exit,
-                  name: ' exit ',
+                  onPressed: onVideoPressed,
+                  icon: AppIcons.video,
+                  name: 'video',
                 ),
                 AppNavBarItem(
                   onPressed: () => onImagePressed(),
                   icon: AppIcons.addImage,
-                  name: ' image ',
+                  name: 'image',
                 ),
               ],
             ),

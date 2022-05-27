@@ -5,12 +5,12 @@ import 'package:app/provider/auth/auth_state_provider.dart';
 import 'package:app/provider/setup/setup_state_provider.dart';
 import 'package:app/provider/user/user_state_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 import 'package:utopia_utils/utopia_utils.dart';
-
 
 final injector = Injector.appInstance;
 
@@ -35,6 +35,9 @@ class App extends HookWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
+          textTheme: GoogleFonts.robotoTextTheme(
+            Theme.of(context).textTheme,
+          ),
           primarySwatch: Colors.brown,
         ),
         navigatorKey: navigatorKey,

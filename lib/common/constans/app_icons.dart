@@ -18,5 +18,6 @@ class AppIcons {
   static const read = Icons.chrome_reader_mode_outlined;
   static const up = Icons.keyboard_arrow_up_rounded;
   static const down = Icons.keyboard_arrow_down_rounded;
+  static const video = Icons.movie_creation_rounded;
 
 }

@@ -17,7 +17,7 @@ class AddScreenState {
   final Function() onSaveButtonPressed;
   final Function() onPickImagePressed;
   final Function() onLinkPressed;
-  final Function() onExitPressed;
+  final Function() onVideoPressed;
   final Function() switchReadOnly;
   final Function() onWillPop;
   final bool isReadOnly;
@@ -32,7 +32,7 @@ class AddScreenState {
     required this.descriptionState,
     required this.onSaveButtonPressed,
     required this.onLinkPressed,
-    required this.onExitPressed,
+    required this.onVideoPressed,
     required this.isReadOnly,
     required this.isLinkTabOpen,
     required this.timeLeft,
@@ -69,8 +69,7 @@ AddScreenState useAddScreenState({
   final ImagePicker imagePicker = ImagePicker();
 
   Future openGallery() async {
-
-    if(isPremium.value == false){
+    if (isPremium.value == false) {
       stopwatch.onExecute.add(StopWatchExecute.stop);
     }
     final pickedFile = await imagePicker.getImage(
@@ -80,7 +79,7 @@ AddScreenState useAddScreenState({
     if (pickedFile != null) {
       fileState.value = File(pickedFile.path);
       urlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
-      if(isPremium.value == false){
+      if (isPremium.value == false) {
         stopwatch.onExecute.add(StopWatchExecute.start);
       }
       ScaffoldMessenger.of(context).showSnackBar(
@@ -93,7 +92,7 @@ AddScreenState useAddScreenState({
         ),
       );
     } else {
-      if(isPremium.value == false){
+      if (isPremium.value == false) {
         stopwatch.onExecute.add(StopWatchExecute.start);
       }
       ScaffoldMessenger.of(context).showSnackBar(
@@ -165,6 +164,7 @@ AddScreenState useAddScreenState({
   Future<bool> onWillPop() async {
     final result = await showExitDialog();
     if (result == true) {
+      stopwatch.onExecute.add(StopWatchExecute.stop);
       return true;
     } else {
       return false;
@@ -172,7 +172,7 @@ AddScreenState useAddScreenState({
   }
 
   return AddScreenState(
-    onExitPressed: () => navigateBack(false),
+    onVideoPressed: () {},
     onSaveButtonPressed: () => onSavePressed(),
     onLinkPressed: () => onLinkPressed(),
     switchReadOnly: () => isReadOnlyState.value = !isReadOnlyState.value,

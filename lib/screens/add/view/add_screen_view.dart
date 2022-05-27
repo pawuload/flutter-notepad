@@ -15,9 +15,10 @@ class AddScreenView extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => state.onWillPop(),
       child: Scaffold(
+        appBar: AppBar(),
         body: GestureDetector(
           child: Container(
-            margin: const EdgeInsets.only(top: 60),
+            margin: const EdgeInsets.only(top: 25),
             child: Column(
               children: [
                 _buildNoteTextFieldTitle(),
@@ -26,7 +27,15 @@ class AddScreenView extends StatelessWidget {
                     child: _buildNoteTextFieldDescription(),
                   ),
                 ),
-                if (state.isLinkTabOpen == true) AddScreenUrl(state: state),
+                AnimatedOpacity(
+                  opacity: state.isLinkTabOpen ? 1 : 0,
+                  duration: const Duration(milliseconds: 500),
+                  child: state.isLinkTabOpen == true
+                      ? AddScreenUrl(
+                          state: state,
+                        )
+                      : null,
+                ),
               ],
             ),
           ),
@@ -39,7 +48,7 @@ class AddScreenView extends StatelessWidget {
         bottomNavigationBar: AppNavBar(
           onLinkPressed: state.onLinkPressed,
           onSavePressed: state.onSaveButtonPressed,
-          onExitPressed: state.onExitPressed,
+          onVideoPressed: state.onVideoPressed,
           onImagePressed: state.onPickImagePressed,
         ),
       ),
@@ -67,7 +76,7 @@ class AddScreenView extends StatelessWidget {
       child: NoteTextField(
         isReadOnly: state.isReadOnly,
         state: state.descriptionState,
-        maxLines: 32,
+        maxLines: 28,
         fontSize: 16,
         hint: 'Start your note here...',
         showBorder: false,

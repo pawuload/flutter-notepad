@@ -66,6 +66,7 @@ dependencies:
   stop_watch_timer: ^1.4.0
   flutter_speed_dial: ^5.1.0
   flutter_staggered_animations: ^1.0.0
+  google_fonts: ^3.0.1
 
 
 
