@@ -13,7 +13,15 @@ class AddScreenButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SpeedDial(
       child: Container(
-        child: state.isPremium ? const Icon(AppIcons.premium) : Text(state.timeLeft.toString()),
+        child: state.isLoading
+            ? const CircularProgressIndicator(
+          color: Colors.white,
+          strokeWidth: 3,
+
+        )
+            : state.isPremium
+                ? const Icon(AppIcons.premium)
+                : Text(state.timeLeft.toString()),
       ),
       backgroundColor: state.isPremium ? Colors.brown : AppColors.premium,
       elevation: 10,

@@ -4,7 +4,6 @@ import 'package:app/screens/details/widget/details_screen_attachments.dart';
 import 'package:app/screens/details/widget/details_screen_button.dart';
 import 'package:app/screens/details/widget/details_screen_textfield.dart';
 import 'package:app/screens/details/widget/details_screen_url.dart';
-
 import 'package:flutter/material.dart';
 
 class DetailsScreenView extends StatelessWidget {

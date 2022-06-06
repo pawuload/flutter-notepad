@@ -13,6 +13,11 @@ class ItemService {
   Future<List<Note>> getAllItems() async {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
+    // return collection
+    //     .orderBy(_ordering, descending: true)
+    //     .snapshots()
+    //     .map((snapshot) => snapshot.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data()))).toSet());
+    //
     final result = await collection.orderBy(_ordering, descending: true).get();
     final value = result.docs.map(  // TODO
       (e) => Note(
@@ -30,6 +35,7 @@ class ItemService {
     required String description,
     required String? url,
     required String? imageUrl,
+    required String? videoUrl,
   }) async {
     final CollectionReference collection = FirebaseFirestore.instance.collection(
       'notes/' + _authService.user!.uid + '/notes',
@@ -42,6 +48,7 @@ class ItemService {
         created: DateTime.now(),
         url: url,
         imageUrl: imageUrl,
+        videoUrl: videoUrl,
       ).toJson(),
     );
   }
@@ -52,6 +59,7 @@ class ItemService {
     required String description,
     required String? url,
     required String? imageUrl,
+    required String? videoUrl,
   }) async {
     CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
     await collection.doc(id).update(
@@ -61,6 +69,7 @@ class ItemService {
             created: DateTime.now(),
             url: url,
             imageUrl: imageUrl,
+            videoUrl: videoUrl,
           ).toJson(),
         );
   }

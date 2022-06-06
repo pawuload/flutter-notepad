@@ -16,29 +16,31 @@ class AddScreenView extends StatelessWidget {
       onWillPop: () => state.onWillPop(),
       child: Scaffold(
         appBar: AppBar(),
-        body: GestureDetector(
-          child: Container(
-            margin: const EdgeInsets.only(top: 25),
-            child: Column(
-              children: [
-                _buildNoteTextFieldTitle(),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: _buildNoteTextFieldDescription(),
+        body: Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 25),
+              child: Column(
+                children: [
+                  _buildNoteTextFieldTitle(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: _buildNoteTextFieldDescription(),
+                    ),
                   ),
-                ),
-                AnimatedOpacity(
-                  opacity: state.isLinkTabOpen ? 1 : 0,
-                  duration: const Duration(milliseconds: 500),
-                  child: state.isLinkTabOpen == true
-                      ? AddScreenUrl(
-                          state: state,
-                        )
-                      : null,
-                ),
-              ],
+                  AnimatedOpacity(
+                    opacity: state.isLinkTabOpen ? 1 : 0,
+                    duration: const Duration(milliseconds: 300),
+                    child: state.isLinkTabOpen == true
+                        ? AddScreenUrl(
+                            state: state,
+                          )
+                        : null,
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
         floatingActionButton: Visibility(
           visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
@@ -59,7 +61,7 @@ class AddScreenView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: NoteTextField(
-        isReadOnly: state.isReadOnly,
+        isReadOnly: false,
         state: state.titleState,
         fontSize: 20,
         limit: 47,

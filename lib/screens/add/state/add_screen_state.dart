@@ -21,9 +21,10 @@ class AddScreenState {
   final Function() switchReadOnly;
   final Function() onWillPop;
   final bool isReadOnly;
+  final bool isLoading;
   final bool isLinkTabOpen;
-  final int timeLeft;
   final bool isPremium;
+  final int timeLeft;
 
   const AddScreenState({
     required this.titleState,
@@ -34,6 +35,7 @@ class AddScreenState {
     required this.onLinkPressed,
     required this.onVideoPressed,
     required this.isReadOnly,
+    required this.isLoading,
     required this.isLinkTabOpen,
     required this.timeLeft,
     required this.switchReadOnly,
@@ -57,6 +59,7 @@ AddScreenState useAddScreenState({
   final isPremium = useState<bool>(userState.user!.details.isPremium);
   final isReadOnlyState = useState<bool>(false);
   final isLinkTabOpen = useState<bool>(false);
+  final isLoading = useState<bool>(false);
   final timeLeft = useState<int>(30);
   final context = useContext();
   final stopwatch = useMemoized(
@@ -65,7 +68,8 @@ AddScreenState useAddScreenState({
     ),
   );
   final fileState = useState<File?>(null);
-  final urlState = useState<String?>(null);
+  final imageUrlState = useState<String?>(null);
+  final videoUrlState = useState<String?>(null);
   final ImagePicker imagePicker = ImagePicker();
 
   Future openGallery() async {
@@ -76,9 +80,14 @@ AddScreenState useAddScreenState({
       source: ImageSource.gallery,
     );
 
+    isLoading.value = !isLoading.value;
+
     if (pickedFile != null) {
       fileState.value = File(pickedFile.path);
-      urlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+      imageUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+
+      isLoading.value = !isLoading.value;
+
       if (isPremium.value == false) {
         stopwatch.onExecute.add(StopWatchExecute.start);
       }
@@ -89,9 +98,12 @@ AddScreenState useAddScreenState({
           ),
           backgroundColor: Colors.green.withOpacity(0.5),
           duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
         ),
       );
     } else {
+      isLoading.value = !isLoading.value;
+
       if (isPremium.value == false) {
         stopwatch.onExecute.add(StopWatchExecute.start);
       }
@@ -102,6 +114,54 @@ AddScreenState useAddScreenState({
           ),
           backgroundColor: Colors.red.withOpacity(0.5),
           duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
+  Future openVideoGallery() async {
+    if (isPremium.value == false) {
+      stopwatch.onExecute.add(StopWatchExecute.stop);
+    }
+    final pickedFile = await imagePicker.getVideo(
+      source: ImageSource.gallery,
+    );
+
+    isLoading.value = !isLoading.value;
+
+    if (pickedFile != null) {
+      fileState.value = File(pickedFile.path);
+      videoUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+      isLoading.value = !isLoading.value;
+
+      if (isPremium.value == false) {
+        stopwatch.onExecute.add(StopWatchExecute.start);
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text(
+            'Video has been added',
+          ),
+          backgroundColor: Colors.green.withOpacity(0.5),
+          duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } else {
+      isLoading.value = !isLoading.value;
+
+      if (isPremium.value == false) {
+        stopwatch.onExecute.add(StopWatchExecute.start);
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text(
+            'Problem with sending video. Try again',
+          ),
+          backgroundColor: Colors.red.withOpacity(0.5),
+          duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
         ),
       );
     }
@@ -112,7 +172,8 @@ AddScreenState useAddScreenState({
       await itemService.saveItem(
         title: titleState.value,
         description: descriptionState.value,
-        imageUrl: urlState.value,
+        imageUrl: imageUrlState.value,
+        videoUrl: videoUrlState.value,
         url: urlFieldState.value,
       );
       navigateBack(true);
@@ -172,7 +233,7 @@ AddScreenState useAddScreenState({
   }
 
   return AddScreenState(
-    onVideoPressed: () {},
+    onVideoPressed: () => openVideoGallery(),
     onSaveButtonPressed: () => onSavePressed(),
     onLinkPressed: () => onLinkPressed(),
     switchReadOnly: () => isReadOnlyState.value = !isReadOnlyState.value,
@@ -184,6 +245,7 @@ AddScreenState useAddScreenState({
     isReadOnly: isReadOnlyState.value,
     onPickImagePressed: () => openGallery(),
     isPremium: isPremium.value,
+    isLoading: isLoading.value,
     isLinkTabOpen: isLinkTabOpen.value,
   );
 }

@@ -27,12 +27,14 @@ class _$NoteDetailsTearOff {
       required String description,
       required DateTime created,
       required String? imageUrl,
+      required String? videoUrl,
       required String? url}) {
     return _NoteDetails(
       title: title,
       description: description,
       created: created,
       imageUrl: imageUrl,
+      videoUrl: videoUrl,
       url: url,
     );
   }
@@ -51,6 +53,7 @@ mixin _$NoteDetails {
   String get description => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
+  String? get videoUrl => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -69,6 +72,7 @@ abstract class $NoteDetailsCopyWith<$Res> {
       String description,
       DateTime created,
       String? imageUrl,
+      String? videoUrl,
       String? url});
 }
 
@@ -86,6 +90,7 @@ class _$NoteDetailsCopyWithImpl<$Res> implements $NoteDetailsCopyWith<$Res> {
     Object? description = freezed,
     Object? created = freezed,
     Object? imageUrl = freezed,
+    Object? videoUrl = freezed,
     Object? url = freezed,
   }) {
     return _then(_value.copyWith(
@@ -104,6 +109,10 @@ class _$NoteDetailsCopyWithImpl<$Res> implements $NoteDetailsCopyWith<$Res> {
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      videoUrl: videoUrl == freezed
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       url: url == freezed
           ? _value.url
@@ -125,6 +134,7 @@ abstract class _$NoteDetailsCopyWith<$Res>
       String description,
       DateTime created,
       String? imageUrl,
+      String? videoUrl,
       String? url});
 }
 
@@ -144,6 +154,7 @@ class __$NoteDetailsCopyWithImpl<$Res> extends _$NoteDetailsCopyWithImpl<$Res>
     Object? description = freezed,
     Object? created = freezed,
     Object? imageUrl = freezed,
+    Object? videoUrl = freezed,
     Object? url = freezed,
   }) {
     return _then(_NoteDetails(
@@ -163,6 +174,10 @@ class __$NoteDetailsCopyWithImpl<$Res> extends _$NoteDetailsCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      videoUrl: videoUrl == freezed
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -179,6 +194,7 @@ class _$_NoteDetails implements _NoteDetails {
       required this.description,
       required this.created,
       required this.imageUrl,
+      required this.videoUrl,
       required this.url});
 
   factory _$_NoteDetails.fromJson(Map<String, dynamic> json) =>
@@ -193,11 +209,13 @@ class _$_NoteDetails implements _NoteDetails {
   @override
   final String? imageUrl;
   @override
+  final String? videoUrl;
+  @override
   final String? url;
 
   @override
   String toString() {
-    return 'NoteDetails(title: $title, description: $description, created: $created, imageUrl: $imageUrl, url: $url)';
+    return 'NoteDetails(title: $title, description: $description, created: $created, imageUrl: $imageUrl, videoUrl: $videoUrl, url: $url)';
   }
 
   @override
@@ -210,6 +228,7 @@ class _$_NoteDetails implements _NoteDetails {
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.created, created) &&
             const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
+            const DeepCollectionEquality().equals(other.videoUrl, videoUrl) &&
             const DeepCollectionEquality().equals(other.url, url));
   }
 
@@ -220,6 +239,7 @@ class _$_NoteDetails implements _NoteDetails {
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(created),
       const DeepCollectionEquality().hash(imageUrl),
+      const DeepCollectionEquality().hash(videoUrl),
       const DeepCollectionEquality().hash(url));
 
   @JsonKey(ignore: true)
@@ -239,6 +259,7 @@ abstract class _NoteDetails implements NoteDetails {
       required String description,
       required DateTime created,
       required String? imageUrl,
+      required String? videoUrl,
       required String? url}) = _$_NoteDetails;
 
   factory _NoteDetails.fromJson(Map<String, dynamic> json) =
@@ -252,6 +273,8 @@ abstract class _NoteDetails implements NoteDetails {
   DateTime get created;
   @override
   String? get imageUrl;
+  @override
+  String? get videoUrl;
   @override
   String? get url;
   @override

@@ -67,6 +67,8 @@ dependencies:
   flutter_speed_dial: ^5.1.0
   flutter_staggered_animations: ^1.0.0
   google_fonts: ^3.0.1
+  video_player: ^2.4.2
+  shimmer: ^2.0.0
 
 
 

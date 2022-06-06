@@ -19,6 +19,7 @@ class DetailsScreenState {
   final bool isLinkTabOpen;
   final bool isPremium;
   final bool isTabOpen;
+  final bool isLoading;
   final Function() onSaveButtonPressed;
   final Function() onDeletePressed;
   final Function() onLinkPressed;
@@ -36,6 +37,7 @@ class DetailsScreenState {
     required this.isLinkTabOpen,
     required this.isPremium,
     required this.isTabOpen,
+    required this.isLoading,
     required this.onSaveButtonPressed,
     required this.onLinkPressed,
     required this.titleFieldState,
@@ -71,8 +73,10 @@ DetailsScreenState useDetailsScreenState({
   final urlFieldState = useFieldStateSimple(initialValue: note.details.url);
   final fileState = useState<File?>(null);
   final isLinkTabOpen = useState<bool>(false);
+  final isLoading = useState<bool>(false);
   final context = useContext();
-  final urlState = useState<String?>(note.details.imageUrl);
+  final imageUrlState = useState<String?>(note.details.imageUrl);
+  final videoUrlState = useState<String?>(note.details.videoUrl);
   final ImagePicker imagePicker = ImagePicker();
 
   Future openGallery() async {
@@ -80,9 +84,14 @@ DetailsScreenState useDetailsScreenState({
       source: ImageSource.gallery,
     );
 
+    isLoading.value = !isLoading.value;
+
     if (pickedFile != null) {
       fileState.value = File(pickedFile.path);
-      urlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+      imageUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+
+      isLoading.value = !isLoading.value;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(
@@ -90,9 +99,12 @@ DetailsScreenState useDetailsScreenState({
           ),
           backgroundColor: Colors.green.withOpacity(0.5),
           duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
         ),
       );
     } else {
+      isLoading.value = !isLoading.value;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(
@@ -100,6 +112,46 @@ DetailsScreenState useDetailsScreenState({
           ),
           backgroundColor: Colors.red.withOpacity(0.5),
           duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
+  Future openVideoGallery() async {
+    final pickedFile = await imagePicker.getVideo(
+      source: ImageSource.gallery,
+    );
+
+    isLoading.value = !isLoading.value;
+
+    if (pickedFile != null) {
+      fileState.value = File(pickedFile.path);
+      videoUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+
+      isLoading.value = !isLoading.value;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text(
+            'Video has been added',
+          ),
+          backgroundColor: Colors.green.withOpacity(0.5),
+          duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } else {
+      isLoading.value = !isLoading.value;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text(
+            'Problem with sending video. Try again',
+          ),
+          backgroundColor: Colors.red.withOpacity(0.5),
+          duration: const Duration(seconds: 1),
+          behavior: SnackBarBehavior.floating,
         ),
       );
     }
@@ -109,7 +161,9 @@ DetailsScreenState useDetailsScreenState({
     isLinkTabOpen.value = !isLinkTabOpen.value;
   }
 
-  Future<void> onTabOpenPressed() async => isTabOpen.value = !isTabOpen.value;
+  Future<void> onTabOpenPressed() async {
+    isTabOpen.value = !isTabOpen.value;
+  }
 
   Future<void> onSavePressed() async {
     if (titleFieldState.value != '') {
@@ -117,7 +171,8 @@ DetailsScreenState useDetailsScreenState({
         title: titleFieldState.value,
         description: descriptionFieldState.value,
         id: note.id,
-        imageUrl: urlState.value,
+        imageUrl: imageUrlState.value,
+        videoUrl: videoUrlState.value,
         url: urlFieldState.value,
       );
       navigateBack(true);
@@ -192,12 +247,13 @@ DetailsScreenState useDetailsScreenState({
     onPickImagePressed: () => openGallery(),
     isPremium: isPremium.value,
     isTabOpen: isTabOpen.value,
+    isLoading: isLoading.value,
     isLinkTabOpen: isLinkTabOpen.value,
     urlFieldState: urlFieldState,
     note: note,
     onEditPressed: () => edit(),
     onExitPressed: () => navigateBack(false),
-    onVideoPressed: () {},
+    onVideoPressed: () => openVideoGallery(),
     onWillPop: () => onWillPop(),
   );
 }
