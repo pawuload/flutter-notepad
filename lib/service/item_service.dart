@@ -16,8 +16,8 @@ class ItemService {
     // return collection
     //     .orderBy(_ordering, descending: true)
     //     .snapshots()
-    //     .map((snapshot) => snapshot.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data()))).toSet());
-    //
+    //     .map((snapshot) => snapshot.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data()))).toList());
+
     final result = await collection.orderBy(_ordering, descending: true).get();
     final value = result.docs.map(  // TODO
       (e) => Note(
