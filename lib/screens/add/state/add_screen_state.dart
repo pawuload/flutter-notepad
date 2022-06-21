@@ -84,6 +84,13 @@ AddScreenState useAddScreenState({
     );
   }
 
+  Future<void> showWarningSnackBar() async {
+    showSnackBar(
+      text: 'You can upload up to 12 images only',
+      color: Colors.red.withOpacity(0.5),
+    );
+  }
+
   Future<void> switchPremium() async {
     isPremium.value = !isPremium.value;
     await userService.switchPremium(
@@ -101,32 +108,47 @@ AddScreenState useAddScreenState({
         text: 'Wait until uploading is finished',
         color: Colors.red.withOpacity(0.5),
       );
-    } else if (imageUrlState.value!.length >= 9) {
-      showSnackBar(
-        text: 'You can upload up to 9 images only',
-        color: Colors.red.withOpacity(0.5),
-      );
+    } else if (imageUrlState.value!.length >= 12) {
+      showWarningSnackBar();
     } else {
       if (isPremium.value == false) {
         stopwatch.onExecute.add(StopWatchExecute.stop);
       }
-      final pickedFile = await imagePicker.getImage(
-        source: ImageSource.gallery,
-      );
-      switchLoading();
+
+      final List<PickedFile?> list = [];
+      final pickedFile = await imagePicker.getMultiImage();
       if (pickedFile != null) {
-        fileState.value = File(pickedFile.path);
-        if (fileState.value!.lengthSync() > 30000000) {
-          stopwatch.onExecute.add(StopWatchExecute.start);
-          showSnackBar(
-            text: 'File is too big',
-            color: Colors.red.withOpacity(0.5),
-          );
-          switchLoading();
+        if (pickedFile.length > (12 - imageUrlState.value!.length)) {
+          showWarningSnackBar();
           return;
         }
-        final String? img = await storageService.uploadFile(fileState.value!, name: '/notes');
-        imageUrlState.value!.add(img!);
+        switchLoading();
+        list.addAll(pickedFile);
+
+        for (int i = 0; i < list.length; i++) {
+          if (imageUrlState.value!.length < 12) {
+            fileState.value = File(list[i]!.path);
+            if (fileState.value!.lengthSync() > 10000000) {
+              stopwatch.onExecute.add(StopWatchExecute.start);
+              if (pickedFile.length == 1) {
+                showSnackBar(
+                  text: 'File is too big to upload',
+                  color: Colors.red.withOpacity(0.5),
+                );
+              } else {
+                showSnackBar(
+                  text: 'Some files are too big to upload',
+                  color: Colors.red.withOpacity(0.5),
+                );
+              }
+              switchLoading();
+              return;
+            }
+            final String? img = await storageService.uploadFile(fileState.value!, name: '/notes');
+            imageUrlState.value!.add(img!);
+          }
+        }
+
         switchLoading();
         if (isPremium.value == false) {
           stopwatch.onExecute.add(StopWatchExecute.start);
@@ -169,7 +191,7 @@ AddScreenState useAddScreenState({
             stopwatch.onExecute.add(StopWatchExecute.start);
           }
           showSnackBar(
-            text: 'File is too big',
+            text: 'File is too big to upload',
             color: Colors.red.withOpacity(0.5),
           );
           switchLoading();

@@ -84,13 +84,13 @@ class DetailsScreenImages extends StatelessWidget {
   Widget _buildCardsWithGestureDetector(BuildContext context, String image) {
     return GestureDetector(
       onTap: () {
-        _showDialog(context, image);
+        _showImage(context, image);
       },
       child: _buildCard(image: image),
     );
   }
 
-  _showDialog(BuildContext context, String image) {
+  Future<void> _showImage(BuildContext context, String image) {
     return showDialog(
       context: context,
       builder: (context) {
