@@ -1,6 +1,6 @@
 import 'package:app/common/widget/navigation_bar/app_nav_bar.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
-import 'package:app/screens/details/widget/details_screen_attachments.dart';
+import 'package:app/screens/details/widget/attachments/details_screen_attachments.dart';
 import 'package:app/screens/details/widget/details_screen_button.dart';
 import 'package:app/screens/details/widget/details_screen_textfield.dart';
 import 'package:app/screens/details/widget/details_screen_url.dart';

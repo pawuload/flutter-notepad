@@ -46,7 +46,7 @@ class HomeScreenView extends StatelessWidget {
                 ),
                 failedBuilder: (context) => Center(
                   child: Text(
-                    'Loading notes has been failed. Please try again',
+                    'Loading notes has been failed. Please try again later.',
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.brown.withOpacity(0.5),

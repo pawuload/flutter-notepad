@@ -10,7 +10,7 @@ class NoteDetails with _$NoteDetails {
     required String title,
     required String description,
     required DateTime created,
-    required String? imageUrl,
+    required List<String>? imageUrl,
     required String? videoUrl,
     required String? url,
   }) = _NoteDetails;

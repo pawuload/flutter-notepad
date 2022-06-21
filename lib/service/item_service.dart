@@ -34,7 +34,7 @@ class ItemService {
     required String title,
     required String description,
     required String? url,
-    required String? imageUrl,
+    required List<String>? imageUrl,
     required String? videoUrl,
   }) async {
     final CollectionReference collection = FirebaseFirestore.instance.collection(
@@ -58,7 +58,7 @@ class ItemService {
     required String title,
     required String description,
     required String? url,
-    required String? imageUrl,
+    required List<String>? imageUrl,
     required String? videoUrl,
   }) async {
     CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');

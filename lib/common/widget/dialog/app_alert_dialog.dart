@@ -114,6 +114,54 @@ class AppAlertDialog extends StatelessWidget {
     );
   }
 
+  static Future<bool?> showSave(BuildContext context) async {
+    return await show<bool>(
+      context,
+      (context) {
+        return AppAlertDialog(
+          title: const Text(
+            'Uploading...',
+            style: TextStyle(fontSize: 16),
+          ),
+          content: const Text(
+            "Video or image is still uploading.\n"
+                "If you press 'ok' it's not going to be saved.\n"
+                "Remember to name your note.",
+            style: TextStyle(fontSize: 14),
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                icon: const Icon(
+                  AppIcons.yes,
+                  color: Colors.brown,
+                  size: 40,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                icon: const Icon(
+                  AppIcons.no,
+                  color: Colors.brown,
+                  size: 40,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   static Future<bool?> showPremium(BuildContext context, {required PremiumDialogItem item}) async {
     return await show<bool>(
       context,

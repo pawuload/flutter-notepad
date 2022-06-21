@@ -11,7 +11,9 @@ _$_NoteDetails _$$_NoteDetailsFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String,
       created: DateTime.parse(json['created'] as String),
-      imageUrl: json['imageUrl'] as String?,
+      imageUrl: (json['imageUrl'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       videoUrl: json['videoUrl'] as String?,
       url: json['url'] as String?,
     );

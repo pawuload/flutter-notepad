@@ -23,6 +23,7 @@ class AddScreen extends HookWidget {
         );
       },
       showExitDialog: () async => await AppAlertDialog.showExit(context),
+      showSaveDialog: () async => await AppAlertDialog.showSave(context),
       navigateBack: (value) => navigator.pop(value),
     );
 

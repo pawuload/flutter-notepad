@@ -26,7 +26,7 @@ class _$NoteDetailsTearOff {
       {required String title,
       required String description,
       required DateTime created,
-      required String? imageUrl,
+      required List<String>? imageUrl,
       required String? videoUrl,
       required String? url}) {
     return _NoteDetails(
@@ -52,7 +52,7 @@ mixin _$NoteDetails {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
+  List<String>? get imageUrl => throw _privateConstructorUsedError;
   String? get videoUrl => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
 
@@ -71,7 +71,7 @@ abstract class $NoteDetailsCopyWith<$Res> {
       {String title,
       String description,
       DateTime created,
-      String? imageUrl,
+      List<String>? imageUrl,
       String? videoUrl,
       String? url});
 }
@@ -109,7 +109,7 @@ class _$NoteDetailsCopyWithImpl<$Res> implements $NoteDetailsCopyWith<$Res> {
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -133,7 +133,7 @@ abstract class _$NoteDetailsCopyWith<$Res>
       {String title,
       String description,
       DateTime created,
-      String? imageUrl,
+      List<String>? imageUrl,
       String? videoUrl,
       String? url});
 }
@@ -173,7 +173,7 @@ class __$NoteDetailsCopyWithImpl<$Res> extends _$NoteDetailsCopyWithImpl<$Res>
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -207,7 +207,7 @@ class _$_NoteDetails implements _NoteDetails {
   @override
   final DateTime created;
   @override
-  final String? imageUrl;
+  final List<String>? imageUrl;
   @override
   final String? videoUrl;
   @override
@@ -258,7 +258,7 @@ abstract class _NoteDetails implements NoteDetails {
       {required String title,
       required String description,
       required DateTime created,
-      required String? imageUrl,
+      required List<String>? imageUrl,
       required String? videoUrl,
       required String? url}) = _$_NoteDetails;
 
@@ -272,7 +272,7 @@ abstract class _NoteDetails implements NoteDetails {
   @override
   DateTime get created;
   @override
-  String? get imageUrl;
+  List<String>? get imageUrl;
   @override
   String? get videoUrl;
   @override

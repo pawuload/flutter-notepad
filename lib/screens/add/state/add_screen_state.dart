@@ -47,6 +47,7 @@ class AddScreenState {
 AddScreenState useAddScreenState({
   required Future<bool?> Function() showPremiumDialog,
   required Future<bool?> Function() showExitDialog,
+  required Future<bool?> Function() showSaveDialog,
   required Function(bool?) navigateBack,
 }) {
   final itemService = useInjected<ItemService>();
@@ -68,102 +69,131 @@ AddScreenState useAddScreenState({
     ),
   );
   final fileState = useState<File?>(null);
-  final imageUrlState = useState<String?>(null);
+  final imageUrlState = useState<List<String>?>([]);
   final videoUrlState = useState<String?>(null);
   final ImagePicker imagePicker = ImagePicker();
 
-  Future openGallery() async {
-    if (isPremium.value == false) {
-      stopwatch.onExecute.add(StopWatchExecute.stop);
-    }
-    final pickedFile = await imagePicker.getImage(
-      source: ImageSource.gallery,
+  Future<void> showSnackBar({required String text, required Color color}) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+        backgroundColor: color,
+        duration: const Duration(seconds: 1),
+        behavior: SnackBarBehavior.floating,
+      ),
     );
+  }
 
-    isLoading.value = !isLoading.value;
+  Future<void> switchPremium() async {
+    isPremium.value = !isPremium.value;
+    await userService.switchPremium(
+      email: userState.user!.details.email,
+      id: userState.user!.id,
+      isPremium: isPremium.value,
+    );
+  }
 
-    if (pickedFile != null) {
-      fileState.value = File(pickedFile.path);
-      imageUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+  Future<void> switchLoading() async => isLoading.value = !isLoading.value;
 
-      isLoading.value = !isLoading.value;
-
-      if (isPremium.value == false) {
-        stopwatch.onExecute.add(StopWatchExecute.start);
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            'Image has been added',
-          ),
-          backgroundColor: Colors.green.withOpacity(0.5),
-          duration: const Duration(seconds: 1),
-          behavior: SnackBarBehavior.floating,
-        ),
+  Future openGallery() async {
+    if (isLoading.value == true) {
+      showSnackBar(
+        text: 'Wait until uploading is finished',
+        color: Colors.red.withOpacity(0.5),
+      );
+    } else if (imageUrlState.value!.length >= 9) {
+      showSnackBar(
+        text: 'You can upload up to 9 images only',
+        color: Colors.red.withOpacity(0.5),
       );
     } else {
-      isLoading.value = !isLoading.value;
-
       if (isPremium.value == false) {
-        stopwatch.onExecute.add(StopWatchExecute.start);
+        stopwatch.onExecute.add(StopWatchExecute.stop);
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            'Problem with sending image. Try again',
-          ),
-          backgroundColor: Colors.red.withOpacity(0.5),
-          duration: const Duration(seconds: 1),
-          behavior: SnackBarBehavior.floating,
-        ),
+      final pickedFile = await imagePicker.getImage(
+        source: ImageSource.gallery,
       );
+      switchLoading();
+      if (pickedFile != null) {
+        fileState.value = File(pickedFile.path);
+        if (fileState.value!.lengthSync() > 30000000) {
+          stopwatch.onExecute.add(StopWatchExecute.start);
+          showSnackBar(
+            text: 'File is too big',
+            color: Colors.red.withOpacity(0.5),
+          );
+          switchLoading();
+          return;
+        }
+        final String? img = await storageService.uploadFile(fileState.value!, name: '/notes');
+        imageUrlState.value!.add(img!);
+        switchLoading();
+        if (isPremium.value == false) {
+          stopwatch.onExecute.add(StopWatchExecute.start);
+        }
+        showSnackBar(
+          text: 'Image has been added',
+          color: Colors.green.withOpacity(0.5),
+        );
+      } else {
+        switchLoading();
+        if (isPremium.value == false) {
+          stopwatch.onExecute.add(StopWatchExecute.start);
+        }
+        showSnackBar(
+          text: 'Problem with sending image. Try again',
+          color: Colors.red.withOpacity(0.5),
+        );
+      }
     }
   }
 
   Future openVideoGallery() async {
-    if (isPremium.value == false) {
-      stopwatch.onExecute.add(StopWatchExecute.stop);
-    }
-    final pickedFile = await imagePicker.getVideo(
-      source: ImageSource.gallery,
-    );
-
-    isLoading.value = !isLoading.value;
-
-    if (pickedFile != null) {
-      fileState.value = File(pickedFile.path);
-      videoUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
-      isLoading.value = !isLoading.value;
-
-      if (isPremium.value == false) {
-        stopwatch.onExecute.add(StopWatchExecute.start);
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            'Video has been added',
-          ),
-          backgroundColor: Colors.green.withOpacity(0.5),
-          duration: const Duration(seconds: 1),
-          behavior: SnackBarBehavior.floating,
-        ),
+    if (isLoading.value == true) {
+      showSnackBar(
+        text: 'Wait until uploading is finished',
+        color: Colors.red.withOpacity(0.5),
       );
     } else {
-      isLoading.value = !isLoading.value;
-
       if (isPremium.value == false) {
-        stopwatch.onExecute.add(StopWatchExecute.start);
+        stopwatch.onExecute.add(StopWatchExecute.stop);
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            'Problem with sending video. Try again',
-          ),
-          backgroundColor: Colors.red.withOpacity(0.5),
-          duration: const Duration(seconds: 1),
-          behavior: SnackBarBehavior.floating,
-        ),
+      final pickedFile = await imagePicker.getVideo(
+        source: ImageSource.gallery,
       );
+      switchLoading();
+      if (pickedFile != null) {
+        fileState.value = File(pickedFile.path);
+        if (fileState.value!.lengthSync() > 40000000) {
+          if (isPremium.value == false) {
+            stopwatch.onExecute.add(StopWatchExecute.start);
+          }
+          showSnackBar(
+            text: 'File is too big',
+            color: Colors.red.withOpacity(0.5),
+          );
+          switchLoading();
+          return;
+        }
+        videoUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+        switchLoading();
+        if (isPremium.value == false) {
+          stopwatch.onExecute.add(StopWatchExecute.start);
+        }
+        showSnackBar(
+          text: 'Video has been added',
+          color: Colors.green.withOpacity(0.5),
+        );
+      } else {
+        switchLoading();
+        if (isPremium.value == false) {
+          stopwatch.onExecute.add(StopWatchExecute.start);
+        }
+        showSnackBar(
+          text: 'Problem with sending video. Try again',
+          color: Colors.red.withOpacity(0.5),
+        );
+      }
     }
   }
 
@@ -178,36 +208,24 @@ AddScreenState useAddScreenState({
       );
       navigateBack(true);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            'To save a note you must put a title',
-          ),
-          backgroundColor: Colors.red.withOpacity(0.5),
-          duration: const Duration(milliseconds: 1700),
-        ),
+      showSnackBar(
+        text: 'To save a note you must put a title',
+        color: Colors.red.withOpacity(0.5),
       );
     }
-  }
-
-  Future<void> switchPremium() async {
-    isPremium.value = !isPremium.value;
-    await userService.switchPremium(
-      email: userState.user!.details.email,
-      id: userState.user!.id,
-      isPremium: isPremium.value,
-    );
   }
 
   Future<void> onLinkPressed() async {
     isLinkTabOpen.value = !isLinkTabOpen.value;
   }
 
-  useMemoized(() async {
-    if (isPremium.value == false) {
-      stopwatch.onExecute.add(StopWatchExecute.start);
-    }
-  });
+  useMemoized(
+    () async {
+      if (isPremium.value == false) {
+        stopwatch.onExecute.add(StopWatchExecute.start);
+      }
+    },
+  );
 
   useSimpleEffect(() async {
     if (timeLeft.value == 0) {
@@ -234,7 +252,22 @@ AddScreenState useAddScreenState({
 
   return AddScreenState(
     onVideoPressed: () => openVideoGallery(),
-    onSaveButtonPressed: () => onSavePressed(),
+    onSaveButtonPressed: () async {
+      if (isLoading.value == false) {
+        onSavePressed();
+      } else {
+        final result = await showSaveDialog();
+        if (result == true) {
+          if (titleState.value != '') {
+            isLoading.value ? switchLoading() : null;
+            isPremium.value ? stopwatch.onExecute.add(StopWatchExecute.stop) : null;
+            onSavePressed();
+          }
+        } else {
+          return false;
+        }
+      }
+    },
     onLinkPressed: () => onLinkPressed(),
     switchReadOnly: () => isReadOnlyState.value = !isReadOnlyState.value,
     onWillPop: () => onWillPop(),
