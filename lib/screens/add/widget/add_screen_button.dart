@@ -15,13 +15,20 @@ class AddScreenButton extends StatelessWidget {
       child: Container(
         child: state.isLoading
             ? const CircularProgressIndicator(
-          color: Colors.white,
-          strokeWidth: 3,
-
-        )
+                color: Colors.white,
+                strokeWidth: 3,
+              )
             : state.isPremium
                 ? const Icon(AppIcons.premium)
-                : Text(state.timeLeft.toString()),
+                : state.timeLeft < 1
+                    ? TextButton(
+                        onPressed: state.getPremium,
+                        child: const Text(
+                          'Buy',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )
+                    : Text(state.timeLeft.toString()),
       ),
       backgroundColor: state.isPremium ? Colors.brown : AppColors.premium,
       elevation: 10,

@@ -25,12 +25,10 @@ class DetailsScreenAttachments extends StatelessWidget {
             ),
             onPressed: state.onTabOpenPressed,
           ),
-        if (state.isTabOpen == true && note.details.url != null && state.isReadOnly == true)
-          DetailsScreenLinkTab(note: note),
+        if (state.isTabOpen == true && note.details.url != null && state.isReadOnly == true) DetailsScreenLinkTab(note: note),
         if (state.isTabOpen == true && note.details.imageUrl!.isEmpty == false && state.isReadOnly == true)
           DetailsScreenImages(state: state, note: note),
-        if (state.isTabOpen == true && note.details.videoUrl != null && state.isReadOnly == true)
-          DetailsScreenVideoPlayer(note: note),
+        if (state.isTabOpen == true && note.details.videoUrl != null && state.isReadOnly == true) DetailsScreenVideoPlayer(note: note),
       ],
     );
   }

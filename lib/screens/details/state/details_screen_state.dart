@@ -56,11 +56,11 @@ class DetailsScreenState {
 
 DetailsScreenState useDetailsScreenState({
   required Note note,
-  required Function(bool) navigateBack,
   required Future<bool?> Function(PremiumDialogItem) showPremiumDialog,
   required Future<bool?> Function() showDeleteDialog,
   required Future<bool?> Function() showExitDialog,
   required Future<bool?> Function() showSaveDialog,
+  required Function(bool) navigateBack,
 }) {
   final itemService = useInjected<ItemService>();
   final userService = useInjected<UserService>();
@@ -194,6 +194,7 @@ DetailsScreenState useDetailsScreenState({
           return;
         }
         videoUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
+
         switchLoading();
         showSnackBar(
           text: 'Video has been added',

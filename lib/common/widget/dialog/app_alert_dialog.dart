@@ -125,8 +125,8 @@ class AppAlertDialog extends StatelessWidget {
           ),
           content: const Text(
             "Video or image is still uploading.\n"
-                "If you press 'ok' it's not going to be saved.\n"
-                "Remember to name your note.",
+            "If you press 'ok' it's not going to be saved.\n"
+            "Remember to name your note.",
             style: TextStyle(fontSize: 14),
           ),
           actions: <Widget>[

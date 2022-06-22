@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
-
 class HomeScreen extends HookWidget {
   static const route = '/home';
   static final routeConfig = RouteConfig.material(() => const HomeScreen());

@@ -13,6 +13,7 @@ class AppMediaProgressBar extends StatelessWidget {
   final Function()? onDragEnd;
 
   const AppMediaProgressBar({
+    Key? key,
     required this.progressColor,
     required this.progress,
     required this.total,
@@ -21,7 +22,7 @@ class AppMediaProgressBar extends StatelessWidget {
     this.onDragStart,
     this.onDragUpdate,
     this.onDragEnd,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

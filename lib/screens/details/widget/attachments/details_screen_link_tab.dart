@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class DetailsScreenLinkTab extends StatelessWidget {
   final Note note;
+
   const DetailsScreenLinkTab({Key? key, required this.note}) : super(key: key);
 
   @override
