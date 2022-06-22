@@ -168,6 +168,7 @@ DetailsScreenState useDetailsScreenState({
           text: 'Problem with sending image. Try again',
           color: Colors.red.withOpacity(0.5),
         );
+        if (isLoading.value == true) switchLoading();
       }
     }
   }

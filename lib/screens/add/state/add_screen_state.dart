@@ -169,6 +169,7 @@ AddScreenState useAddScreenState({
             text: 'Problem with sending image. Try again',
             color: Colors.red.withOpacity(0.5),
           );
+          if (isLoading.value == true) switchLoading();
         }
       }
     } else {
@@ -266,6 +267,7 @@ AddScreenState useAddScreenState({
       isReadOnlyState.value = !isReadOnlyState.value;
       await switchPremium();
       userState.refresh();
+      timeLeft.value = 1;
     }
   }
 
