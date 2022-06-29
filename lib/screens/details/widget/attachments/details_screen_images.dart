@@ -1,7 +1,7 @@
 import 'package:app/models/note/note.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
+import 'package:app/screens/details/widget/attachments/details_screen_image_cards.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 class DetailsScreenImages extends StatelessWidget {
   final DetailsScreenState state;
@@ -11,105 +11,38 @@ class DetailsScreenImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(10, 0, 10, note.details.videoUrl == null ? 55 : 12),
-      height: note.details.imageUrl!.length <= 3
-          ? 150
-          : note.details.imageUrl!.length <= 6
-              ? 260
-              : 290,
-      width: double.infinity,
-      child: GridView.builder(
-        itemCount: note.details.imageUrl!.length,
-        itemBuilder: (context, index) {
-          return _buildCardsWithGestureDetector(context, note.details.imageUrl![index]);
-        },
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 150,
-          crossAxisSpacing: 1,
-          mainAxisSpacing: 3,
-        ),
-      ),
-    );
-  }
+    return LayoutBuilder(builder: (context, constrains) {
+      final NeverScrollableScrollPhysics? scrollOn = note.details.imageUrl!.length <= 6 ? const NeverScrollableScrollPhysics() : null;
+      final ScrollController _controller = ScrollController();
+      final int rowCount = note.details.imageUrl!.length <= 3 ? note.details.imageUrl!.length : 3;
+      final double sizeCrossAxisExtent = (constrains.maxWidth / rowCount) * 0.95;
+      final double size = note.details.imageUrl!.length <= 3 ? sizeCrossAxisExtent : sizeCrossAxisExtent * 2;
+      final bool showScrollbar = note.details.imageUrl!.length > 6;
 
-  Widget _buildCard({required String image}) {
-    return Card(
-      elevation: 5,
-      color: Colors.grey[400],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Image.network(
-          image,
-          fit: BoxFit.cover,
-          errorBuilder: (BuildContext context, Object object, stackTrace) {
-            return _buildErrorBuilder();
-          },
-          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-            if (loadingProgress == null) return child;
-            return Shimmer.fromColors(
-              baseColor: Colors.grey[400]!,
-              highlightColor: Colors.grey[300]!,
-              child: Container(
-                color: Colors.grey[100],
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildErrorBuilder() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.error,
-          color: Colors.brown.shade400,
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: const Text(
-            "Loading failed",
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _buildCardsWithGestureDetector(BuildContext context, String image) {
-    return GestureDetector(
-      onTap: () {
-        _showImage(context, image);
-      },
-      child: _buildCard(image: image),
-    );
-  }
-
-  Future<void> _showImage(BuildContext context, String image) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return Center(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            padding: const EdgeInsets.all(5),
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              constraints: const BoxConstraints(maxHeight: 700),
-              child: _buildCard(image: image),
+      return Container(
+        margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),
+        height: size,
+        child: RawScrollbar(
+          controller: _controller,
+          crossAxisMargin: -12,
+          thickness: 7,
+          radius: const Radius.circular(20),
+          thumbColor: Colors.brown.withOpacity(0.4),
+          isAlwaysShown: showScrollbar,
+          child: GridView.builder(
+            controller: _controller,
+            physics: scrollOn,
+            scrollDirection: Axis.horizontal,
+            itemCount: note.details.imageUrl!.length,
+            itemBuilder: (context, index) => DetailsScreenImageCards(image: note.details.imageUrl![index]),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: sizeCrossAxisExtent,
+              crossAxisSpacing: 1,
+              mainAxisSpacing: 3,
             ),
           ),
-        );
-      },
-    );
+        ),
+      );
+    });
   }
 }

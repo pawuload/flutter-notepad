@@ -159,7 +159,7 @@ DetailsScreenState useDetailsScreenState({
 
         switchLoading();
         showSnackBar(
-          text: 'Image has been added',
+          text: 'Images have been added',
           color: Colors.green.withOpacity(0.5),
         );
       } else {

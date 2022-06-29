@@ -33,61 +33,66 @@ class HomeScreenView extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               margin: const EdgeInsets.only(bottom: 0),
-              child: RefreshableComputedListWrapper<Note>(
-                state: state.noteState,
-                inProgressBuilder: (context) => Center(
-                  child: Text(
-                    'Loading...',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.brown.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-                failedBuilder: (context) => Center(
-                  child: Text(
-                    'Loading notes has been failed. Please try again later.',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.brown.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-                emptyBuilder: (context) => Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 25),
-                      child: Text(
-                        'Create a new note right there',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.brown.withOpacity(0.5),
-                        ),
+              child: RawScrollbar(
+                thumbColor: Colors.brown.withOpacity(0.6),
+                radius: const Radius.circular(20),
+                thickness: 5,
+                child: RefreshableComputedListWrapper<Note>(
+                  state: state.noteState,
+                  inProgressBuilder: (context) => Center(
+                    child: Text(
+                      'Loading...',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.brown.withOpacity(0.5),
                       ),
-                    )
-                  ],
-                ),
-                builder: (context, notes) {
-                  return ListView.builder(
-                    itemCount: notes.length,
-                    itemBuilder: (context, index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 375),
-                        child: SlideAnimation(
-                          verticalOffset: 50.0,
-                          child: FadeInAnimation(
-                            child: HomeScreenListItem(
-                              note: notes[index],
-                              state: state,
-                            ),
+                    ),
+                  ),
+                  failedBuilder: (context) => Center(
+                    child: Text(
+                      'Loading notes has been failed. Please try again later.',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.brown.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                  emptyBuilder: (context) => Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 25),
+                        child: Text(
+                          'Create a new note right there',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.brown.withOpacity(0.5),
                           ),
                         ),
-                      );
-                    },
-                  );
-                },
+                      )
+                    ],
+                  ),
+                  builder: (context, notes) {
+                    return ListView.builder(
+                      itemCount: notes.length,
+                      itemBuilder: (context, index) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 375),
+                          child: SlideAnimation(
+                            verticalOffset: 50.0,
+                            child: FadeInAnimation(
+                              child: HomeScreenListItem(
+                                note: notes[index],
+                                state: state,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ),

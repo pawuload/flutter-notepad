@@ -157,7 +157,7 @@ AddScreenState useAddScreenState({
             stopwatch.onExecute.add(StopWatchExecute.start);
           }
           showSnackBar(
-            text: 'Image has been added',
+            text: 'Images have been added',
             color: Colors.green.withOpacity(0.5),
           );
         } else {

@@ -1,6 +1,7 @@
 import 'package:app/common/widget/navigation_bar/app_nav_bar.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
 import 'package:app/screens/details/widget/attachments/details_screen_attachments.dart';
+import 'package:app/screens/details/widget/attachments/details_screen_link_tab.dart';
 import 'package:app/screens/details/widget/details_screen_button.dart';
 import 'package:app/screens/details/widget/details_screen_textfield.dart';
 import 'package:app/screens/details/widget/details_screen_url.dart';
@@ -13,6 +14,8 @@ class DetailsScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final urlExists = state.note.details.url != null && state.note.details.url!.isNotEmpty;
+
     return WillPopScope(
       onWillPop: () => state.onWillPop(),
       child: Scaffold(
@@ -24,7 +27,7 @@ class DetailsScreenView extends StatelessWidget {
               _buildDetailsScreenTextFieldTitle(),
               Expanded(
                 child: SingleChildScrollView(
-                  child: _buildDetailsScreenTextFieldDescription(),
+                  child: _buildDetailsScreenTextFieldDescription(urlExists),
                 ),
               ),
               DetailsScreenAttachments(state: state, note: state.note),
@@ -72,15 +75,20 @@ class DetailsScreenView extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsScreenTextFieldDescription() {
+  Widget _buildDetailsScreenTextFieldDescription(bool urlExists) {
     return Padding(
       padding: const EdgeInsets.all(7),
-      child: DetailsScreenTextField(
-        isReadOnly: state.isReadOnly,
-        state: state.descriptionFieldState,
-        maxLines: 29,
-        fontSize: 16,
-        showBorder: false,
+      child: Column(
+        children: [
+          DetailsScreenTextField(
+            isReadOnly: state.isReadOnly,
+            state: state.descriptionFieldState,
+            maxLines: 27,
+            fontSize: 16,
+            showBorder: false,
+          ),
+          if (urlExists && state.isReadOnly) DetailsScreenLinkTab(note: state.note),
+        ],
       ),
     );
   }
