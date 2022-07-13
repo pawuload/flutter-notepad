@@ -25,6 +25,7 @@ class DetailsScreenState {
   final Function() onExitPressed;
   final Function() onVideoPressed;
   final Function() onWillPop;
+  final Function(String) navigateToFullScreen;
   final bool isReadOnly;
   final bool isLinkTabOpen;
   final bool isPremium;
@@ -46,6 +47,7 @@ class DetailsScreenState {
     required this.switchReadOnly,
     required this.onDeletePressed,
     required this.onPickImagePressed,
+    required this.navigateToFullScreen,
     required this.onTabOpenPressed,
     required this.onEditPressed,
     required this.onExitPressed,
@@ -61,6 +63,7 @@ DetailsScreenState useDetailsScreenState({
   required Future<bool?> Function() showExitDialog,
   required Future<bool?> Function() showSaveDialog,
   required Function(bool) navigateBack,
+  required Function(String) navigateToVideo,
 }) {
   final itemService = useInjected<ItemService>();
   final userService = useInjected<UserService>();
@@ -302,5 +305,6 @@ DetailsScreenState useDetailsScreenState({
     onExitPressed: () => navigateBack(false),
     onVideoPressed: () => openVideoGallery(),
     onWillPop: () => onWillPop(),
+    navigateToFullScreen: (path) => navigateToVideo(path),
   );
 }

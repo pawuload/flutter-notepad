@@ -12,14 +12,12 @@ class DetailsScreenVideoPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      margin: const EdgeInsets.fromLTRB(10, 0, 10, 5),
       child: AppVideoPlayer(
-        aspectRatio: 1.75,
         videoPath: note.details.videoUrl!,
         bottomControlsProgressColor: Colors.white,
         loadingBackgroundColor: Colors.brown.shade300,
         loadingColor: Colors.white,
+        autoplay: true,
       ),
     );
   }

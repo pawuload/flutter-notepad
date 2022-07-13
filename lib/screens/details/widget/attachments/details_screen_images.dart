@@ -12,12 +12,13 @@ class DetailsScreenImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constrains) {
-      final NeverScrollableScrollPhysics? scrollOn = note.details.imageUrl!.length <= 6 ? const NeverScrollableScrollPhysics() : null;
-      final ScrollController _controller = ScrollController();
-      final int rowCount = note.details.imageUrl!.length <= 3 ? note.details.imageUrl!.length : 3;
+      final int length = note.details.imageUrl!.length;
+      final int rowCount = length  <= 3 ? length  : 3;
       final double sizeCrossAxisExtent = (constrains.maxWidth / rowCount) * 0.95;
-      final double size = note.details.imageUrl!.length <= 3 ? sizeCrossAxisExtent : sizeCrossAxisExtent * 2;
-      final bool showScrollbar = note.details.imageUrl!.length > 6;
+      final double size = length  <= 3 ? sizeCrossAxisExtent : sizeCrossAxisExtent * 2;
+      final bool showScrollbar = length  > 6;
+      final NeverScrollableScrollPhysics? scrollOn = length  <= 6 ? const NeverScrollableScrollPhysics() : null;
+      final ScrollController _controller = ScrollController();
 
       return Container(
         margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),

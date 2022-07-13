@@ -8,7 +8,7 @@ class DetailsScreenImageCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildCardsWithGestureDetector(context, image);
+    return _buildCardsWithInkWell(context, image);
   }
 
   Widget _buildCard({required String image}) {
@@ -47,7 +47,7 @@ class DetailsScreenImageCards extends StatelessWidget {
       children: [
         Icon(
           Icons.error,
-          color: Colors.brown.shade400,
+          color: Colors.brown.shade300,
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
@@ -59,11 +59,9 @@ class DetailsScreenImageCards extends StatelessWidget {
     );
   }
 
-  Widget _buildCardsWithGestureDetector(BuildContext context, String image) {
-    return GestureDetector(
-      onTap: () {
-        _showImage(context, image);
-      },
+  Widget _buildCardsWithInkWell(BuildContext context, String image) {
+    return InkWell(
+      onTap: () => _showImage(context, image),
       child: _buildCard(image: image),
     );
   }

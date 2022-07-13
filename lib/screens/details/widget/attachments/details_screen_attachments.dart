@@ -2,7 +2,7 @@ import 'package:app/common/constans/app_icons.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
 import 'package:app/screens/details/widget/attachments/details_screen_images.dart';
-import 'package:app/screens/details/widget/attachments/details_screen_video_player.dart';
+import 'package:app/screens/details/widget/attachments/details_screen_video_card.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreenAttachments extends StatelessWidget {
@@ -17,32 +17,36 @@ class DetailsScreenAttachments extends StatelessWidget {
     final bool videoExists = note.details.videoUrl != null && note.details.videoUrl!.isNotEmpty;
 
     return Container(
-      color: Colors.transparent,
-      child: Container(
-        decoration: _buildBoxDecoration(),
-        child: Column(
-          children: [
-            if ((imageExists || videoExists) && state.isReadOnly)
-              IconButton(
-                icon: Icon(
-                  state.isTabOpen == true ? AppIcons.down : AppIcons.up,
-                ),
-                alignment: Alignment.center,
-                iconSize: 30,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: state.onTabOpenPressed,
-                padding: const EdgeInsets.fromLTRB(100, 12, 100, 7),
+      decoration: _buildBoxDecoration(),
+      child: Column(
+        children: [
+          if ((imageExists || videoExists) && state.isReadOnly)
+            IconButton(
+              icon: Icon(
+                state.isTabOpen == true ? AppIcons.down : AppIcons.up,
               ),
-            if (state.isTabOpen && state.isReadOnly) ...[
-              if (imageExists) DetailsScreenImages(state: state, note: note),
-              if (videoExists) DetailsScreenVideoPlayer(note: note, state: state),
-              const SizedBox(
-                height: 65,
-              ),
-            ],
-          ],
-        ),
+              alignment: Alignment.center,
+              iconSize: 30,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onPressed: state.onTabOpenPressed,
+              padding: const EdgeInsets.fromLTRB(100, 12, 100, 7),
+            ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 200),
+            child: Column(
+              children: [
+                if (state.isTabOpen && state.isReadOnly) ...[
+                  if (videoExists) DetailsScreenVideoCard(note: note, state: state),
+                  if (imageExists) DetailsScreenImages(state: state, note: note),
+                  const SizedBox(
+                    height: 65,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -50,8 +54,8 @@ class DetailsScreenAttachments extends StatelessWidget {
   BoxDecoration _buildBoxDecoration() {
     return const BoxDecoration(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(40),
-        topRight: Radius.circular(40),
+        topLeft: Radius.circular(25),
+        topRight: Radius.circular(25),
       ),
       gradient: LinearGradient(
         colors: [
