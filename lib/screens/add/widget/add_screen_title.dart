@@ -23,23 +23,27 @@ class AddScreenTitle extends StatelessWidget {
       ),
       child: SizedBox(
         height: 60,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: TextField(
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(50),
-              ],
-              decoration: const InputDecoration.collapsed(
-                hintText: 'Title',
-                hintStyle: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
-              style: const TextStyle(fontSize: 20),
+        child: _buildCardText(),
+      ),
+    );
+  }
+
+  Widget _buildCardText() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: TextField(
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(50),
+          ],
+          decoration: const InputDecoration.collapsed(
+            hintText: 'Title',
+            hintStyle: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
             ),
           ),
+          style: const TextStyle(fontSize: 20),
         ),
       ),
     );

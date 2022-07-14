@@ -26,22 +26,26 @@ class AuthScreenCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 AuthScreenForm(state: state),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: CheckboxListTile(
-                    value: state.isCheckboxOn,
-                    onChanged: (_) => state.onCheckboxPressed(),
-                    title: const Text(
-                      'I consent to the processing of data for the marketing purposes',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    controlAffinity: ListTileControlAffinity.leading,
-                  ),
-                ),
+                _buildCheckBox(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildCheckBox() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: CheckboxListTile(
+        value: state.isCheckboxOn,
+        onChanged: (_) => state.onCheckboxPressed(),
+        title: const Text(
+          'I consent to the processing of data for the marketing purposes',
+          style: TextStyle(fontSize: 15),
+        ),
+        controlAffinity: ListTileControlAffinity.leading,
       ),
     );
   }

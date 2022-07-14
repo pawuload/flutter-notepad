@@ -17,18 +17,22 @@ class AddScreenUrl extends StatelessWidget {
           color: Colors.brown,
         ),
       )),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        width: double.infinity,
-        child: NoteTextField(
-          state: state.urlState,
-          hint: 'https://...',
-          isReadOnly: state.isReadOnly,
-          fontSize: 16,
-          maxLines: 1,
-          showBorder: false,
-        ),
+      child: _buildUrl(),
+    );
+  }
+
+  Widget _buildUrl() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      width: double.infinity,
+      child: NoteTextField(
+        state: state.urlState,
+        hint: 'https://...',
+        isReadOnly: state.isReadOnly,
+        fontSize: 16,
+        maxLines: 1,
+        showBorder: false,
       ),
     );
   }

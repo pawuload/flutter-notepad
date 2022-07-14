@@ -14,35 +14,18 @@ class DetailsScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final urlExists = state.note.details.url != null && state.note.details.url!.isNotEmpty;
-
     return WillPopScope(
       onWillPop: () => state.onWillPop(),
       child: Scaffold(
         appBar: AppBar(),
-        body: Container(
-          margin: const EdgeInsets.only(top: 25),
-          child: Column(
-            children: [
-              _buildDetailsScreenTextFieldTitle(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: _buildDetailsScreenTextFieldDescription(urlExists),
-                ),
-              ),
-              DetailsScreenAttachments(state: state, note: state.note),
-              if (state.isReadOnly == false)
-                AnimatedOpacity(
-                  opacity: state.isLinkTabOpen ? 1 : 0,
-                  duration: const Duration(milliseconds: 500),
-                  child: state.isLinkTabOpen == true
-                      ? DetailsScreenUrl(
-                          state: state,
-                        )
-                      : null,
-                ),
-            ],
-          ),
+        body: Stack(
+          children: [
+            _buildNoteText(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: DetailsScreenAttachments(state: state, note: state.note),
+            ),
+          ],
         ),
         floatingActionButton: Visibility(
           visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
@@ -57,6 +40,33 @@ class DetailsScreenView extends StatelessWidget {
                 onVideoPressed: state.onVideoPressed,
                 onImagePressed: state.onPickImagePressed,
               ),
+      ),
+    );
+  }
+
+  Widget _buildNoteText() {
+    final urlExists = state.note.details.url != null && state.note.details.url!.isNotEmpty;
+    return Container(
+      margin: const EdgeInsets.only(top: 25),
+      child: Column(
+        children: [
+          _buildDetailsScreenTextFieldTitle(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: _buildDetailsScreenTextFieldDescription(urlExists),
+            ),
+          ),
+          if (state.isReadOnly == false)
+            AnimatedOpacity(
+              opacity: state.isLinkTabOpen ? 1 : 0,
+              duration: const Duration(milliseconds: 500),
+              child: state.isLinkTabOpen == true
+                  ? DetailsScreenUrl(
+                      state: state,
+                    )
+                  : null,
+            ),
+        ],
       ),
     );
   }

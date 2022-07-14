@@ -11,25 +11,19 @@ class ItemService {
   static const _ordering = 'created';
 
 
-  Stream<List<Note>> itemDataStream() {
-    final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
-    return collection
-        .orderBy('created', descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data()))).toList());
-  }
+  // Stream<List<Note>> itemDataStream() {
+  //   final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
+  //   return collection
+  //       .orderBy('created', descending: true)
+  //       .snapshots()
+  //       .map((snapshot) => snapshot.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data()))).toList());
+  // }
 
   Future<List<Note>> getAllItems() async {
     final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
 
-    // return collection
-    //     .orderBy(_ordering, descending: true)
-    //     .snapshots()
-    //     .map((snapshot) => snapshot.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data()))).toList());
-
     final result = await collection.orderBy(_ordering, descending: true).get();
     final value = result.docs.map(
-      // TODO
       (e) => Note(
         id: e.id,
         details: NoteDetails.fromJson(
@@ -39,27 +33,6 @@ class ItemService {
     );
     return value.toList();
   }
-
-  // Future<List<Note>> getAllItems() async {
-  //   final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
-  //
-  //   // return collection
-  //   //     .orderBy(_ordering, descending: true)
-  //   //     .snapshots()
-  //   //     .map((snapshot) => snapshot.docs.map((e) => Note(id: e.id, details: NoteDetails.fromJson(e.data()))).toList());
-  //
-  //   final result = await collection.orderBy(_ordering, descending: true).get();
-  //   final value = result.docs.map(
-  //     // TODO
-  //     (e) => Note(
-  //       id: e.id,
-  //       details: NoteDetails.fromJson(
-  //         e.data(),
-  //       ),
-  //     ),
-  //   );
-  //   return value.toList();
-  // }
 
   Future<void> saveItem({
     required String title,

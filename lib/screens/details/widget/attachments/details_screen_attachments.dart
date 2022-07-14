@@ -19,33 +19,39 @@ class DetailsScreenAttachments extends StatelessWidget {
     return Container(
       decoration: _buildBoxDecoration(),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          if ((imageExists || videoExists) && state.isReadOnly)
-            IconButton(
-              icon: Icon(
-                state.isTabOpen == true ? AppIcons.down : AppIcons.up,
-              ),
-              alignment: Alignment.center,
-              iconSize: 30,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onPressed: state.onTabOpenPressed,
-              padding: const EdgeInsets.fromLTRB(100, 12, 100, 7),
-            ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 200),
-            child: Column(
-              children: [
-                if (state.isTabOpen && state.isReadOnly) ...[
-                  if (videoExists) DetailsScreenVideoCard(note: note, state: state),
-                  if (imageExists) DetailsScreenImages(state: state, note: note),
-                  const SizedBox(
-                    height: 65,
-                  ),
-                ],
-              ],
-            ),
-          ),
+          if ((imageExists || videoExists) && state.isReadOnly) _buildIconButton(),
+          _buildAttachments(videoExists, imageExists),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIconButton() {
+    return IconButton(
+      icon: Icon(
+        state.isTabOpen == true ? AppIcons.down : AppIcons.up,
+      ),
+      alignment: Alignment.center,
+      iconSize: 30,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onPressed: state.onTabOpenPressed,
+      padding: const EdgeInsets.fromLTRB(100, 12, 100, 7),
+    );
+  }
+
+  Widget _buildAttachments(bool videoExists, bool imageExists) {
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 200),
+      child: Column(
+        children: [
+          if (state.isTabOpen && state.isReadOnly) ...[
+            if (videoExists) DetailsScreenVideoCard(note: note, state: state),
+            if (imageExists) DetailsScreenImages(state: state, note: note),
+            const SizedBox(height: 55),
+          ],
         ],
       ),
     );

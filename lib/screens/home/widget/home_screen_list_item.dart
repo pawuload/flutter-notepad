@@ -23,35 +23,47 @@ class HomeScreenListItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: Text(
-                  note.details.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-              ),
+              _buildTitle(),
               Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Text(
-                      DateFormat.yMMMd().format(note.details.created),
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Text(
-                      note.details.description.length > 36 ? note.details.description.substring(0, 35) + '...' : note.details.description,
-                      maxLines: 1,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ),
+                  _buildDate(),
+                  _buildDescription(),
                 ],
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      child: Text(
+        note.details.title,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+      ),
+    );
+  }
+
+  Widget _buildDate() {
+    return Container(
+      padding: const EdgeInsets.only(right: 10),
+      child: Text(
+        DateFormat.yMMMd().format(note.details.created),
+        style: const TextStyle(fontSize: 11),
+      ),
+    );
+  }
+
+  Widget _buildDescription() {
+    return Container(
+      padding: const EdgeInsets.only(right: 10),
+      child: Text(
+        note.details.description.length > 36 ? note.details.description.substring(0, 35) + '...' : note.details.description,
+        maxLines: 1,
+        style: const TextStyle(fontSize: 14),
       ),
     );
   }

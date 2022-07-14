@@ -18,28 +18,7 @@ class AddScreenView extends StatelessWidget {
         appBar: AppBar(),
         body: Stack(
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 25),
-              child: Column(
-                children: [
-                  _buildNoteTextFieldTitle(),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: _buildNoteTextFieldDescription(),
-                    ),
-                  ),
-                  AnimatedOpacity(
-                    opacity: state.isLinkTabOpen ? 1 : 0,
-                    duration: const Duration(milliseconds: 300),
-                    child: state.isLinkTabOpen == true
-                        ? AddScreenUrl(
-                            state: state,
-                          )
-                        : null,
-                  ),
-                ],
-              ),
-            ),
+            _buildNoteTextField(),
           ],
         ),
         floatingActionButton: Visibility(
@@ -53,6 +32,31 @@ class AddScreenView extends StatelessWidget {
           onVideoPressed: state.onVideoPressed,
           onImagePressed: state.onPickImagePressed,
         ),
+      ),
+    );
+  }
+
+  Widget _buildNoteTextField() {
+    return Container(
+      margin: const EdgeInsets.only(top: 25),
+      child: Column(
+        children: [
+          _buildNoteTextFieldTitle(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: _buildNoteTextFieldDescription(),
+            ),
+          ),
+          AnimatedOpacity(
+            opacity: state.isLinkTabOpen ? 1 : 0,
+            duration: const Duration(milliseconds: 300),
+            child: state.isLinkTabOpen == true
+                ? AddScreenUrl(
+                    state: state,
+                  )
+                : null,
+          ),
+        ],
       ),
     );
   }

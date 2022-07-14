@@ -13,8 +13,8 @@ class DetailsScreenButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SpeedDial(
       activeBackgroundColor: Colors.brown[300],
-      buttonSize: const Size(55, 55),
-      childrenButtonSize: const Size(55, 55),
+      buttonSize: const Size(53, 53),
+      childrenButtonSize: const Size(53, 53),
       animatedIcon: state.isLoading ? null : AnimatedIcons.menu_close,
       child: state.isLoading
           ? const CircularProgressIndicator(
@@ -28,31 +28,43 @@ class DetailsScreenButton extends StatelessWidget {
       overlayColor: Colors.brown[200],
       overlayOpacity: 0.4,
       children: [
-        SpeedDialChild(
-          backgroundColor: Colors.brown[300],
-          child: const Icon(
-            AppIcons.delete,
-            color: Colors.white,
-          ),
-          onTap: state.onDeletePressed,
-        ),
-        SpeedDialChild(
-          backgroundColor: Colors.brown[300],
-          child: const Icon(
-            AppIcons.backHome,
-            color: Colors.white,
-          ),
-          onTap: state.onExitPressed,
-        ),
-        SpeedDialChild(
-          backgroundColor: state.isPremium ? Colors.brown[300] : AppColors.premium,
-          child: Icon(
-            state.isReadOnly ? AppIcons.edit : AppIcons.read,
-            color: Colors.white,
-          ),
-          onTap: state.onEditPressed,
-        ),
+        _buildDeleteButton(),
+        _buildDeleteButton(),
+        _buildEditButton(),
       ],
+    );
+  }
+
+  SpeedDialChild _buildDeleteButton() {
+    return SpeedDialChild(
+      backgroundColor: Colors.brown[300],
+      child: const Icon(
+        AppIcons.delete,
+        color: Colors.white,
+      ),
+      onTap: state.onDeletePressed,
+    );
+  }
+
+  SpeedDialChild _buildPremiumButton() {
+    return SpeedDialChild(
+      backgroundColor: Colors.brown[300],
+      child: const Icon(
+        AppIcons.backHome,
+        color: Colors.white,
+      ),
+      onTap: state.onExitPressed,
+    );
+  }
+
+  SpeedDialChild _buildEditButton() {
+    return SpeedDialChild(
+      backgroundColor: state.isPremium ? Colors.brown[300] : AppColors.premium,
+      child: Icon(
+        state.isReadOnly ? AppIcons.edit : AppIcons.read,
+        color: Colors.white,
+      ),
+      onTap: state.onEditPressed,
     );
   }
 }

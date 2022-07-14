@@ -18,18 +18,22 @@ class DetailsScreenUrl extends StatelessWidget {
           ),
         ),
       ),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        width: double.infinity,
-        child: NoteTextField(
-          state: state.urlFieldState,
-          isReadOnly: state.isReadOnly,
-          hint: 'https://...',
-          fontSize: 16,
-          maxLines: 1,
-          showBorder: false,
-        ),
+      child: _buildUrl(),
+    );
+  }
+
+  Widget _buildUrl() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      width: double.infinity,
+      child: NoteTextField(
+        state: state.urlFieldState,
+        isReadOnly: state.isReadOnly,
+        hint: 'https://...',
+        fontSize: 16,
+        maxLines: 1,
+        showBorder: false,
       ),
     );
   }

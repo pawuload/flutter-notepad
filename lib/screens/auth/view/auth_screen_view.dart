@@ -29,18 +29,22 @@ class AuthScreenView extends StatelessWidget {
                 flex: 4,
                 child: AuthScreenCard(state: state),
               ),
-              Container(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: AppButton(
-                  loading: state.loading,
-                  title: 'Login',
-                  onPressed: state.onButtonPressed,
-                  enabled: state.isCheckboxOn,
-                ),
-              ),
+              _buildLoginButton(),
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: AppButton(
+        loading: state.loading,
+        title: 'Login',
+        onPressed: state.onButtonPressed,
+        enabled: state.isCheckboxOn,
       ),
     );
   }

@@ -12,8 +12,9 @@ class DetailsScreenVideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double horizontalMargin = MediaQuery.of(context).size.width * 0.25;
     return Card(
-      margin: const EdgeInsets.only( bottom: 20, top: 10),
+      margin: EdgeInsets.fromLTRB(horizontalMargin, 10, horizontalMargin, 20),
       elevation: 8,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
@@ -21,16 +22,13 @@ class DetailsScreenVideoCard extends StatelessWidget {
       color: Colors.grey[100],
       child: InkWell(
         onTap: () => _showVideo(context),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 25),
-              child: Icon(
-                AppIcons.playVideo,
-                size: 45,
-                color: Colors.brown[400],
-              ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25),
+            child: Icon(
+              AppIcons.playVideo,
+              size: 45,
+              color: Colors.brown[400],
             ),
           ),
         ),
@@ -44,16 +42,8 @@ class DetailsScreenVideoCard extends StatelessWidget {
       builder: (context) {
         return Center(
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            padding: const EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width * 0.95,
-            child: Container(
-              constraints: const BoxConstraints(maxHeight: 700),
-              child: DetailsScreenVideoPlayer(state: state, note: state.note),
-            ),
+            constraints: const BoxConstraints(maxHeight: 700),
+            child: DetailsScreenVideoPlayer(state: state, note: state.note),
           ),
         );
       },

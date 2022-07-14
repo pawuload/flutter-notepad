@@ -22,31 +22,43 @@ class HomeScreenButton extends StatelessWidget {
       overlayColor: Colors.brown[200],
       overlayOpacity: 0.4,
       children: [
-        SpeedDialChild(
-          backgroundColor: Colors.brown[300],
-          child: const Icon(
-            AppIcons.add,
-            color: Colors.white,
-          ),
-          onTap: state.onAddButtonPressed,
-        ),
-        SpeedDialChild(
-          backgroundColor: Colors.brown[300],
-          child: const Icon(
-            AppIcons.logout,
-            color: Colors.white,
-          ),
-          onTap: state.onSignOutPressed,
-        ),
-        SpeedDialChild(
-          backgroundColor: state.userState.user!.details.isPremium ? Colors.brown[300] : AppColors.premium,
-          child: const Icon(
-            AppIcons.premium,
-            color: Colors.white,
-          ),
-          onTap: state.onPremiumPressed,
-        ),
+        _buildAddButton(),
+        _buildLogoutButton(),
+        _buildPremiumButton(),
       ],
+    );
+  }
+
+  SpeedDialChild _buildAddButton() {
+    return SpeedDialChild(
+      backgroundColor: Colors.brown[300],
+      child: const Icon(
+        AppIcons.add,
+        color: Colors.white,
+      ),
+      onTap: state.onAddButtonPressed,
+    );
+  }
+
+  SpeedDialChild _buildLogoutButton() {
+    return SpeedDialChild(
+      backgroundColor: Colors.brown[300],
+      child: const Icon(
+        AppIcons.logout,
+        color: Colors.white,
+      ),
+      onTap: state.onSignOutPressed,
+    );
+  }
+
+  SpeedDialChild _buildPremiumButton() {
+    return SpeedDialChild(
+      backgroundColor: state.userState.user!.details.isPremium ? Colors.brown[300] : AppColors.premium,
+      child: const Icon(
+        AppIcons.premium,
+        color: Colors.white,
+      ),
+      onTap: state.onPremiumPressed,
     );
   }
 }

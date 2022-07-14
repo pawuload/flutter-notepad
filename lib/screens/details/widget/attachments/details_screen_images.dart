@@ -21,7 +21,7 @@ class DetailsScreenImages extends StatelessWidget {
       final ScrollController _controller = ScrollController();
 
       return Container(
-        margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),
+        margin: const EdgeInsets.fromLTRB(10, 0, 10, 25),
         height: size,
         child: RawScrollbar(
           controller: _controller,
