@@ -40,6 +40,7 @@ class ItemService {
     required String? url,
     required List<String>? imageUrl,
     required String? videoUrl,
+    required String? thumbnail,
   }) async {
     final CollectionReference collection = FirebaseFirestore.instance.collection(
       'notes/' + _authService.user!.uid + '/notes',
@@ -53,6 +54,7 @@ class ItemService {
         url: url,
         imageUrl: imageUrl,
         videoUrl: videoUrl,
+        thumbnail: thumbnail,
       ).toJson(),
     );
   }
@@ -64,6 +66,7 @@ class ItemService {
     required String? url,
     required List<String>? imageUrl,
     required String? videoUrl,
+    required String? thumbnail,
   }) async {
     CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
     await collection.doc(id).update(
@@ -74,6 +77,7 @@ class ItemService {
             url: url,
             imageUrl: imageUrl,
             videoUrl: videoUrl,
+            thumbnail: thumbnail
           ).toJson(),
         );
   }

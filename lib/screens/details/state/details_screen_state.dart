@@ -7,8 +7,10 @@ import 'package:app/service/storage_service.dart';
 import 'package:app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class DetailsScreenState {
   final Note note;
@@ -81,6 +83,8 @@ DetailsScreenState useDetailsScreenState({
   final context = useContext();
   final imageUrlState = useState<List<String>?>(note.details.imageUrl);
   final videoUrlState = useState<String?>(note.details.videoUrl);
+  final thumbnailState = useState<String?>(note.details.thumbnail);
+  final thumbnail = useState<String?>(null);
   final ImagePicker imagePicker = ImagePicker();
 
   Future<void> showSnackBar({required String text, required Color color}) async {
@@ -199,6 +203,14 @@ DetailsScreenState useDetailsScreenState({
         }
         videoUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
 
+        thumbnail.value = await VideoThumbnail.thumbnailFile(
+          video: videoUrlState.value!,
+          thumbnailPath: (await getTemporaryDirectory()).path,
+          imageFormat: ImageFormat.JPEG,
+          quality: 100,
+        );
+        thumbnailState.value = await storageService.uploadFile(File(thumbnail.value!), name: '/notes');
+
         switchLoading();
         showSnackBar(
           text: 'Video has been added',
@@ -226,6 +238,7 @@ DetailsScreenState useDetailsScreenState({
         id: note.id,
         imageUrl: imageUrlState.value,
         videoUrl: videoUrlState.value,
+        thumbnail: thumbnailState.value,
         url: urlFieldState.value,
       );
       navigateBack(true);

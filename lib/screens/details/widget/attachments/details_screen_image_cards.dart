@@ -74,12 +74,9 @@ class DetailsScreenImageCards extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
             ),
-            padding: const EdgeInsets.all(5),
             width: MediaQuery.of(context).size.width * 0.9,
             child: Container(
-              padding: const EdgeInsets.all(15),
               constraints: const BoxConstraints(maxHeight: 700),
               child: _buildCard(image: image),
             ),

@@ -6,9 +6,11 @@ import 'package:app/service/storage_service.dart';
 import 'package:app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class AddScreenState {
   final FieldState titleState;
@@ -68,6 +70,8 @@ AddScreenState useAddScreenState({
   final fileState = useState<File?>(null);
   final imageUrlState = useState<List<String>?>([]);
   final videoUrlState = useState<String?>(null);
+  final thumbnailState = useState<String?>(null);
+  final thumbnail = useState<String?>(null);
   final ImagePicker imagePicker = ImagePicker();
   final stopwatch = useMemoized(
     () => StopWatchTimer(
@@ -205,8 +209,16 @@ AddScreenState useAddScreenState({
           }
           videoUrlState.value = await storageService.uploadFile(fileState.value!, name: '/notes');
 
-          switchLoading();
           if (isPremium.value == false) stopwatch.onExecute.add(StopWatchExecute.start);
+          thumbnail.value = await VideoThumbnail.thumbnailFile(
+            video: videoUrlState.value!,
+            thumbnailPath: (await getTemporaryDirectory()).path,
+            imageFormat: ImageFormat.JPEG,
+            quality: 100,
+          );
+          thumbnailState.value = await storageService.uploadFile(File(thumbnail.value!), name: '/notes');
+
+          switchLoading();
           showSnackBar(
             text: 'Video has been added',
             color: Colors.green.withOpacity(0.5),
@@ -232,6 +244,7 @@ AddScreenState useAddScreenState({
         description: descriptionState.value,
         imageUrl: imageUrlState.value,
         videoUrl: videoUrlState.value,
+        thumbnail: thumbnailState.value,
         url: urlFieldState.value,
       );
       navigateBack(true);

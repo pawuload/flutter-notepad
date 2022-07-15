@@ -1,5 +1,5 @@
 import 'package:app/app/app_media_progress_bar/app_media_progress_bar.dart';
-import 'package:app/common/widget/video_player/state/use_video_player_state.dart';
+import 'package:app/common/widget/video_player/state/video_player_state.dart';
 import 'package:app/common/widget/video_player/widgets/app_video_player_button.dart';
 import 'package:flutter/material.dart';
 

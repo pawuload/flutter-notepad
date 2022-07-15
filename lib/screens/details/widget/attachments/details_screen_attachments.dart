@@ -1,8 +1,7 @@
 import 'package:app/common/constans/app_icons.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
-import 'package:app/screens/details/widget/attachments/details_screen_images.dart';
-import 'package:app/screens/details/widget/attachments/details_screen_video_card.dart';
+import 'package:app/screens/details/widget/attachments/details_screen_gallery.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreenAttachments extends StatelessWidget {
@@ -48,8 +47,12 @@ class DetailsScreenAttachments extends StatelessWidget {
       child: Column(
         children: [
           if (state.isTabOpen && state.isReadOnly) ...[
-            if (videoExists) DetailsScreenVideoCard(note: note, state: state),
-            if (imageExists) DetailsScreenImages(state: state, note: note),
+            DetailsScreenGallery(
+              state: state,
+              note: note,
+              imageExists: imageExists,
+              videoExists: videoExists,
+            ),
             const SizedBox(height: 55),
           ],
         ],

@@ -1,4 +1,4 @@
-import 'package:app/common/widget/video_player/state/use_video_player_state.dart';
+import 'package:app/common/widget/video_player/state/video_player_state.dart';
 import 'package:app/screens/video/activity_video_screen_args.dart';
 
 class ActivityVideoScreenState {

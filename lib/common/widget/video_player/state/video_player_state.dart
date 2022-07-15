@@ -1,5 +1,5 @@
 import 'package:app/common/widget/video_player/player_video_data.dart';
-import 'package:app/common/widget/video_player/state/use_video_player_controller_state.dart';
+import 'package:app/common/widget/video_player/state/video_player_controller_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';

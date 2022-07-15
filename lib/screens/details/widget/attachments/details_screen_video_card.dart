@@ -1,8 +1,8 @@
-import 'package:app/common/constans/app_icons.dart';
 import 'package:app/models/note/note.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
 import 'package:app/screens/details/widget/attachments/details_screen_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DetailsScreenVideoCard extends StatelessWidget {
   final Note note;
@@ -12,24 +12,56 @@ class DetailsScreenVideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double horizontalMargin = MediaQuery.of(context).size.width * 0.25;
     return Card(
-      margin: EdgeInsets.fromLTRB(horizontalMargin, 10, horizontalMargin, 20),
-      elevation: 8,
+      elevation: 5,
+      color: Colors.grey[400],
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(5),
       ),
-      color: Colors.grey[100],
-      child: InkWell(
-        onTap: () => _showVideo(context),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25),
-            child: Icon(
-              AppIcons.playVideo,
-              size: 45,
-              color: Colors.brown[400],
-            ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: InkWell(
+          onTap: () => _showVideo(context),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.network(
+                note.details.thumbnail!,
+                fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object object, stackTrace) {
+                  return _buildErrorBuilder();
+                },
+                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey[400]!,
+                    highlightColor: Colors.grey[300]!,
+                    child: Container(
+                      color: Colors.grey[100],
+                    ),
+                  );
+                },
+              ),
+              _buildPlayButton(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlayButton() {
+    return const Center(
+      child: Material(
+        elevation: 1,
+        color: Colors.transparent,
+        shape: CircleBorder(side: BorderSide(color: Colors.white)),
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Icon(
+            Icons.play_arrow,
+            color: Colors.white,
+            size: 32,
           ),
         ),
       ),
@@ -47,6 +79,24 @@ class DetailsScreenVideoCard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildErrorBuilder() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.error,
+          color: Colors.brown.shade300,
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 5),
+          child: const Text(
+            "Loading failed",
+          ),
+        )
+      ],
     );
   }
 }
