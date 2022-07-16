@@ -22,10 +22,11 @@ class DetailsScreen extends HookWidget {
     final state = useDetailsScreenState(
       note: args!.note,
       navigateBack: (value) => navigator.pop(value),
-      navigateToVideo: (videoUrl) => navigator.pushNamed(
+      navigateToVideo: (videoUrl, thumbnail) => navigator.pushNamed(
         ActivityVideoScreen.route,
         arguments: ActivityVideoScreenArgs(
           videoUrl: videoUrl,
+          thumbNail: thumbnail,
         ),
       ),
       showPremiumDialog: (item) async => await AppAlertDialog.showPremium(context, item: item),

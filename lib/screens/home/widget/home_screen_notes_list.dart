@@ -15,7 +15,7 @@ class HomeScreenNotesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) return _buildInProgressBuilder();
+        if (state.noteStream.note == null) return _buildInProgressBuilder();
         if (snapshot.hasError) return _buildFailedBuilder();
         if (state.noteStream.note!.isEmpty) return _buildEmptyBuilder();
         return _buildListView();

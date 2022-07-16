@@ -1,10 +1,10 @@
 class ActivityVideoScreenArgs {
   final String videoUrl;
 
-  // final String thumbNail;
+  final String thumbNail;
 
   const ActivityVideoScreenArgs({
     required this.videoUrl,
-    // required this.thumbNail,
+    required this.thumbNail,
   });
 }

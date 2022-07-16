@@ -9,9 +9,10 @@ class ItemService {
   const ItemService(this._authService);
 
   static const _ordering = 'created';
+  static const _notes = '/notes/';
 
   Stream<List<Note>> itemDataStream() {
-    final CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes');
+    final CollectionReference collection = FirebaseFirestore.instance.collection(_notes + _authService.user!.uid + _notes);
     return collection
         .orderBy(_ordering, descending: true)
         .snapshots()
@@ -26,9 +27,7 @@ class ItemService {
     required String? videoUrl,
     required String? thumbnail,
   }) async {
-    final CollectionReference collection = FirebaseFirestore.instance.collection(
-      'notes/' + _authService.user!.uid + '/notes',
-    );
+    final CollectionReference collection = FirebaseFirestore.instance.collection(_notes + _authService.user!.uid + _notes);
 
     await collection.add(
       NoteDetails(
@@ -52,7 +51,7 @@ class ItemService {
     required String? videoUrl,
     required String? thumbnail,
   }) async {
-    CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
+    CollectionReference collection = FirebaseFirestore.instance.collection(_notes + _authService.user!.uid + _notes);
     await collection.doc(id).update(
           NoteDetails(
                   title: title,
@@ -67,7 +66,7 @@ class ItemService {
   }
 
   Future<void> deleteItem({required String id}) async {
-    CollectionReference collection = FirebaseFirestore.instance.collection('notes/' + _authService.user!.uid + '/notes/');
+    CollectionReference collection = FirebaseFirestore.instance.collection(_notes + _authService.user!.uid + _notes);
     await collection.doc(id).delete();
   }
 }

@@ -33,13 +33,7 @@ class DetailsScreenVideoCard extends StatelessWidget {
                 },
                 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) return child;
-                  return Shimmer.fromColors(
-                    baseColor: Colors.grey[400]!,
-                    highlightColor: Colors.grey[300]!,
-                    child: Container(
-                      color: Colors.grey[100],
-                    ),
-                  );
+                  return _buildShimmer();
                 },
               ),
               _buildPlayButton(),
@@ -97,6 +91,16 @@ class DetailsScreenVideoCard extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+
+  Widget _buildShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[400]!,
+      highlightColor: Colors.grey[300]!,
+      child: Container(
+        color: Colors.grey[100],
+      ),
     );
   }
 }

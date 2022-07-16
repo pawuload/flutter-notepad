@@ -4,13 +4,13 @@ import 'package:app/screens/video/activity_video_screen_args.dart';
 class ActivityVideoScreenState {
   final VideoPlayerState videoPlayerState;
   final String videoUrl;
+  final String thumbNail;
 
-  // final String thumbNail;
 
   const ActivityVideoScreenState({
     required this.videoPlayerState,
     required this.videoUrl,
-    // required this.thumbNail,
+    required this.thumbNail,
   });
 }
 
@@ -24,7 +24,7 @@ ActivityVideoScreenState useActivityVideoScreenState({required ActivityVideoScre
 
   return ActivityVideoScreenState(
     videoPlayerState: videoPlayerState,
-    // thumbNail: args.thumbNail,
+    thumbNail: args.thumbNail,
     videoUrl: args.videoUrl,
   );
 }
