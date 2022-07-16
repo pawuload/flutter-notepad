@@ -1,4 +1,4 @@
-import 'package:app/provider/setup/setup_state.dart';
+import 'package:app/provider/setup/setup_state_provider.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
 void useAsyncEffectAfterSetup(Future<void> Function() effect, [List<Object>? keys]) {

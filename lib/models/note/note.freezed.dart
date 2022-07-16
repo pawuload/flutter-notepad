@@ -40,17 +40,19 @@ const $Note = _$NoteTearOff();
 /// @nodoc
 mixin _$Note {
   String get id => throw _privateConstructorUsedError;
+
   NoteDetails get details => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $NoteCopyWith<Note> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NoteCopyWith<$Res> {
-  factory $NoteCopyWith(Note value, $Res Function(Note) then) =
-      _$NoteCopyWithImpl<$Res>;
+  factory $NoteCopyWith(Note value, $Res Function(Note) then) = _$NoteCopyWithImpl<$Res>;
+
   $Res call({String id, NoteDetails details});
 
   $NoteDetailsCopyWith<$Res> get details;
@@ -61,6 +63,7 @@ class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
   _$NoteCopyWithImpl(this._value, this._then);
 
   final Note _value;
+
   // ignore: unused_field
   final $Res Function(Note) _then;
 
@@ -91,8 +94,8 @@ class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
-  factory _$NoteCopyWith(_Note value, $Res Function(_Note) then) =
-      __$NoteCopyWithImpl<$Res>;
+  factory _$NoteCopyWith(_Note value, $Res Function(_Note) then) = __$NoteCopyWithImpl<$Res>;
+
   @override
   $Res call({String id, NoteDetails details});
 
@@ -101,10 +104,8 @@ abstract class _$NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
-    implements _$NoteCopyWith<$Res> {
-  __$NoteCopyWithImpl(_Note _value, $Res Function(_Note) _then)
-      : super(_value, (v) => _then(v as _Note));
+class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res> implements _$NoteCopyWith<$Res> {
+  __$NoteCopyWithImpl(_Note _value, $Res Function(_Note) _then) : super(_value, (v) => _then(v as _Note));
 
   @override
   _Note get _value => super._value as _Note;
@@ -154,15 +155,11 @@ class _$_Note implements _Note {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(details));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(id), const DeepCollectionEquality().hash(details));
 
   @JsonKey(ignore: true)
   @override
-  _$NoteCopyWith<_Note> get copyWith =>
-      __$NoteCopyWithImpl<_Note>(this, _$identity);
+  _$NoteCopyWith<_Note> get copyWith => __$NoteCopyWithImpl<_Note>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -177,8 +174,10 @@ abstract class _Note implements Note {
 
   @override
   String get id;
+
   @override
   NoteDetails get details;
+
   @override
   @JsonKey(ignore: true)
   _$NoteCopyWith<_Note> get copyWith => throw _privateConstructorUsedError;

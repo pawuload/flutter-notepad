@@ -2,7 +2,6 @@ import 'package:app/models/note/details/note_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'note.freezed.dart';
-
 part 'note.g.dart';
 
 @freezed

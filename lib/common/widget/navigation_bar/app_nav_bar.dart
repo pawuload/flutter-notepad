@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:app/common/constans/app_icons.dart';
+import 'package:flutter/material.dart';
+
 import 'app_nav_bar_item.dart';
 
 class AppNavBar extends StatelessWidget {

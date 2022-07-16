@@ -40,19 +40,19 @@ const $UserDetails = _$UserDetailsTearOff();
 /// @nodoc
 mixin _$UserDetails {
   String get email => throw _privateConstructorUsedError;
+
   bool get isPremium => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
-  $UserDetailsCopyWith<UserDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserDetailsCopyWith<UserDetails> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserDetailsCopyWith<$Res> {
-  factory $UserDetailsCopyWith(
-          UserDetails value, $Res Function(UserDetails) then) =
-      _$UserDetailsCopyWithImpl<$Res>;
+  factory $UserDetailsCopyWith(UserDetails value, $Res Function(UserDetails) then) = _$UserDetailsCopyWithImpl<$Res>;
+
   $Res call({String email, bool isPremium});
 }
 
@@ -61,6 +61,7 @@ class _$UserDetailsCopyWithImpl<$Res> implements $UserDetailsCopyWith<$Res> {
   _$UserDetailsCopyWithImpl(this._value, this._then);
 
   final UserDetails _value;
+
   // ignore: unused_field
   final $Res Function(UserDetails) _then;
 
@@ -83,21 +84,16 @@ class _$UserDetailsCopyWithImpl<$Res> implements $UserDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UserDetailsCopyWith<$Res>
-    implements $UserDetailsCopyWith<$Res> {
-  factory _$UserDetailsCopyWith(
-          _UserDetails value, $Res Function(_UserDetails) then) =
-      __$UserDetailsCopyWithImpl<$Res>;
+abstract class _$UserDetailsCopyWith<$Res> implements $UserDetailsCopyWith<$Res> {
+  factory _$UserDetailsCopyWith(_UserDetails value, $Res Function(_UserDetails) then) = __$UserDetailsCopyWithImpl<$Res>;
+
   @override
   $Res call({String email, bool isPremium});
 }
 
 /// @nodoc
-class __$UserDetailsCopyWithImpl<$Res> extends _$UserDetailsCopyWithImpl<$Res>
-    implements _$UserDetailsCopyWith<$Res> {
-  __$UserDetailsCopyWithImpl(
-      _UserDetails _value, $Res Function(_UserDetails) _then)
-      : super(_value, (v) => _then(v as _UserDetails));
+class __$UserDetailsCopyWithImpl<$Res> extends _$UserDetailsCopyWithImpl<$Res> implements _$UserDetailsCopyWith<$Res> {
+  __$UserDetailsCopyWithImpl(_UserDetails _value, $Res Function(_UserDetails) _then) : super(_value, (v) => _then(v as _UserDetails));
 
   @override
   _UserDetails get _value => super._value as _UserDetails;
@@ -125,8 +121,7 @@ class __$UserDetailsCopyWithImpl<$Res> extends _$UserDetailsCopyWithImpl<$Res>
 class _$_UserDetails implements _UserDetails {
   _$_UserDetails({required this.email, required this.isPremium});
 
-  factory _$_UserDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDetailsFromJson(json);
+  factory _$_UserDetails.fromJson(Map<String, dynamic> json) => _$$_UserDetailsFromJson(json);
 
   @override
   final String email;
@@ -148,15 +143,11 @@ class _$_UserDetails implements _UserDetails {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(isPremium));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(email), const DeepCollectionEquality().hash(isPremium));
 
   @JsonKey(ignore: true)
   @override
-  _$UserDetailsCopyWith<_UserDetails> get copyWith =>
-      __$UserDetailsCopyWithImpl<_UserDetails>(this, _$identity);
+  _$UserDetailsCopyWith<_UserDetails> get copyWith => __$UserDetailsCopyWithImpl<_UserDetails>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -165,18 +156,17 @@ class _$_UserDetails implements _UserDetails {
 }
 
 abstract class _UserDetails implements UserDetails {
-  factory _UserDetails({required String email, required bool isPremium}) =
-      _$_UserDetails;
+  factory _UserDetails({required String email, required bool isPremium}) = _$_UserDetails;
 
-  factory _UserDetails.fromJson(Map<String, dynamic> json) =
-      _$_UserDetails.fromJson;
+  factory _UserDetails.fromJson(Map<String, dynamic> json) = _$_UserDetails.fromJson;
 
   @override
   String get email;
+
   @override
   bool get isPremium;
+
   @override
   @JsonKey(ignore: true)
-  _$UserDetailsCopyWith<_UserDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$UserDetailsCopyWith<_UserDetails> get copyWith => throw _privateConstructorUsedError;
 }

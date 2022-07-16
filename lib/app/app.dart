@@ -2,6 +2,7 @@ import 'package:app/app/app_injector.dart';
 import 'package:app/app/app_reporter.dart';
 import 'package:app/app/app_routing.dart';
 import 'package:app/provider/auth/auth_state_provider.dart';
+import 'package:app/provider/item/item_state_provider.dart';
 import 'package:app/provider/setup/setup_state_provider.dart';
 import 'package:app/provider/user/user_state_provider.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class App extends HookWidget {
         const SetupStateProvider(),
         const UserStateProvider(),
         const AuthStateProvider(),
+        const ItemStateProvider(),
       ],
       child: MaterialApp(
         theme: ThemeData(

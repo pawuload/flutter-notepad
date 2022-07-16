@@ -1,7 +1,7 @@
-import 'package:app/service/auth_service.dart';
-import 'package:app/service/item_service.dart';
-import 'package:app/service/storage_service.dart';
-import 'package:app/service/user_service.dart';
+import 'package:app/service/auth/auth_service.dart';
+import 'package:app/service/item/item_service.dart';
+import 'package:app/service/storage/storage_service.dart';
+import 'package:app/service/user/user_service.dart';
 import 'package:injector/injector.dart';
 
 class AppInjector {

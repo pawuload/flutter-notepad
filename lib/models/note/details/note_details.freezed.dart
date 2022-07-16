@@ -52,32 +52,30 @@ const $NoteDetails = _$NoteDetailsTearOff();
 /// @nodoc
 mixin _$NoteDetails {
   String get title => throw _privateConstructorUsedError;
+
   String get description => throw _privateConstructorUsedError;
+
   DateTime get created => throw _privateConstructorUsedError;
+
   List<String>? get imageUrl => throw _privateConstructorUsedError;
+
   String? get videoUrl => throw _privateConstructorUsedError;
+
   String? get thumbnail => throw _privateConstructorUsedError;
+
   String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
-  $NoteDetailsCopyWith<NoteDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+  $NoteDetailsCopyWith<NoteDetails> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NoteDetailsCopyWith<$Res> {
-  factory $NoteDetailsCopyWith(
-          NoteDetails value, $Res Function(NoteDetails) then) =
-      _$NoteDetailsCopyWithImpl<$Res>;
-  $Res call(
-      {String title,
-      String description,
-      DateTime created,
-      List<String>? imageUrl,
-      String? videoUrl,
-      String? thumbnail,
-      String? url});
+  factory $NoteDetailsCopyWith(NoteDetails value, $Res Function(NoteDetails) then) = _$NoteDetailsCopyWithImpl<$Res>;
+
+  $Res call({String title, String description, DateTime created, List<String>? imageUrl, String? videoUrl, String? thumbnail, String? url});
 }
 
 /// @nodoc
@@ -85,6 +83,7 @@ class _$NoteDetailsCopyWithImpl<$Res> implements $NoteDetailsCopyWith<$Res> {
   _$NoteDetailsCopyWithImpl(this._value, this._then);
 
   final NoteDetails _value;
+
   // ignore: unused_field
   final $Res Function(NoteDetails) _then;
 
@@ -132,28 +131,16 @@ class _$NoteDetailsCopyWithImpl<$Res> implements $NoteDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$NoteDetailsCopyWith<$Res>
-    implements $NoteDetailsCopyWith<$Res> {
-  factory _$NoteDetailsCopyWith(
-          _NoteDetails value, $Res Function(_NoteDetails) then) =
-      __$NoteDetailsCopyWithImpl<$Res>;
+abstract class _$NoteDetailsCopyWith<$Res> implements $NoteDetailsCopyWith<$Res> {
+  factory _$NoteDetailsCopyWith(_NoteDetails value, $Res Function(_NoteDetails) then) = __$NoteDetailsCopyWithImpl<$Res>;
+
   @override
-  $Res call(
-      {String title,
-      String description,
-      DateTime created,
-      List<String>? imageUrl,
-      String? videoUrl,
-      String? thumbnail,
-      String? url});
+  $Res call({String title, String description, DateTime created, List<String>? imageUrl, String? videoUrl, String? thumbnail, String? url});
 }
 
 /// @nodoc
-class __$NoteDetailsCopyWithImpl<$Res> extends _$NoteDetailsCopyWithImpl<$Res>
-    implements _$NoteDetailsCopyWith<$Res> {
-  __$NoteDetailsCopyWithImpl(
-      _NoteDetails _value, $Res Function(_NoteDetails) _then)
-      : super(_value, (v) => _then(v as _NoteDetails));
+class __$NoteDetailsCopyWithImpl<$Res> extends _$NoteDetailsCopyWithImpl<$Res> implements _$NoteDetailsCopyWith<$Res> {
+  __$NoteDetailsCopyWithImpl(_NoteDetails _value, $Res Function(_NoteDetails) _then) : super(_value, (v) => _then(v as _NoteDetails));
 
   @override
   _NoteDetails get _value => super._value as _NoteDetails;
@@ -213,8 +200,7 @@ class _$_NoteDetails implements _NoteDetails {
       required this.thumbnail,
       required this.url});
 
-  factory _$_NoteDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_NoteDetailsFromJson(json);
+  factory _$_NoteDetails.fromJson(Map<String, dynamic> json) => _$$_NoteDetailsFromJson(json);
 
   @override
   final String title;
@@ -242,8 +228,7 @@ class _$_NoteDetails implements _NoteDetails {
         (other.runtimeType == runtimeType &&
             other is _NoteDetails &&
             const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.created, created) &&
             const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
             const DeepCollectionEquality().equals(other.videoUrl, videoUrl) &&
@@ -264,8 +249,7 @@ class _$_NoteDetails implements _NoteDetails {
 
   @JsonKey(ignore: true)
   @override
-  _$NoteDetailsCopyWith<_NoteDetails> get copyWith =>
-      __$NoteDetailsCopyWithImpl<_NoteDetails>(this, _$identity);
+  _$NoteDetailsCopyWith<_NoteDetails> get copyWith => __$NoteDetailsCopyWithImpl<_NoteDetails>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -283,25 +267,30 @@ abstract class _NoteDetails implements NoteDetails {
       required String? thumbnail,
       required String? url}) = _$_NoteDetails;
 
-  factory _NoteDetails.fromJson(Map<String, dynamic> json) =
-      _$_NoteDetails.fromJson;
+  factory _NoteDetails.fromJson(Map<String, dynamic> json) = _$_NoteDetails.fromJson;
 
   @override
   String get title;
+
   @override
   String get description;
+
   @override
   DateTime get created;
+
   @override
   List<String>? get imageUrl;
+
   @override
   String? get videoUrl;
+
   @override
   String? get thumbnail;
+
   @override
   String? get url;
+
   @override
   @JsonKey(ignore: true)
-  _$NoteDetailsCopyWith<_NoteDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$NoteDetailsCopyWith<_NoteDetails> get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ class AppVideoPlayerControls extends HookWidget {
   final bool isBottomBarTransparent;
 
   const AppVideoPlayerControls({
-    Key ? key,
+    Key? key,
     required this.state,
     required this.bottomControlsProgressColor,
     this.header,

@@ -13,25 +13,21 @@ class HomeScreenListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => state.onItemPressed(note),
-      child: Card(
-        elevation: 10,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(13),
-        ),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildTitle(),
-              Row(
-                children: [
-                  _buildDate(),
-                  _buildDescription(),
-                ],
-              ),
-            ],
-          ),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+        decoration: _buildBoxDecoration(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildTitle(),
+            Row(
+              children: [
+                _buildDate(),
+                _buildDescription(),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -65,6 +61,20 @@ class HomeScreenListItem extends StatelessWidget {
         maxLines: 1,
         style: const TextStyle(fontSize: 14),
       ),
+    );
+  }
+
+  BoxDecoration _buildBoxDecoration() {
+    return BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(14),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.2),
+          blurRadius: 5,
+          offset: const Offset(3, 3),
+        ),
+      ],
     );
   }
 }

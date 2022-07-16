@@ -1,9 +1,22 @@
 import 'package:app/models/user/user_data.dart';
-import 'package:app/provider/user/user_state.dart';
-import 'package:app/service/user_service.dart';
+import 'package:app/service/user/user_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
+
+class UserState {
+  final UserData? Function() getUser;
+  final Future<UserData?> Function() refresh;
+
+  const UserState({
+    required this.getUser,
+    required this.refresh,
+  });
+
+  UserData? get user => getUser();
+
+  bool get isInitialized => user != null;
+}
 
 class UserStateProvider extends HookStateProviderWidget<UserState> {
   const UserStateProvider({Key? key}) : super(key: key);

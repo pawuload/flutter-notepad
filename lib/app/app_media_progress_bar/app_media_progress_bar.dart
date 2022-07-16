@@ -1,5 +1,6 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
+
 import 'app_media_progress_bar_duration.dart';
 
 class AppMediaProgressBar extends StatelessWidget {

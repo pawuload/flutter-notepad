@@ -1,14 +1,14 @@
 import 'package:app/models/note/note.dart';
 import 'package:app/models/premium_dialog/premium_dialog_item.dart';
-import 'package:app/provider/user/user_state.dart';
-import 'package:app/service/auth_service.dart';
-import 'package:app/service/item_service.dart';
-import 'package:app/service/user_service.dart';
+import 'package:app/provider/item/item_state_provider.dart';
+import 'package:app/provider/user/user_state_provider.dart';
+import 'package:app/service/auth/auth_service.dart';
+import 'package:app/service/user/user_service.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
 class HomeScreenState {
-  final RefreshableComputedState<List<Note>> noteState;
+  final ItemState noteStream;
   final UserState userState;
   final Function(Note) onItemPressed;
   final Function() switchPremium;
@@ -17,7 +17,7 @@ class HomeScreenState {
   final Function() onSignOutPressed;
 
   const HomeScreenState({
-    required this.noteState,
+    required this.noteStream,
     required this.userState,
     required this.switchPremium,
     required this.onItemPressed,
@@ -33,10 +33,10 @@ HomeScreenState useHomeScreenState({
   required Function() navigateToAdd,
   required Function() navigateToAuth,
 }) {
-  final itemService = useInjected<ItemService>();
   final userService = useInjected<UserService>();
   final authService = useInjected<AuthService>();
   final userState = useProvided<UserState>();
+  final noteStream = useProvided<ItemState>();
   final isPremium = useState<bool>(userState.user!.details.isPremium);
 
   Future<void> switchPremium() async {
@@ -49,11 +49,6 @@ HomeScreenState useHomeScreenState({
     userState.refresh();
   }
 
-  final noteState = useAutoComputedState(
-    compute: () async => await itemService.getAllItems(),
-    keys: [],
-  );
-
   Future<void> logout() async {
     authService.signOut();
     navigateToAuth();
@@ -61,12 +56,9 @@ HomeScreenState useHomeScreenState({
 
   return HomeScreenState(
     userState: userState,
-    noteState: noteState,
+    noteStream: noteStream,
     switchPremium: () => switchPremium(),
-    onItemPressed: (note) async {
-      final result = await navigateToDetails(note);
-      if (result == true) noteState.refresh();
-    },
+    onItemPressed: (note) => navigateToDetails(note),
     onPremiumPressed: () async {
       if (userState.user!.details.isPremium == false) {
         final result = await showPremiumDialog(PremiumDialogItem.off);
@@ -80,12 +72,7 @@ HomeScreenState useHomeScreenState({
         }
       }
     },
-    onAddButtonPressed: () async {
-      final result = await navigateToAdd();
-      if (result == true) {
-        noteState.refresh();
-      }
-    },
+    onAddButtonPressed: () => navigateToAdd(),
     onSignOutPressed: () => logout(),
   );
 }

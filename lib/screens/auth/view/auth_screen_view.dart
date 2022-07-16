@@ -1,10 +1,10 @@
+import 'package:app/common/widget/app_snackbar.dart';
+import 'package:app/common/widget/button/app_button.dart';
 import 'package:app/screens/auth/state/auth_screen_state.dart';
 import 'package:app/screens/auth/widget/auth_screen_card.dart';
 import 'package:app/screens/auth/widget/auth_screen_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
-import 'package:app/common/widget/button/app_button.dart';
-import 'package:app/common/widget/app_snackbar.dart';
 
 class AuthScreenView extends StatelessWidget {
   final AuthScreenState state;

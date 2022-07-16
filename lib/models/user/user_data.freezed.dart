@@ -40,18 +40,19 @@ const $UserData = _$UserDataTearOff();
 /// @nodoc
 mixin _$UserData {
   String get id => throw _privateConstructorUsedError;
+
   UserDetails get details => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
-  $UserDataCopyWith<UserData> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserDataCopyWith<UserData> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserDataCopyWith<$Res> {
-  factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
-      _$UserDataCopyWithImpl<$Res>;
+  factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) = _$UserDataCopyWithImpl<$Res>;
+
   $Res call({String id, UserDetails details});
 
   $UserDetailsCopyWith<$Res> get details;
@@ -62,6 +63,7 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
   _$UserDataCopyWithImpl(this._value, this._then);
 
   final UserData _value;
+
   // ignore: unused_field
   final $Res Function(UserData) _then;
 
@@ -92,8 +94,8 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
-  factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) then) =
-      __$UserDataCopyWithImpl<$Res>;
+  factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) then) = __$UserDataCopyWithImpl<$Res>;
+
   @override
   $Res call({String id, UserDetails details});
 
@@ -102,10 +104,8 @@ abstract class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
-    implements _$UserDataCopyWith<$Res> {
-  __$UserDataCopyWithImpl(_UserData _value, $Res Function(_UserData) _then)
-      : super(_value, (v) => _then(v as _UserData));
+class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res> implements _$UserDataCopyWith<$Res> {
+  __$UserDataCopyWithImpl(_UserData _value, $Res Function(_UserData) _then) : super(_value, (v) => _then(v as _UserData));
 
   @override
   _UserData get _value => super._value as _UserData;
@@ -133,8 +133,7 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
 class _$_UserData implements _UserData {
   _$_UserData({required this.id, required this.details});
 
-  factory _$_UserData.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDataFromJson(json);
+  factory _$_UserData.fromJson(Map<String, dynamic> json) => _$$_UserDataFromJson(json);
 
   @override
   final String id;
@@ -156,15 +155,11 @@ class _$_UserData implements _UserData {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(details));
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(id), const DeepCollectionEquality().hash(details));
 
   @JsonKey(ignore: true)
   @override
-  _$UserDataCopyWith<_UserData> get copyWith =>
-      __$UserDataCopyWithImpl<_UserData>(this, _$identity);
+  _$UserDataCopyWith<_UserData> get copyWith => __$UserDataCopyWithImpl<_UserData>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -173,17 +168,17 @@ class _$_UserData implements _UserData {
 }
 
 abstract class _UserData implements UserData {
-  factory _UserData({required String id, required UserDetails details}) =
-      _$_UserData;
+  factory _UserData({required String id, required UserDetails details}) = _$_UserData;
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
 
   @override
   String get id;
+
   @override
   UserDetails get details;
+
   @override
   @JsonKey(ignore: true)
-  _$UserDataCopyWith<_UserData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$UserDataCopyWith<_UserData> get copyWith => throw _privateConstructorUsedError;
 }

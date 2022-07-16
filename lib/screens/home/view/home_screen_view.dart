@@ -1,8 +1,8 @@
+import 'package:app/common/constans/app_images.dart';
 import 'package:app/screens/home/state/home_screen_state.dart';
 import 'package:app/screens/home/widget/home_screen_button.dart';
 import 'package:app/screens/home/widget/home_screen_notes_list.dart';
 import 'package:flutter/material.dart';
-import 'package:app/common/constans/app_images.dart';
 
 class HomeScreenView extends StatelessWidget {
   final HomeScreenState state;

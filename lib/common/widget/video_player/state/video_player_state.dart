@@ -1,4 +1,4 @@
-import 'package:app/common/widget/video_player/player_video_data.dart';
+import 'package:app/common/widget/video_player/state/player_video_data.dart';
 import 'package:app/common/widget/video_player/state/video_player_controller_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +6,6 @@ import 'package:utopia_hooks/utopia_hooks.dart';
 import 'package:utopia_utils/utopia_utils.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
-
 
 class VideoPlayerState {
   final VideoPlayerController? controller;

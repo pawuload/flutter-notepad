@@ -2,6 +2,7 @@ import 'package:app/common/widget/video_player/state/video_player_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
 import 'widgets/app_video_player_loading.dart';
 
 class AppVideoPlayerContent extends StatelessWidget {

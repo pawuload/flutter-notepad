@@ -6,7 +6,7 @@ class AppVideoPlayerButton extends StatelessWidget {
   final double iconSize;
 
   const AppVideoPlayerButton({
-    Key ? key,
+    Key? key,
     required this.icon,
     required this.onTap,
     this.iconSize = 20,

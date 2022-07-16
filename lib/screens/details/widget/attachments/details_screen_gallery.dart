@@ -1,8 +1,8 @@
+import 'package:app/models/note/note.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
 import 'package:app/screens/details/widget/attachments/details_screen_image_cards.dart';
 import 'package:app/screens/details/widget/attachments/details_screen_video_card.dart';
 import 'package:flutter/material.dart';
-import 'package:app/models/note/note.dart';
 
 class DetailsScreenGallery extends StatelessWidget {
   final DetailsScreenState state;
@@ -46,9 +46,8 @@ class DetailsScreenGallery extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: length,
               itemBuilder: (context, index) {
-                if (videoExists == true) {
-                  return Padding(
-                    padding: const EdgeInsets.all(0),
+                if (videoExists) {
+                  return SizedBox(
                     child: index == 0
                         ? DetailsScreenVideoCard(note: note, state: state)
                         : DetailsScreenImageCards(image: note.details.imageUrl![index - 1]),

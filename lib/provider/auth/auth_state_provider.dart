@@ -1,7 +1,12 @@
-import 'package:app/provider/auth/auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
+
+class AuthState {
+  final AuthStatus status;
+
+  AuthState({Key? key, required this.status});
+}
 
 enum AuthStatus { unknown, authorized, none }
 

@@ -4,6 +4,7 @@ import 'package:app/screens/video/activity_video_screen_args.dart';
 class ActivityVideoScreenState {
   final VideoPlayerState videoPlayerState;
   final String videoUrl;
+
   // final String thumbNail;
 
   const ActivityVideoScreenState({

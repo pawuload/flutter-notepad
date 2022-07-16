@@ -1,9 +1,9 @@
-import 'package:app/provider/user/user_state.dart';
-import 'package:app/service/auth_service.dart';
+import 'package:app/provider/user/user_state_provider.dart';
+import 'package:app/service/auth/auth_service.dart';
+import 'package:app/util/helpers/input_validator.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_arch/utopia_arch_extensions.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
-import 'package:app/util/helpers/input_validator.dart';
 
 class AuthScreenState {
   final bool isCheckboxOn;

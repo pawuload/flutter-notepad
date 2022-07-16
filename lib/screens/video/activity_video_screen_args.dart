@@ -1,5 +1,6 @@
 class ActivityVideoScreenArgs {
   final String videoUrl;
+
   // final String thumbNail;
 
   const ActivityVideoScreenArgs({

@@ -1,8 +1,7 @@
 import 'package:app/common/constans/app_color.dart';
 import 'package:app/common/constans/app_images.dart';
-import 'package:app/provider/auth/auth_state.dart';
 import 'package:app/provider/auth/auth_state_provider.dart';
-import 'package:app/provider/user/user_state.dart';
+import 'package:app/provider/user/user_state_provider.dart';
 import 'package:app/screens/auth/auth_screen.dart';
 import 'package:app/screens/home/home_screen.dart';
 import 'package:app/util/hooks/setup_state_hooks.dart';

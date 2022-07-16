@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:app/provider/user/user_state.dart';
-import 'package:app/service/item_service.dart';
-import 'package:app/service/storage_service.dart';
-import 'package:app/service/user_service.dart';
+
+import 'package:app/provider/user/user_state_provider.dart';
+import 'package:app/service/item/item_service.dart';
+import 'package:app/service/storage/storage_service.dart';
+import 'package:app/service/user/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
