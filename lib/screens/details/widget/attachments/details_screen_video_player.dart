@@ -14,11 +14,14 @@ class DetailsScreenVideoPlayer extends StatelessWidget {
     return Card(
       child: AppVideoPlayer(
         videoPath: note.details.videoUrl!,
+        thumbnail: note.details.thumbnail!,
         bottomControlsProgressColor: Colors.white,
         loadingBackgroundColor: Colors.brown.shade300,
         loadingColor: Colors.white,
-        autoplay: false,
-        // navigateToFullScreen: state.navigateToFullScreen(note.details.videoUrl!, note.details.thumbnail!),
+        autoplay: true,
+        navigateToFullScreen: (video, thumbnail) {
+          state.navigateToFullScreen(video, thumbnail);
+        },
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:app/common/widget/video_player/state/video_player_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:video_player/video_player.dart';
 
 import 'widgets/app_video_player_loading.dart';
@@ -29,17 +30,17 @@ class AppVideoPlayerContent extends StatelessWidget {
       aspectRatio: aspectRatio != null
           ? aspectRatio!
           : state.isWaiting
-              ? 16 / 9
-              : state.controller!.value.aspectRatio,
+          ? 16 / 9
+          : state.controller!.value.aspectRatio,
       child: Stack(
         children: [
           Positioned.fill(
             child: Container(
               child: state.isWaiting
                   ? AppVideoPlayerLoading(
-                      backgroundColor: loadingBackgroundColor,
-                      bounceColor: loadingColor,
-                    )
+                backgroundColor: loadingBackgroundColor,
+                bounceColor: loadingColor,
+              )
                   : _buildVideoPlayer(state),
             ),
           ),

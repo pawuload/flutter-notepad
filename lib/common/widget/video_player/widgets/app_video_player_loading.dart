@@ -6,9 +6,9 @@ class AppVideoPlayerLoading extends StatelessWidget {
   final Color bounceColor;
 
   const AppVideoPlayerLoading({
-    Key? key,
     required this.backgroundColor,
     required this.bounceColor,
+    Key? key,
   }) : super(key: key);
 
   @override

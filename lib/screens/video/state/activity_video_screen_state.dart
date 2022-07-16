@@ -6,7 +6,6 @@ class ActivityVideoScreenState {
   final String videoUrl;
   final String thumbNail;
 
-
   const ActivityVideoScreenState({
     required this.videoPlayerState,
     required this.videoUrl,

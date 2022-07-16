@@ -1,8 +1,9 @@
-import 'package:app/common/widget/video_player/app_video_player_content.dart';
 import 'package:app/common/widget/video_player/state/video_player_state.dart';
-import 'package:app/common/widget/video_player/widgets/app_video_player_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+import 'app_video_player_content.dart';
+import 'widgets/app_video_player_controls.dart';
 
 class AppVideoPlayer extends HookWidget {
   final bool looping;
@@ -28,7 +29,7 @@ class AppVideoPlayer extends HookWidget {
     required this.bottomControlsProgressColor,
     required this.loadingBackgroundColor,
     required this.loadingColor,
-    this.navigateToFullScreen,
+    required this.navigateToFullScreen,
     this.thumbnail,
     this.showControls = true,
     this.isInView = true,
