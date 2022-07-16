@@ -1,26 +1,25 @@
+import 'package:app/common/widget/video_player/app_video_player_content.dart';
 import 'package:app/common/widget/video_player/state/video_player_state.dart';
+import 'package:app/common/widget/video_player/widgets/app_video_player_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'app_video_player_content.dart';
-import 'widgets/app_video_player_controls.dart';
-
 class AppVideoPlayer extends HookWidget {
-  final bool looping;
   final String videoPath;
   final String? thumbnail;
+  final bool looping;
   final bool showControls;
   final bool autoplay;
   final bool isInView;
-  final Function(bool)? onTogglePlay;
-  final double? aspectRatio;
   final bool mute;
-  final Widget Function(VideoPlayerState)? controls;
   final bool isFullscreen;
+  final double? aspectRatio;
   final Color bottomControlsProgressColor;
   final Color loadingBackgroundColor;
   final Color loadingColor;
+  final Function(bool)? onTogglePlay;
   final Function(String, String)? navigateToFullScreen;
+  final Widget Function(VideoPlayerState)? controls;
 
   AppVideoPlayer({
     this.looping = false,

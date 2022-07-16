@@ -1,9 +1,7 @@
-
 import 'package:app/app/app_media_progress_bar/app_media_progress_bar.dart';
 import 'package:app/common/widget/video_player/state/video_player_state.dart';
+import 'package:app/common/widget/video_player/widgets/app_video_player_button.dart';
 import 'package:flutter/material.dart';
-
-import 'app_video_player_button.dart';
 
 class AppVideoPlayerBottomBar extends StatelessWidget {
   final VideoPlayerState state;
@@ -11,10 +9,11 @@ class AppVideoPlayerBottomBar extends StatelessWidget {
   final bool isBackgroundTransparent;
 
   const AppVideoPlayerBottomBar({
+    Key? key,
     required this.state,
     required this.progressColor,
     this.isBackgroundTransparent = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

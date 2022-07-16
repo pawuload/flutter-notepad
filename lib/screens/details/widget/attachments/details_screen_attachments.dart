@@ -29,9 +29,7 @@ class DetailsScreenAttachments extends StatelessWidget {
 
   Widget _buildIconButton() {
     return IconButton(
-      icon: Icon(
-        state.isTabOpen == true ? AppIcons.down : AppIcons.up,
-      ),
+      icon: Icon(state.isTabOpen == true ? AppIcons.down : AppIcons.up),
       alignment: Alignment.center,
       iconSize: 30,
       splashColor: Colors.transparent,

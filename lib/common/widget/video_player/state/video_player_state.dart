@@ -1,18 +1,14 @@
-
 import 'package:app/common/widget/video_player/state/player_video_data.dart';
 import 'package:app/common/widget/video_player/state/video_player_controller_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 import 'package:utopia_utils/utopia_utils.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
 
-
 class VideoPlayerState {
   final VideoPlayerController? controller;
-  final Function(int) seekTo;
   final int progress;
   final int total;
   final bool isSound;
@@ -21,13 +17,14 @@ class VideoPlayerState {
   final bool isWaiting;
   final bool areControlsVisible;
   final bool showThumbnail;
+  final bool isFullscreen;
   final Function() toggleControlsVisibility;
   final Function() togglePlaying;
   final Function() toggleVolume;
   final Function() repeat;
-  final FocusNode focusNode;
   final Function() toggleFullscreen;
-  final bool isFullscreen;
+  final Function(int) seekTo;
+  final FocusNode focusNode;
 
   const VideoPlayerState({
     required this.seekTo,
@@ -83,8 +80,7 @@ VideoPlayerState useVideoPlayerState({
     isSound: isSoundState.value,
   );
 
-  final computedData =
-  useState<PlayerVideoData>(compute(controllerA != null ? controllerA.value.duration.inMilliseconds : 0));
+  final computedData = useState<PlayerVideoData>(compute(controllerA != null ? controllerA.value.duration.inMilliseconds : 0));
 
   useEffect(() {
     computedData.value = compute(controllerA != null ? controllerA.value.duration.inMilliseconds : 100);
@@ -114,6 +110,7 @@ VideoPlayerState useVideoPlayerState({
   //looping
   useEffect(() {
     if (currentMs >= computedData.value.end && looping) seekTo(0);
+    return null;
   }, [controllerAValue]);
 
   useSimpleEffect(() async {
@@ -123,10 +120,11 @@ VideoPlayerState useVideoPlayerState({
   }, [focusNode.hasFocus]);
 
   useSimpleEffect(() async {
-    if (isInView && autoplay)
+    if (isInView && autoplay) {
       isPlayingState.value = true;
-    else
+    } else {
       isPlayingState.value = false;
+    }
   }, [isInView]);
 
   useSimpleEffect(() async {
@@ -137,10 +135,11 @@ VideoPlayerState useVideoPlayerState({
       }
     }
 
-    if (isInView)
+    if (isInView) {
       Wakelock.toggle(enable: true);
-    else
+    } else {
       Wakelock.toggle(enable: false);
+    }
   }, [isInView, isPlayingState.value]);
 
   return VideoPlayerState(

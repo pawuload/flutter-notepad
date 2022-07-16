@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class AuthScreenForm extends StatelessWidget {
   final AuthScreenState state;
 
-  const AuthScreenForm({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const AuthScreenForm({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

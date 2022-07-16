@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class AuthScreenCard extends StatelessWidget {
   final AuthScreenState state;
 
-  const AuthScreenCard({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const AuthScreenCard({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

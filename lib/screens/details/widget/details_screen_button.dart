@@ -16,12 +16,7 @@ class DetailsScreenButton extends StatelessWidget {
       buttonSize: const Size(53, 53),
       childrenButtonSize: const Size(53, 53),
       animatedIcon: state.isLoading ? null : AnimatedIcons.menu_close,
-      child: state.isLoading
-          ? const CircularProgressIndicator(
-              color: Colors.white,
-              strokeWidth: 3,
-            )
-          : null,
+      child: state.isLoading ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 3) : null,
       elevation: 10,
       spacing: 3,
       spaceBetweenChildren: 5,

@@ -27,9 +27,7 @@ class HomeScreenView extends StatelessWidget {
                 thumbColor: Colors.brown.withOpacity(0.6),
                 radius: const Radius.circular(20),
                 thickness: 5,
-                child: HomeScreenNotesList(
-                  state: state,
-                ),
+                child: HomeScreenNotesList(state: state),
               ),
             ),
           ),

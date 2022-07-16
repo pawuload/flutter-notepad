@@ -48,14 +48,9 @@ class AddScreenView extends StatelessWidget {
             ),
           ),
           AnimatedOpacity(
-            opacity: state.isLinkTabOpen ? 1 : 0,
-            duration: const Duration(milliseconds: 300),
-            child: state.isLinkTabOpen == true
-                ? AddScreenUrl(
-                    state: state,
-                  )
-                : null,
-          ),
+              opacity: state.isLinkTabOpen ? 1 : 0,
+              duration: const Duration(milliseconds: 300),
+              child: state.isLinkTabOpen == true ? AddScreenUrl(state: state) : null),
         ],
       ),
     );

@@ -7,27 +7,25 @@ import 'package:utopia_hooks/utopia_hooks.dart';
 
 class AuthScreenState {
   final bool isCheckboxOn;
+  final bool loading;
   final FieldState emailState;
   final FieldState passwordState;
   final Function() onButtonPressed;
   final Function() onCheckboxPressed;
   final Stream<String?> showSnackBarEvents;
-  final bool loading;
 
   const AuthScreenState({
     required this.isCheckboxOn,
+    required this.loading,
     required this.onButtonPressed,
     required this.emailState,
     required this.passwordState,
     required this.onCheckboxPressed,
     required this.showSnackBarEvents,
-    required this.loading,
   });
 }
 
-AuthScreenState useAuthScreenState({
-  required Function() navigateToHome,
-}) {
+AuthScreenState useAuthScreenState({required Function() navigateToHome}) {
   final authService = useInjected<AuthService>();
   final userState = useProvided<UserState>();
   final isCheckboxOn = useState<bool>(false);

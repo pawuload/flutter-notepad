@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:utopia_utils/utopia_utils.dart';
 
-
 class ActivityBackgroundImage extends StatelessWidget {
   final Widget child;
   final String imageUrl;

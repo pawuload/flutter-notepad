@@ -7,7 +7,11 @@ class HomeScreenListItem extends StatelessWidget {
   final Note note;
   final HomeScreenState state;
 
-  const HomeScreenListItem({Key? key, required this.note, required this.state}) : super(key: key);
+  const HomeScreenListItem({
+    Key? key,
+    required this.note,
+    required this.state,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +58,13 @@ class HomeScreenListItem extends StatelessWidget {
   }
 
   Widget _buildDescription() {
+    final String description =
+        note.details.description.length > 36 ? note.details.description.substring(0, 35) + '...' : note.details.description;
+
     return Container(
       padding: const EdgeInsets.only(right: 10),
       child: Text(
-        note.details.description.length > 36 ? note.details.description.substring(0, 35) + '...' : note.details.description,
+        description,
         maxLines: 1,
         style: const TextStyle(fontSize: 14),
       ),

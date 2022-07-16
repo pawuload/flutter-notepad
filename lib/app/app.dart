@@ -48,7 +48,6 @@ class App extends HookWidget {
         navigatorObservers: [RouteConfig.createNavigationObserver(AppRouting.routes)],
         initialRoute: AppRouting.initialRoute,
         debugShowCheckedModeBanner: false,
-        title: 'notepad',
       ),
     );
   }

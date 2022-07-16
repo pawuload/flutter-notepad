@@ -19,5 +19,4 @@ class AppIcons {
   static const up = Icons.keyboard_arrow_up_rounded;
   static const down = Icons.keyboard_arrow_down_rounded;
   static const video = Icons.movie_creation_rounded;
-  static const playVideo = Icons.video_library_rounded;
 }

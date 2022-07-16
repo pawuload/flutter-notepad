@@ -75,9 +75,7 @@ AddScreenState useAddScreenState({
   final thumbnail = useState<String?>(null);
   final ImagePicker imagePicker = ImagePicker();
   final stopwatch = useMemoized(
-    () => StopWatchTimer(
-      onChangeRawSecond: (value) => timeLeft.value = 30 - value,
-    ),
+    () => StopWatchTimer(onChangeRawSecond: (value) => timeLeft.value = 30 - value),
   );
 
   Future<void> showSnackBar({required String text, required Color color}) async {

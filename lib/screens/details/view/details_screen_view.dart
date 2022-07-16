@@ -31,7 +31,8 @@ class DetailsScreenView extends StatelessWidget {
           visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
           child: DetailsScreenButton(state: state),
         ),
-        floatingActionButtonLocation: state.isReadOnly ? FloatingActionButtonLocation.endFloat : FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation:
+            state.isReadOnly ? FloatingActionButtonLocation.endFloat : FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: state.isReadOnly
             ? null
             : AppNavBar(
@@ -58,14 +59,9 @@ class DetailsScreenView extends StatelessWidget {
           ),
           if (state.isReadOnly == false)
             AnimatedOpacity(
-              opacity: state.isLinkTabOpen ? 1 : 0,
-              duration: const Duration(milliseconds: 500),
-              child: state.isLinkTabOpen == true
-                  ? DetailsScreenUrl(
-                      state: state,
-                    )
-                  : null,
-            ),
+                opacity: state.isLinkTabOpen ? 1 : 0,
+                duration: const Duration(milliseconds: 500),
+                child: state.isLinkTabOpen == true ? DetailsScreenUrl(state: state) : null),
         ],
       ),
     );

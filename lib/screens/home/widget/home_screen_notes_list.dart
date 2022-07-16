@@ -6,10 +6,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 class HomeScreenNotesList extends StatelessWidget {
   final HomeScreenState state;
 
-  const HomeScreenNotesList({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const HomeScreenNotesList({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +53,18 @@ class HomeScreenNotesList extends StatelessWidget {
     );
   }
 
+  Widget _buildFailedBuilder() {
+    return Center(
+      child: Text(
+        'Loading notes has been failed. Please try again later.',
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.brown.withOpacity(0.5),
+        ),
+      ),
+    );
+  }
+
   Widget _buildEmptyBuilder() {
     return Center(
       child: Column(
@@ -72,18 +81,6 @@ class HomeScreenNotesList extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-
-  Widget _buildFailedBuilder() {
-    return Center(
-      child: Text(
-        'Loading notes has been failed. Please try again later.',
-        style: TextStyle(
-          fontSize: 15,
-          color: Colors.brown.withOpacity(0.5),
-        ),
       ),
     );
   }

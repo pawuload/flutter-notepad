@@ -155,7 +155,8 @@ class _$_UserData implements _UserData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(id), const DeepCollectionEquality().hash(details));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(id), const DeepCollectionEquality().hash(details));
 
   @JsonKey(ignore: true)
   @override

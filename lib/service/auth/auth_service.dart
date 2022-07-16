@@ -8,7 +8,8 @@ class AuthService {
   User? get user => _auth.currentUser;
 
   Future<void> userSetup(String email) async {
-    CollectionReference users = FirebaseFirestore.instance.collection('users/' + FirebaseAuth.instance.currentUser!.uid + '/user');
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('users/' + FirebaseAuth.instance.currentUser!.uid + '/user');
     users.add(UserDetails(email: email, isPremium: false).toJson());
   }
 

@@ -75,7 +75,14 @@ mixin _$NoteDetails {
 abstract class $NoteDetailsCopyWith<$Res> {
   factory $NoteDetailsCopyWith(NoteDetails value, $Res Function(NoteDetails) then) = _$NoteDetailsCopyWithImpl<$Res>;
 
-  $Res call({String title, String description, DateTime created, List<String>? imageUrl, String? videoUrl, String? thumbnail, String? url});
+  $Res call(
+      {String title,
+      String description,
+      DateTime created,
+      List<String>? imageUrl,
+      String? videoUrl,
+      String? thumbnail,
+      String? url});
 }
 
 /// @nodoc
@@ -135,12 +142,20 @@ abstract class _$NoteDetailsCopyWith<$Res> implements $NoteDetailsCopyWith<$Res>
   factory _$NoteDetailsCopyWith(_NoteDetails value, $Res Function(_NoteDetails) then) = __$NoteDetailsCopyWithImpl<$Res>;
 
   @override
-  $Res call({String title, String description, DateTime created, List<String>? imageUrl, String? videoUrl, String? thumbnail, String? url});
+  $Res call(
+      {String title,
+      String description,
+      DateTime created,
+      List<String>? imageUrl,
+      String? videoUrl,
+      String? thumbnail,
+      String? url});
 }
 
 /// @nodoc
 class __$NoteDetailsCopyWithImpl<$Res> extends _$NoteDetailsCopyWithImpl<$Res> implements _$NoteDetailsCopyWith<$Res> {
-  __$NoteDetailsCopyWithImpl(_NoteDetails _value, $Res Function(_NoteDetails) _then) : super(_value, (v) => _then(v as _NoteDetails));
+  __$NoteDetailsCopyWithImpl(_NoteDetails _value, $Res Function(_NoteDetails) _then)
+      : super(_value, (v) => _then(v as _NoteDetails));
 
   @override
   _NoteDetails get _value => super._value as _NoteDetails;

@@ -32,10 +32,7 @@ class AppButton extends StatelessWidget {
                     color: Colors.white,
                     size: 17,
                   )
-                : Text(
-                    title,
-                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
-                  ),
+                : Text(title, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17)),
             onPressed: () {
               if (enabled) onPressed();
             },

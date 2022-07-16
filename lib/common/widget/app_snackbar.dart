@@ -10,9 +10,7 @@ class AppSnackBar extends SnackBar {
   }) : super(
           key: key,
           backgroundColor: backgroundColor,
-          content: Builder(
-            builder: (_) => Text(content),
-          ),
+          content: Builder(builder: (_) => Text(content)),
           duration: duration,
         );
 

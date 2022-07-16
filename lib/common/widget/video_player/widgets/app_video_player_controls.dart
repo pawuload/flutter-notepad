@@ -1,12 +1,9 @@
-
 import 'package:app/common/widget/video_player/state/video_player_state.dart';
+import 'package:app/common/widget/video_player/widgets/app_video_player_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
-import 'app_video_player_bottom_bar.dart';
-
-const _autoHideDuration = const Duration(seconds: 1);
+const _autoHideDuration = Duration(seconds: 1);
 
 class AppVideoPlayerControls extends HookWidget {
   final VideoPlayerState state;
@@ -15,11 +12,12 @@ class AppVideoPlayerControls extends HookWidget {
   final bool isBottomBarTransparent;
 
   const AppVideoPlayerControls({
+    Key? key,
     required this.state,
     required this.bottomControlsProgressColor,
     this.header,
     this.isBottomBarTransparent = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +38,7 @@ class AppVideoPlayerControls extends HookWidget {
       onTap: () => state.toggleControlsVisibility(),
       child: AnimatedOpacity(
         opacity: state.areControlsVisible ? 1 : 0,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         child: Stack(
           children: [
             Container(
@@ -70,20 +68,20 @@ class AppVideoPlayerControls extends HookWidget {
     final icon = state.isFinished
         ? Icons.refresh_rounded
         : state.isPlaying
-        ? Icons.pause
-        : Icons.play_arrow;
+            ? Icons.pause
+            : Icons.play_arrow;
 
     return Center(
       child: GestureDetector(
         onTap: () => state.areControlsVisible
             ? state.isFinished
-            ? state.repeat()
-            : state.togglePlaying()
+                ? state.repeat()
+                : state.togglePlaying()
             : state.toggleControlsVisibility(),
         child: Material(
           elevation: 1,
           color: Colors.transparent,
-          shape: CircleBorder(side: BorderSide(color: Colors.white)),
+          shape: const CircleBorder(side: BorderSide(color: Colors.white)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(

@@ -93,7 +93,8 @@ abstract class _$UserDetailsCopyWith<$Res> implements $UserDetailsCopyWith<$Res>
 
 /// @nodoc
 class __$UserDetailsCopyWithImpl<$Res> extends _$UserDetailsCopyWithImpl<$Res> implements _$UserDetailsCopyWith<$Res> {
-  __$UserDetailsCopyWithImpl(_UserDetails _value, $Res Function(_UserDetails) _then) : super(_value, (v) => _then(v as _UserDetails));
+  __$UserDetailsCopyWithImpl(_UserDetails _value, $Res Function(_UserDetails) _then)
+      : super(_value, (v) => _then(v as _UserDetails));
 
   @override
   _UserDetails get _value => super._value as _UserDetails;
@@ -143,7 +144,8 @@ class _$_UserDetails implements _UserDetails {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(email), const DeepCollectionEquality().hash(isPremium));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(email), const DeepCollectionEquality().hash(isPremium));
 
   @JsonKey(ignore: true)
   @override

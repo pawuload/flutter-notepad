@@ -86,9 +86,7 @@ class DetailsScreenVideoCard extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
-          child: const Text(
-            "Loading failed",
-          ),
+          child: const Text("Loading failed"),
         )
       ],
     );

@@ -14,17 +14,20 @@ VideoPlayerController? useVideoControllerState({
       controller.initialize().then((_) => controllerState.value = controller);
       return () => controller.dispose();
     }
+    return null;
   }, [path]);
   useEffect(() {
     if (controllerState.value != null) {
-      if (isPlaying)
+      if (isPlaying) {
         controllerState.value!.play();
-      else
+      } else {
         controllerState.value!.pause();
-      if (isSound)
+      }
+      if (isSound) {
         controllerState.value!.setVolume(1);
-      else
+      } else {
         controllerState.value!.setVolume(0);
+      }
     }
   }, [controllerState.value, isPlaying, isSound]);
 
