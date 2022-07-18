@@ -65,7 +65,7 @@ With one click switch between editing and reading mode.
 <img src="demo/switch_mode.gif" height="500px"/>
 </center>
 
-### Upload images and videos
+### Upload images and videos 
 Make your notes more interesting by adding some visual media. Watch your images and videos in scrollable [gallery](#gallery). <br>
 You can upload up to 12 images and one video to each note. 
 
