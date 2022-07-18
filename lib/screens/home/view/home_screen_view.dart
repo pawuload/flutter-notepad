@@ -3,6 +3,7 @@ import 'package:app/screens/home/state/home_screen_state.dart';
 import 'package:app/screens/home/widget/home_screen_button.dart';
 import 'package:app/screens/home/widget/home_screen_notes_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreenView extends StatelessWidget {
   final HomeScreenState state;
@@ -11,6 +12,9 @@ class HomeScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       floatingActionButton: HomeScreenButton(state: state),
       backgroundColor: Theme.of(context).secondaryHeaderColor,

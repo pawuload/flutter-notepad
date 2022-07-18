@@ -6,6 +6,7 @@ import 'package:app/screens/details/widget/details_screen_link_tab.dart';
 import 'package:app/screens/details/widget/details_screen_textfield.dart';
 import 'package:app/screens/details/widget/details_screen_url.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DetailsScreenView extends StatelessWidget {
   final DetailsScreenState state;
@@ -14,6 +15,9 @@ class DetailsScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return WillPopScope(
       onWillPop: () => state.onWillPop(),
       child: Scaffold(

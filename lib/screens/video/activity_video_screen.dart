@@ -9,10 +9,7 @@ import 'package:utopia_utils/utopia_utils.dart';
 
 class ActivityVideoScreen extends HookWidget {
   static const route = '/video';
-  static final routeConfig = RouteConfig.material(
-    () => const ActivityVideoScreen(),
-    orientation: RouteConfigOrientation.landscape,
-  );
+  static final routeConfig = RouteConfig.material(() => const ActivityVideoScreen());
 
   const ActivityVideoScreen({Key? key}) : super(key: key);
 

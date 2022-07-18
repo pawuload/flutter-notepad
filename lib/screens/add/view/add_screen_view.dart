@@ -4,6 +4,7 @@ import 'package:app/screens/add/state/add_screen_state.dart';
 import 'package:app/screens/add/widget/add_screen_button.dart';
 import 'package:app/screens/add/widget/add_screen_url.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddScreenView extends StatelessWidget {
   final AddScreenState state;
@@ -12,15 +13,14 @@ class AddScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return WillPopScope(
       onWillPop: () => state.onWillPop(),
       child: Scaffold(
         appBar: AppBar(),
-        body: Stack(
-          children: [
-            _buildNoteTextField(),
-          ],
-        ),
+        body: _buildNoteTextField(),
         floatingActionButton: Visibility(
           visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
           child: AddScreenButton(state: state),
@@ -62,11 +62,11 @@ class AddScreenView extends StatelessWidget {
       child: NoteTextField(
         isReadOnly: false,
         state: state.titleState,
+        maxLines: 1,
         fontSize: 20,
         limit: 47,
         hint: 'Title',
         showBorder: true,
-        maxLines: 1,
       ),
     );
   }

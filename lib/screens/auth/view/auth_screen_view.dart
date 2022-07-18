@@ -4,6 +4,7 @@ import 'package:app/screens/auth/state/auth_screen_state.dart';
 import 'package:app/screens/auth/widget/auth_screen_card.dart';
 import 'package:app/screens/auth/widget/auth_screen_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
 
 class AuthScreenView extends StatelessWidget {
@@ -13,6 +14,9 @@ class AuthScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: HookBuilder(

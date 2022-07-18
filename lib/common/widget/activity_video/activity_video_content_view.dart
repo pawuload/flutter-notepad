@@ -4,6 +4,7 @@ import 'package:app/common/widget/video_player/app_video_player_content.dart';
 import 'package:app/common/widget/video_player/state/video_player_state.dart';
 import 'package:app/common/widget/video_player/widgets/app_video_player_controls.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class ActivityVideoContentView extends HookWidget {
@@ -27,6 +28,7 @@ class ActivityVideoContentView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return ActivityFullScreenLayout(
+      aspectRatio: videoPlayerState.controller?.value.aspectRatio ?? 0.77,
       backgroundImage: thumbNail,
       landscapeBuilder: (_, constraints) => _buildLandscape(constraints),
       portraitBuilder: (_, constraints) => _buildPortrait(constraints),
@@ -34,22 +36,23 @@ class ActivityVideoContentView extends HookWidget {
   }
 
   Widget _buildPortrait(BoxConstraints constraints) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Stack(
       children: [
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: SizedBox(
-              width: constraints.maxWidth,
-              child: _buildVideoPlayer(),
-            ),
-          ),
-        ),
         Positioned.fill(child: _buildBackground()),
         Align(
-          alignment: Alignment.topCenter,
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: constraints.maxWidth,
+            child: _buildVideoPlayer(),
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
           child: AspectRatio(
-            aspectRatio: 16 / 9,
+            aspectRatio: videoPlayerState.controller?.value.aspectRatio ?? 16 / 9,
             child: _buildControls(),
           ),
         ),
@@ -58,6 +61,9 @@ class ActivityVideoContentView extends HookWidget {
   }
 
   Widget _buildLandscape(BoxConstraints constraints) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+    ]);
     return Stack(
       children: [
         Positioned.fill(child: _buildBackground()),
@@ -71,7 +77,7 @@ class ActivityVideoContentView extends HookWidget {
         Align(
           alignment: Alignment.topCenter,
           child: AspectRatio(
-            aspectRatio: 16 / 9,
+            aspectRatio: videoPlayerState.controller?.value.aspectRatio ?? 16 / 9,
             child: _buildControls(),
           ),
         ),
@@ -96,7 +102,7 @@ class ActivityVideoContentView extends HookWidget {
       child: AppVideoPlayerContent(
         state: videoPlayerState,
         isAsset: false,
-        aspectRatio: 16 / 9,
+        aspectRatio: videoPlayerState.controller?.value.aspectRatio ?? 16 / 9,
         thumbnail: thumbNail,
         loadingBackgroundColor: loadingBackgroundColor,
         loadingColor: loadingColor,

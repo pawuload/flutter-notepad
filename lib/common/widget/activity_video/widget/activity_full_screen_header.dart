@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:utopia_utils/utopia_utils.dart';
-import 'package:wakelock/wakelock.dart';
 
 class ActivityFullscreenHeader extends HookWidget {
   const ActivityFullscreenHeader({
@@ -23,8 +21,7 @@ class ActivityFullscreenHeader extends HookWidget {
                 icon: const Icon(Icons.close, color: Colors.white),
                 onPressed: () async {
                   context.navigator.pop();
-                  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-                  await Wakelock.toggle(enable: false);
+                  context.navigator.pop();
                 },
               ),
             ],
