@@ -2,8 +2,6 @@ import 'package:app/common/widget/dialog/app_alert_dialog.dart';
 import 'package:app/screens/details/details_screen_args.dart';
 import 'package:app/screens/details/state/details_screen_state.dart';
 import 'package:app/screens/details/view/details_screen_view.dart';
-import 'package:app/screens/video/activity_video_screen.dart';
-import 'package:app/screens/video/activity_video_screen_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:utopia_arch/utopia_arch.dart';
@@ -22,13 +20,6 @@ class DetailsScreen extends HookWidget {
     final state = useDetailsScreenState(
       note: args!.note,
       navigateBack: (value) => navigator.pop(value),
-      navigateToVideo: (videoUrl, thumbnail) => navigator.pushNamed(
-        ActivityVideoScreen.route,
-        arguments: ActivityVideoScreenArgs(
-          videoUrl: videoUrl,
-          thumbNail: thumbnail,
-        ),
-      ),
       showPremiumDialog: (item) async => await AppAlertDialog.showPremium(context, item: item),
       showDeleteDialog: () async => await AppAlertDialog.showDelete(context),
       showExitDialog: () async => await AppAlertDialog.showExit(context),

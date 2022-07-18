@@ -2,7 +2,6 @@ import 'package:app/common/widget/video_player/state/player_video_data.dart';
 import 'package:app/common/widget/video_player/state/video_player_controller_state.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
-import 'package:utopia_utils/utopia_utils.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -16,12 +15,10 @@ class VideoPlayerState {
   final bool isWaiting;
   final bool areControlsVisible;
   final bool showThumbnail;
-  final bool isFullscreen;
   final Function() toggleControlsVisibility;
   final Function() togglePlaying;
   final Function() toggleVolume;
   final Function() repeat;
-  final Function() toggleFullscreen;
   final Function(int) seekTo;
   final FocusNode focusNode;
 
@@ -41,8 +38,6 @@ class VideoPlayerState {
     required this.toggleVolume,
     required this.showThumbnail,
     required this.focusNode,
-    required this.toggleFullscreen,
-    required this.isFullscreen,
   });
 }
 
@@ -51,20 +46,16 @@ final dummyListenable = ValueNotifier<VideoPlayerValue?>(null);
 VideoPlayerState useVideoPlayerState({
   required String videoPath,
   String? thumbnail,
-  required bool isFullscreen,
   bool autoplay = false,
   bool looping = false,
   bool mute = true,
   bool isInView = true,
   bool showControls = true,
   Function(bool)? onTogglePlay,
-  Function(String, String)? navigateToFullScreen,
 }) {
   compute(int end) {
     return PlayerVideoData(path: videoPath, end: end, start: 0);
   }
-
-  final context = useContext();
 
   final isStartedState = useState<bool>(autoplay && isInView);
   final FocusNode focusNode = useMemoized(() => FocusNode());
@@ -166,14 +157,5 @@ VideoPlayerState useVideoPlayerState({
     isSound: isSoundState.value,
     showThumbnail: (pendingSeekMsState.value ?? currentMs) == 0,
     focusNode: focusNode,
-    toggleFullscreen: () async {
-      if (isFullscreen) {
-        context.navigator.pop();
-        context.navigator.pop();
-      } else {
-        navigateToFullScreen?.call(videoPath, thumbnail ?? '');
-      }
-    },
-    isFullscreen: isFullscreen,
   );
 }

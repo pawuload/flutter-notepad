@@ -19,9 +19,6 @@ class DetailsScreenVideoPlayer extends StatelessWidget {
         bottomControlsProgressColor: Colors.white,
         loadingBackgroundColor: Colors.brown.shade300,
         loadingColor: Colors.white,
-        navigateToFullScreen: (video, thumbnail) {
-          state.navigateToFullScreen(video, thumbnail);
-        },
       ),
     );
   }

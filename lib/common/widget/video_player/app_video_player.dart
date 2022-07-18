@@ -10,15 +10,12 @@ class AppVideoPlayer extends HookWidget {
   final bool looping;
   final bool showControls;
   final bool autoplay;
-  final bool isInView;
   final bool mute;
-  final bool isFullscreen;
   final double? aspectRatio;
   final Color bottomControlsProgressColor;
   final Color loadingBackgroundColor;
   final Color loadingColor;
   final Function(bool)? onTogglePlay;
-  final Function(String, String)? navigateToFullScreen;
   final Widget Function(VideoPlayerState)? controls;
 
   AppVideoPlayer({
@@ -28,28 +25,22 @@ class AppVideoPlayer extends HookWidget {
     required this.bottomControlsProgressColor,
     required this.loadingBackgroundColor,
     required this.loadingColor,
-    required this.navigateToFullScreen,
     this.thumbnail,
     this.showControls = true,
-    this.isInView = true,
     this.onTogglePlay,
     this.aspectRatio,
     this.mute = true,
     this.controls,
-    this.isFullscreen = false,
   }) : super(key: ValueKey(videoPath));
 
   @override
   Widget build(BuildContext context) {
     final state = useVideoPlayerState(
-      navigateToFullScreen: (videoUrl, thumbNail) => navigateToFullScreen?.call(videoUrl, thumbNail),
       videoPath: videoPath,
       looping: looping,
       autoplay: autoplay,
-      isInView: isInView,
       mute: mute,
       onTogglePlay: onTogglePlay,
-      isFullscreen: isFullscreen,
       thumbnail: thumbnail,
     );
     return Focus(

@@ -40,10 +40,6 @@ class AppVideoPlayerBottomBar extends StatelessWidget {
             icon: state.isSound ? Icons.volume_down_sharp : Icons.volume_off_rounded,
             onTap: state.toggleVolume,
           ),
-          AppVideoPlayerButton(
-            icon: state.isFullscreen ? Icons.fullscreen_exit : Icons.fullscreen,
-            onTap: state.toggleFullscreen,
-          ),
         ],
       ),
     );
