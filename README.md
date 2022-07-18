@@ -17,6 +17,7 @@ To watch full demo go to [assets/notepad_demo](https://github.com/pawuload/flutt
 - [Get Premium](#get-premium) version to unlock useful features
 - [Edit](#edit-notes) already existing notes
 - [Switch](#switch-modes) between reading and editing mode
+- [Upload images and videos](#upload-images-and-videos)
 
 ### Create an account
 Sign in with email and password. If your account does not exist, it will be created automatically.
@@ -43,11 +44,18 @@ You can get Premium in a few different ways. Each of them is presented below.
 <img src="demo/get_premium.gif" height="500px"/>
 </center>
 
-### Edit Notes
+### Edit notes
 If you have Premium version, you can easily edit text, image and link in your existing note.
 
 <center>
 <img src="demo/editing.gif" height="500px"/>
+</center>
+
+### Delete notes
+Delete unwanted notes with one click.  
+
+<center>
+<img src="demo/delete.gif" height="500px"/>
 </center>
 
 ### Switch modes
@@ -55,6 +63,21 @@ With one click switch between editing and reading mode.
 
 <center>
 <img src="demo/switch_mode.gif" height="500px"/>
+</center>
+
+### Upload images and videos
+Make your notes more interesting by adding some visual media. Watch your images and videos in scrollable [gallery](#gallery). <br>
+You can upload up to 12 images and one video to each note. 
+
+<center>
+<img src="demo/upload_images.gif" height="500px"/>
+</center>
+
+### Gallery
+Admire your wonderful images and videos in the scrollable gallery.
+
+<center>
+<img src="demo/gallery.gif" height="500px"/>
 </center>
 
 ### Time limit
